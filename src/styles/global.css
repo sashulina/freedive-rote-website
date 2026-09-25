@@ -1,4 +1,6 @@
 /* Freedive Rote — site styles.
+   Petrona is loaded at 300 and 400 only. Anything set to weight 200 renders at
+   300, which is how the approved prototype looked (client decision: keep 300).
    Tokens live in ./tokens/ (copied unchanged from the design system).
    tokens/fonts.css is not imported: it loads Google Fonts, and the site
    self-hosts Petrona and Jost via @fontsource instead (see BaseLayout). */
@@ -12,6 +14,9 @@
 :root {
   /* Petrona overrides the design system's Newsreader for every heading (client decision). */
   --font-heading-alt: 'Petrona', var(--font-display);
+  /* Ink muted darkened from the token's #6B7F88 (4.05:1 on shell) so 12px labels
+     reach WCAG AA 4.5:1 on white, shell and cream. Approved by the client. */
+  --c-ink-muted: #5D7078;
   /* Header = 92px logo + 16px padding top and bottom. */
   --site-header-h: calc(92px + var(--space-4) * 2);
 }
