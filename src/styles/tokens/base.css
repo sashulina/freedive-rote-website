@@ -1,0 +1,33 @@
+/* Freedive Rote — element defaults + a few shared primitives.
+   Components style themselves from the tokens; this file only sets the ground. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface-page);color:var(--text-body);font-family:var(--font-body);font-size:var(--text-body);font-weight:var(--weight-light);line-height:var(--leading-body);letter-spacing:var(--tracking-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,h4{margin:0;color:var(--text-heading);font-family:var(--font-display);font-weight:var(--weight-light);letter-spacing:var(--tracking-heading);line-height:var(--leading-heading);text-wrap:pretty}
+h1{font-size:var(--text-display-1);line-height:var(--leading-display);letter-spacing:var(--tracking-display)}
+h2{font-size:var(--text-display-2);line-height:var(--leading-display)}
+h3{font-size:var(--text-heading-1)}
+h4{font-size:var(--text-heading-2)}
+p{margin:0 0 1.15em;max-width:var(--measure-text);text-wrap:pretty}
+p:last-child{margin-bottom:0}
+a{color:var(--text-link);text-decoration:none;border-bottom:1px solid var(--border-hairline-strong);transition:var(--transition-hover)}
+a:hover{color:var(--text-link-hover);border-bottom-color:currentColor}
+img{display:block;max-width:100%;height:auto}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus-ring);outline-offset:3px;border-radius:var(--radius-xs)}
+hr{height:1px;border:0;background:var(--border-hairline);margin:var(--space-12) 0}
+::selection{background:var(--c-aqua-light);color:var(--c-ink)}
+
+/* Shared primitives used by cards, kits and templates */
+.fr-container{width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter)}
+.fr-section{padding-block:var(--space-section)}
+.fr-eyebrow{font-family:var(--font-sans);font-size:var(--text-eyebrow);font-weight:var(--weight-regular);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--text-muted)}
+.fr-lede{font-size:var(--text-body-lg);line-height:var(--leading-loose);max-width:var(--measure-lede)}
+.fr-on-dark{color:var(--text-on-dark)}
+.fr-on-dark h1,.fr-on-dark h2,.fr-on-dark h3,.fr-on-dark h4{color:var(--text-on-dark)}
+.fr-on-dark .fr-eyebrow{color:var(--text-on-dark-muted)}
+.fr-hairline{height:1px;background:var(--border-hairline);border:0}
+
+@keyframes fr-rise{from{opacity:0;transform:translateY(var(--reveal-distance))}to{opacity:1;transform:none}}
+@keyframes fr-fade{from{opacity:0}to{opacity:1}}
+.fr-reveal{animation:fr-rise var(--duration-slow) var(--ease-tide) both}

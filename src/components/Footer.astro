@@ -1,0 +1,150 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logos/logo-freedive-rote-white.png';
+import Icon from './Icon.astro';
+import { FOOTER_LINKS, SITE } from '../data/site';
+---
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__cols">
+      <div class="site-footer__col">
+        <Image src={logo} alt={SITE.logoAlt} height={62} densities={[1, 2]} class="site-footer__logo" />
+        <p class="site-footer__blurb">Join us for freediving courses, training, surf survival workshops and guided ocean excursions.</p>
+        <div class="site-footer__social">
+          <a href={SITE.whatsappUrl} target="_blank" rel="noopener" aria-label="WhatsApp"><Icon name="phone" /></a>
+          <a href={SITE.instagramUrl} target="_blank" rel="noopener" aria-label="Instagram"><Icon name="instagram" /></a>
+        </div>
+      </div>
+
+      <nav class="site-footer__col" aria-labelledby="footer-quick-links">
+        <p class="site-footer__title" id="footer-quick-links">Quick links</p>
+        <div class="site-footer__links">
+          {FOOTER_LINKS.map((l) => <a href={l.href} class="hit">{l.label}</a>)}
+        </div>
+      </nav>
+
+      <div class="site-footer__col">
+        <p class="site-footer__title">Contact info</p>
+        <address class="site-footer__contact">
+          <p class="site-footer__address">
+            <span class="site-footer__icon site-footer__icon--top"><Icon name="map-pin" size={18} /></span>
+            <span>{SITE.address}</span>
+          </p>
+          <a href={SITE.whatsappUrl} target="_blank" rel="noopener" class="hit">
+            <span class="site-footer__icon"><Icon name="phone" size={18} /></span><span>{SITE.phoneDisplay}</span>
+          </a>
+          <a href={`mailto:${SITE.email}`} class="hit">
+            <span class="site-footer__icon"><Icon name="mail" size={18} /></span><span>{SITE.email}</span>
+          </a>
+        </address>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <span>© Freedive Rote · Nemberala, Rote Ndao, Indonesia</span>
+      <span>Breath · Depth · Presence</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--surface-night);
+    color: var(--text-on-dark);
+    padding-block: clamp(40px, 4.5vw, 64px) var(--space-8);
+  }
+  .site-footer__inner { display: flex; flex-direction: column; gap: clamp(32px, 4vw, 52px); }
+  .site-footer__cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: clamp(28px, 3.5vw, 56px);
+  }
+  .site-footer__col { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
+  .site-footer__col:first-child { gap: var(--space-5); }
+
+  .site-footer :global(.site-footer__logo) {
+    height: 62px;
+    width: auto;
+    display: block;
+    align-self: flex-start;
+    object-fit: contain;
+  }
+  .site-footer__blurb {
+    margin: 0;
+    max-width: 30ch;
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-loose);
+    color: var(--text-on-dark-muted);
+  }
+  .site-footer__social { display: flex; gap: var(--space-3); }
+  .site-footer__social a {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-on-dark);
+    border-radius: var(--radius-pill);
+    color: var(--text-on-dark);
+    text-decoration: none;
+    transition: var(--transition-hover);
+  }
+  .site-footer__social a:hover { background: rgba(255, 255, 255, .14); border-color: #ffffff; color: var(--text-on-dark); }
+
+  .site-footer__title {
+    margin: 0;
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-regular);
+    font-size: 22px;
+    line-height: 1.3;
+    letter-spacing: -.01em;
+    color: var(--c-white);
+  }
+  .site-footer__links { display: flex; flex-direction: column; gap: var(--space-3); }
+  /* Links keep the design system's default hairline underline (base.css), as in the prototype. */
+  .site-footer__links a {
+    font-size: var(--text-body-sm);
+    color: var(--text-on-dark-muted);
+    text-decoration: none;
+    min-height: 28px;
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    transition: var(--transition-hover);
+  }
+  .site-footer__links a:hover { color: #ffffff; }
+
+  .site-footer__contact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    font-style: normal;
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-loose);
+    color: var(--text-on-dark-muted);
+  }
+  .site-footer__address { margin: 0; display: flex; align-items: flex-start; gap: var(--space-4); max-width: 36ch; }
+  .site-footer__contact a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    color: var(--text-on-dark);
+    text-decoration: none;
+    transition: var(--transition-hover);
+  }
+  .site-footer__contact a:hover { color: var(--c-aqua); }
+  .site-footer__icon { flex: 0 0 auto; display: flex; color: var(--c-aqua); }
+  .site-footer__icon--top { margin-top: 5px; }
+
+  .site-footer__bottom {
+    border-top: 1px solid var(--border-on-dark);
+    padding-top: var(--space-5);
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+    font-size: var(--text-caption);
+    letter-spacing: .04em;
+    color: var(--text-on-dark-muted);
+  }
+</style>

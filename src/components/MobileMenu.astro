@@ -1,0 +1,153 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logos/logo-freedive-rote-white.png';
+import Button from './Button.astro';
+import { COURSE_LINKS, NAV_LINKS, SITE } from '../data/site';
+/* Full-screen Ocean Night overlay for ≤900px. Built on the native popover API,
+   so it opens, closes and handles Escape without JavaScript. */
+---
+<div id="mobile-menu" class="mobile-menu" popover aria-label="Menu" data-mobile-menu>
+  <div class="mobile-menu__top">
+    <a href="/" class="mobile-menu__logo">
+      <Image src={logo} alt={SITE.logoAlt} height={52} densities={[1, 2]} />
+    </a>
+    <button type="button" class="mobile-menu__close" popovertarget="mobile-menu" popovertargetaction="hide" aria-label="Close menu">
+      <span></span><span></span>
+    </button>
+  </div>
+
+  <nav class="mobile-menu__nav" aria-label="Main">
+    <details class="mobile-courses">
+      <summary class="mobile-menu__item">Freediving Courses<span class="chevron" aria-hidden="true"></span></summary>
+      <div class="mobile-courses__links">
+        {COURSE_LINKS.map((l) => <a href={l.href}>{l.label}</a>)}
+      </div>
+    </details>
+    {NAV_LINKS.map((l) => <a href={l.href} class="mobile-menu__item">{l.label}</a>)}
+  </nav>
+
+  <div class="mobile-menu__cta">
+    <Button variant="onPhotoSolid" size="lg" href={SITE.whatsappUrl} external fullWidth>Book a session</Button>
+  </div>
+</div>
+
+<style>
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    border: 0;
+    padding: var(--space-5) var(--space-5) var(--space-16);
+    background: var(--surface-night);
+    color: var(--text-on-dark);
+    overflow-y: auto;
+    flex-direction: column;
+  }
+  .mobile-menu:popover-open { display: flex; }
+  .mobile-menu::backdrop { background: var(--surface-night); }
+  :global(html:has(.mobile-menu:popover-open)) { overflow: hidden; }
+
+  .mobile-menu__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    min-height: 58px;
+  }
+  .mobile-menu__logo { display: flex; line-height: 0; border: 0; text-decoration: none; }
+  .mobile-menu__logo img { height: 52px; width: auto; display: block; }
+
+  .mobile-menu__close {
+    width: 48px;
+    height: 48px;
+    position: relative;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+  .mobile-menu__close span {
+    position: absolute;
+    left: 11px;
+    top: 23px;
+    width: 26px;
+    height: 1px;
+    background: var(--c-white);
+    transform: rotate(45deg);
+  }
+  .mobile-menu__close span + span { transform: rotate(-45deg); }
+
+  .mobile-menu__nav { display: flex; flex-direction: column; padding-top: var(--space-8); }
+  .mobile-menu__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: 16px 0;
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-light);
+    font-size: 24px;
+    line-height: 1.7;
+    color: var(--text-on-dark);
+    text-decoration: none;
+    border: 0;
+    border-bottom: 1px solid var(--border-on-dark);
+  }
+  a.mobile-menu__item:hover { color: var(--text-on-dark); border-bottom-color: var(--border-on-dark); }
+
+  .mobile-courses > summary { cursor: pointer; list-style: none; }
+  .mobile-courses > summary::-webkit-details-marker { display: none; }
+  .chevron {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    margin-right: 6px;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform var(--duration-quick) var(--ease-tide);
+  }
+  .mobile-courses[open] .chevron { transform: rotate(225deg); }
+
+  .mobile-courses__links {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0 16px 18px;
+    border-bottom: 1px solid var(--border-on-dark);
+  }
+  .mobile-courses__links a {
+    padding: 12px 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-size: var(--text-body);
+    color: var(--text-on-dark-muted);
+    text-decoration: none;
+  }
+  .mobile-courses__links a:hover { color: var(--c-white); }
+
+  .mobile-menu__cta { padding-top: var(--space-10); display: flex; }
+</style>
+
+<script>
+  const menu = document.querySelector<HTMLElement & { hidePopover(): void }>('[data-mobile-menu]');
+  const opener = document.querySelector<HTMLButtonElement>('[data-menu-open]');
+  if (menu) {
+    // Tapping any link closes the overlay (matters for same-page anchors like /#contact).
+    menu.addEventListener('click', (e) => {
+      if ((e.target as Element).closest('a')) menu.hidePopover();
+    });
+    menu.addEventListener('toggle', (e) => {
+      const open = (e as ToggleEvent).newState === 'open';
+      opener?.setAttribute('aria-expanded', String(open));
+      if (open) menu.querySelector<HTMLElement>('.mobile-menu__close')?.focus();
+    });
+    // Close when the viewport grows past the breakpoint.
+    window.matchMedia('(max-width: 900px)').addEventListener('change', (mq) => {
+      if (!mq.matches && menu.matches(':popover-open')) menu.hidePopover();
+    });
+  }
+</script>

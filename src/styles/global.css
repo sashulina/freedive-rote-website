@@ -1,0 +1,170 @@
+/* Freedive Rote — site styles.
+   Tokens live in ./tokens/ (copied unchanged from the design system).
+   tokens/fonts.css is not imported: it loads Google Fonts, and the site
+   self-hosts Petrona and Jost via @fontsource instead (see BaseLayout). */
+@import './tokens/colors.css';
+@import './tokens/typography.css';
+@import './tokens/spacing.css';
+@import './tokens/radius-shadow.css';
+@import './tokens/motion.css';
+@import './tokens/base.css';
+
+:root {
+  /* Petrona overrides the design system's Newsreader for every heading (client decision). */
+  --font-heading-alt: 'Petrona', var(--font-display);
+  /* Header = 92px logo + 16px padding top and bottom. */
+  --site-header-h: calc(92px + var(--space-4) * 2);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: #FDFBF7;
+  font-family: var(--font-sans);
+  font-weight: var(--weight-light);
+  color: var(--c-ink-soft);
+}
+a { color: #0E4A6B; }
+a:hover { color: #2C6E92; }
+
+.site {
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--surface-page);
+}
+
+/* Visually hidden, still announced */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: absolute; left: var(--space-4); top: -100px; z-index: 100;
+  padding: 12px 20px; border-radius: var(--radius-pill);
+  background: var(--c-white); color: var(--c-ink); border: 0;
+  font-size: var(--text-body-sm);
+}
+.skip-link:focus { top: var(--space-4); }
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: var(--max-page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.container--content { max-width: var(--max-content); }
+.container--narrow { max-width: var(--max-narrow); }
+
+/* Anchored sections land directly under the sticky header. */
+[id] { scroll-margin-top: var(--site-header-h); }
+
+/* Type */
+.t-display-2 {
+  margin: 0;
+  font-family: var(--font-heading-alt);
+  font-weight: var(--weight-light);
+  font-size: var(--text-display-2);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-heading);
+  color: var(--c-ink);
+}
+.t-heading-1 {
+  margin: 0;
+  font-family: var(--font-heading-alt);
+  font-weight: var(--weight-light);
+  font-size: var(--text-heading-1);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  color: var(--c-ink);
+}
+.t-lede {
+  margin: 0;
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-loose);
+  color: var(--c-ink);
+}
+.t-body {
+  margin: 0;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--c-ink-soft);
+}
+.measure-lede { max-width: var(--measure-lede); }
+.measure-text { max-width: var(--measure-text); }
+
+.sand-rule {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: var(--c-sand-deep);
+}
+
+/* Photo frame: 20px radius, blue-wash placeholder, image covers. */
+.photo {
+  margin: 0;
+  position: relative;
+  border-radius: var(--radius-photo);
+  overflow: hidden;
+  background: var(--c-blue-wash);
+}
+.photo img,
+.cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+/* Focus: 2px aqua ring at 3px offset on everything interactive. */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* Scroll reveal. Hidden state only applies once JS has armed it (html.js),
+   so content is always visible without JavaScript. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 700ms var(--ease-tide) var(--reveal-delay, 0ms),
+      transform 700ms var(--ease-tide) var(--reveal-delay, 0ms);
+  }
+  .js [data-reveal].is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reduced motion: no transitions, no zoom, no smooth scrolling. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+main:focus { outline: none; }
+
+/* Enlarges a link's tap target to at least 44px without changing layout
+   (footer links are 28px tall in the design, nav items can be narrower than 44px). */
+.hit { position: relative; }
+.hit::after {
+  content: '';
+  position: absolute;
+  inset: var(--hit-y, -8px) var(--hit-x, 0);
+}

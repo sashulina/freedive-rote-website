@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/freedive-rote-design-system-2a042d96-b41d-4a47-b748-bd5175888d7d/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/freedive-rote-design-system-2a042d96-b41d-4a47-b748-bd5175888d7d/tokens/colors.css">
+<link rel="stylesheet" href="_ds/freedive-rote-design-system-2a042d96-b41d-4a47-b748-bd5175888d7d/tokens/typography.css">
+<link rel="stylesheet" href="_ds/freedive-rote-design-system-2a042d96-b41d-4a47-b748-bd5175888d7d/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/freedive-rote-design-system-2a042d96-b41d-4a47-b748-bd5175888d7d/tokens/radius-shadow.css">
+<link rel="stylesheet" href="_ds/freedive-rote-design-system-2a042d96-b41d-4a47-b748-bd5175888d7d/tokens/motion.css">
+<link rel="stylesheet" href="_ds/freedive-rote-design-system-2a042d96-b41d-4a47-b748-bd5175888d7d/tokens/base.css">
+<link rel="stylesheet" href="_ds/freedive-rote-design-system-2a042d96-b41d-4a47-b748-bd5175888d7d/styles.css">
+<script src="https://unpkg.com/lucide@0.544.0/dist/umd/lucide.min.js"></script>
+<script src="_ds/freedive-rote-design-system-2a042d96-b41d-4a47-b748-bd5175888d7d/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,300..700;1,300..600&display=swap">
+<style>
+:root{--font-heading-alt:'Petrona',var(--font-display)}
+body{margin:0;background:#FDFBF7}
+a{color:#0E4A6B}
+a:hover{color:#2C6E92}
+[data-reviews]::-webkit-scrollbar{display:none}
+</style>
+</helmet>
+<div style="font-family:var(--font-sans);font-weight:var(--weight-light);color:var(--c-ink-soft);background:var(--surface-page);min-height:100vh;overflow-x:hidden">
+
+<header style="position:sticky;top:0;z-index:40;width:100%">
+<span style="position:absolute;inset:0;background:rgba(11,51,72,.9);backdrop-filter:var(--blur-glass);-webkit-backdrop-filter:var(--blur-glass);border-bottom:1px solid var(--border-on-dark);transition:opacity var(--duration-base) var(--ease-tide);opacity:{{ headerSolid }}"></span>
+<div style="position:relative;max-width:var(--max-page);margin-inline:auto;min-height:var(--header-height);padding:var(--space-4) var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:var(--space-8)">
+<a href="#/home" onClick="{{ go.home }}" style="display:flex;align-items:center;flex:0 0 auto;line-height:0;border:0;text-decoration:none">
+<img src="assets/logo-freedive-rote-white.png" alt="Freedive Rote — Ocean Performance" style="height:92px;width:auto;display:block;filter:drop-shadow(0 1px 8px rgba(15,36,48,.5))">
+</a>
+<sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+<nav style="display:flex;align-items:center;gap:clamp(14px,2.1vw,32px)">
+<div onMouseEnter="{{ openCourses }}" onMouseLeave="{{ closeCourses }}" style="position:relative;display:flex;align-items:center">
+<button type="button" aria-haspopup="true" aria-expanded="{{ coursesOpen }}" onClick="{{ toggleCourses }}" onKeyDown="{{ coursesKey }}" style="display:inline-flex;align-items:center;gap:10px;padding:10px 0;margin:0;background:transparent;border:0;border-bottom:1px solid transparent;cursor:default;font-family:var(--font-sans);font-size:var(--text-body);font-weight:var(--weight-regular);letter-spacing:.04em;color:var(--text-on-dark);text-shadow:0 1px 8px rgba(15,36,48,.65)">Freediving Courses<span aria-hidden="true" style="display:inline-block;width:6px;height:6px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:{{ coursesChevron }};transition:transform var(--duration-quick) var(--ease-tide)"></span></button>
+<sc-if value="{{ coursesOpen }}" hint-placeholder-val="{{ false }}">
+<div role="menu" style="position:absolute;top:100%;left:-20px;min-width:238px;padding:var(--space-3);background:var(--surface-page);border:var(--border-hair);border-radius:var(--radius-md);box-shadow:var(--shadow-lift);display:flex;flex-direction:column">
+<a href="#/try-freediving" onClick="{{ go.tryFreediving }}" style="padding:12px 16px;border-radius:var(--radius-sm);font-size:var(--text-body-sm);color:var(--text-link);text-decoration:none" style-hover="background:var(--surface-sand)">Try Freediving</a>
+<a href="#/level-1" onClick="{{ go.level1 }}" style="padding:12px 16px;border-radius:var(--radius-sm);font-size:var(--text-body-sm);color:var(--text-link);text-decoration:none" style-hover="background:var(--surface-sand)">Level 1</a>
+<a href="#/level-2" onClick="{{ go.level2 }}" style="padding:12px 16px;border-radius:var(--radius-sm);font-size:var(--text-body-sm);color:var(--text-link);text-decoration:none" style-hover="background:var(--surface-sand)">Level 2</a>
+<a href="#/level-3" onClick="{{ go.level3 }}" style="padding:12px 16px;border-radius:var(--radius-sm);font-size:var(--text-body-sm);color:var(--text-link);text-decoration:none" style-hover="background:var(--surface-sand)">Level 3</a>
+<a href="#/coaching" onClick="{{ go.coaching }}" style="padding:12px 16px;border-radius:var(--radius-sm);font-size:var(--text-body-sm);color:var(--text-link);text-decoration:none" style-hover="background:var(--surface-sand)">Coaching</a>
+<a href="#/all-courses" onClick="{{ go.allCourses }}" style="padding:12px 16px;border-radius:var(--radius-sm);font-size:var(--text-body-sm);color:var(--text-link);text-decoration:none" style-hover="background:var(--surface-sand)">All Courses</a>
+</div>
+</sc-if>
+</div>
+<a href="#/surf-survival" onClick="{{ go.surfSurvival }}" style="padding:10px 0;font-size:var(--text-body);font-weight:var(--weight-regular);letter-spacing:.04em;color:var(--text-on-dark);text-shadow:0 1px 8px rgba(15,36,48,.65);text-decoration:none;border-bottom:1px solid transparent" style-hover="border-bottom-color:currentColor">Surf Survival</a>
+<a href="#/trips" onClick="{{ go.trips }}" style="padding:10px 0;font-size:var(--text-body);font-weight:var(--weight-regular);letter-spacing:.04em;color:var(--text-on-dark);text-shadow:0 1px 8px rgba(15,36,48,.65);text-decoration:none;border-bottom:1px solid transparent" style-hover="border-bottom-color:currentColor">Trips</a>
+<a href="#/location" onClick="{{ go.location }}" style="padding:10px 0;font-size:var(--text-body);font-weight:var(--weight-regular);letter-spacing:.04em;color:var(--text-on-dark);text-shadow:0 1px 8px rgba(15,36,48,.65);text-decoration:none;border-bottom:1px solid transparent" style-hover="border-bottom-color:currentColor">Location</a>
+<a href="#/about" onClick="{{ go.about }}" style="padding:10px 0;font-size:var(--text-body);font-weight:var(--weight-regular);letter-spacing:.04em;color:var(--text-on-dark);text-shadow:0 1px 8px rgba(15,36,48,.65);text-decoration:none;border-bottom:1px solid transparent" style-hover="border-bottom-color:currentColor">About</a>
+<a href="#/home" onClick="{{ go.contact }}" style="padding:10px 0;font-size:var(--text-body);font-weight:var(--weight-regular);letter-spacing:.04em;color:var(--text-on-dark);text-shadow:0 1px 8px rgba(15,36,48,.65);text-decoration:none;border-bottom:1px solid transparent" style-hover="border-bottom-color:currentColor">Contact Us</a>
+<sc-if value="{{ headerCta }}" hint-placeholder-val="{{ false }}">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="onPhoto" size="sm" href="https://wa.me/6285773216666" target="_blank" rel="noopener" hint-size="auto,38px">Book a session</x-import>
+</sc-if>
+</nav>
+</sc-if>
+<sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ toggleMenu }}" aria-label="Open menu" style="width:48px;height:48px;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:6px;background:transparent;border:0;padding:0;cursor:pointer">
+<span style="display:block;width:28px;height:1px;background:var(--c-white)"></span>
+<span style="display:block;width:28px;height:1px;background:var(--c-white)"></span>
+<span style="display:block;width:28px;height:1px;background:var(--c-white)"></span>
+</button>
+</sc-if>
+</div>
+</header>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:fixed;inset:0;z-index:60;background:var(--surface-night);padding:var(--space-5) var(--space-5) var(--space-16);overflow-y:auto;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);min-height:58px">
+<a href="#/home" onClick="{{ go.home }}" style="display:flex;line-height:0;border:0;text-decoration:none"><img src="assets/logo-freedive-rote-white.png" alt="Freedive Rote — Ocean Performance" style="height:52px;width:auto;display:block"></a>
+<button onClick="{{ toggleMenu }}" aria-label="Close menu" style="width:48px;height:48px;position:relative;background:transparent;border:0;cursor:pointer">
+<span style="position:absolute;left:11px;top:23px;width:26px;height:1px;background:var(--c-white);transform:rotate(45deg)"></span>
+<span style="position:absolute;left:11px;top:23px;width:26px;height:1px;background:var(--c-white);transform:rotate(-45deg)"></span>
+</button>
+</div>
+<nav style="display:flex;flex-direction:column;padding-top:var(--space-8)">
+<button type="button" aria-expanded="{{ mobileCoursesOpen }}" onClick="{{ toggleMobileCourses }}" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);width:100%;padding:16px 0;margin:0;background:transparent;border:0;border-bottom:1px solid var(--border-on-dark);cursor:pointer;text-align:left;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:24px;color:var(--text-on-dark)">Freediving Courses<span aria-hidden="true" style="display:inline-block;width:9px;height:9px;margin-right:6px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:{{ mobileCoursesChevron }};transition:transform var(--duration-quick) var(--ease-tide)"></span></button>
+<sc-if value="{{ mobileCoursesOpen }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;padding:8px 0 16px 18px;border-bottom:1px solid var(--border-on-dark)">
+<a href="#/try-freediving" onClick="{{ go.tryFreediving }}" style="padding:12px 0;min-height:44px;display:flex;align-items:center;font-size:var(--text-body);color:var(--text-on-dark-muted);text-decoration:none">Try Freediving</a>
+<a href="#/level-1" onClick="{{ go.level1 }}" style="padding:12px 0;min-height:44px;display:flex;align-items:center;font-size:var(--text-body);color:var(--text-on-dark-muted);text-decoration:none">Level 1</a>
+<a href="#/level-2" onClick="{{ go.level2 }}" style="padding:12px 0;min-height:44px;display:flex;align-items:center;font-size:var(--text-body);color:var(--text-on-dark-muted);text-decoration:none">Level 2</a>
+<a href="#/level-3" onClick="{{ go.level3 }}" style="padding:12px 0;min-height:44px;display:flex;align-items:center;font-size:var(--text-body);color:var(--text-on-dark-muted);text-decoration:none">Level 3</a>
+<a href="#/coaching" onClick="{{ go.coaching }}" style="padding:12px 0;min-height:44px;display:flex;align-items:center;font-size:var(--text-body);color:var(--text-on-dark-muted);text-decoration:none">Coaching</a>
+<a href="#/all-courses" onClick="{{ go.allCourses }}" style="padding:12px 0;min-height:44px;display:flex;align-items:center;font-size:var(--text-body);color:var(--text-on-dark-muted);text-decoration:none">All Courses</a>
+</div>
+</sc-if>
+<a href="#/surf-survival" onClick="{{ go.surfSurvival }}" style="padding:16px 0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:24px;color:var(--text-on-dark);text-decoration:none;border-bottom:1px solid var(--border-on-dark)">Surf Survival</a>
+<a href="#/trips" onClick="{{ go.trips }}" style="padding:16px 0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:24px;color:var(--text-on-dark);text-decoration:none;border-bottom:1px solid var(--border-on-dark)">Trips</a>
+<a href="#/location" onClick="{{ go.location }}" style="padding:16px 0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:24px;color:var(--text-on-dark);text-decoration:none;border-bottom:1px solid var(--border-on-dark)">Location</a>
+<a href="#/about" onClick="{{ go.about }}" style="padding:16px 0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:24px;color:var(--text-on-dark);text-decoration:none;border-bottom:1px solid var(--border-on-dark)">About</a>
+<a href="#/home" onClick="{{ go.contact }}" style="padding:16px 0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:24px;color:var(--text-on-dark);text-decoration:none;border-bottom:1px solid var(--border-on-dark)">Contact Us</a>
+</nav>
+<div style="padding-top:var(--space-10);display:flex">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="onPhotoSolid" size="lg" href="https://wa.me/6285773216666" target="_blank" rel="noopener" full-width="{{ yes }}" hint-size="100%,56px">Book a session</x-import>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<main>
+
+<section data-screen-label="Hero" style="position:relative;margin-top:calc((92px + var(--space-4) * 2) * -1);min-height:min(100vh,940px);display:flex;align-items:flex-end;overflow:hidden;background:var(--surface-night)">
+<img src="assets/hero-beach-v3-w.jpg" alt="A freediver at the surface in the shallows off Nemberala beach, palms behind" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 96%">
+<span style="position:absolute;top:0;left:0;right:0;height:260px;background:{{ heroTopScrim }}"></span>
+<span style="position:absolute;inset:0;background:{{ heroScrimCss }}"></span>
+<div style="position:relative;width:100%;max-width:var(--max-page);margin-inline:auto;padding:calc(92px + var(--space-4) * 2 + var(--space-16)) var(--gutter) clamp(30px,3.5vw,46px);display:flex;flex-direction:column;gap:var(--space-8);align-items:flex-start">
+<h1 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-extralight);font-size:var(--text-display-1);line-height:var(--leading-display);letter-spacing:var(--tracking-display);color:var(--text-on-photo);text-shadow:0 2px 24px rgba(15,36,48,.55);max-width:16ch">Freediving in Rote</h1>
+<p style="margin:0;max-width:var(--measure-lede);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--text-on-dark);text-shadow:0 2px 16px rgba(15,36,48,.55)">Welcome to the beach-based home for freediving, breath-hold training for surfers, and guided ocean excursions on Rote Island.</p>
+<div style="display:flex;gap:var(--space-4);flex-wrap:wrap;padding-top:var(--space-2)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="primary" size="lg" onClick="{{ goOffer }}" hint-size="auto,56px">See the courses →</x-import>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="onPhotoSolid" size="lg" href="https://wa.me/6285773216666" target="_blank" rel="noopener" hint-size="auto,56px">Book a session</x-import>
+</div>
+</div>
+</section>
+
+<section data-screen-label="Key points" style="background:var(--surface-shallow)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding:clamp(40px,5vw,64px) var(--gutter);display:flex;flex-wrap:{{ stripWrap }};gap:clamp(24px,3vw,32px) 0">
+<div style="flex:1 1 {{ stripBasis }};min-width:0;display:flex;flex-direction:column;align-items:center;gap:var(--space-4);padding-inline:var(--space-3);text-align:center">
+<span style="display:flex;align-items:center;justify-content:center;height:40px;color:var(--c-blue-deep)"><span style="font-family:var(--font-sans);font-weight:var(--weight-regular);font-size:32px;line-height:1;letter-spacing:-.01em">15+</span></span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;line-height:1.6;color:var(--c-ink)">Years of teaching</span>
+</div>
+<div style="flex:1 1 {{ stripBasis }};min-width:0;display:flex;flex-direction:column;align-items:center;gap:var(--space-4);padding-inline:var(--space-3);text-align:center;border-left:1px solid {{ dividerColor }}">
+<span style="display:flex;align-items:center;justify-content:center;height:40px;color:var(--c-blue-deep)"><sc-if value="{{ iconsReady }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Icon" name="shield-check" size="{{ iconLg }}" hint-size="34px,34px"></x-import></sc-if></span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;line-height:1.6;color:var(--c-ink)">Safety first</span>
+</div>
+<div style="flex:1 1 {{ stripBasis }};min-width:0;display:flex;flex-direction:column;align-items:center;gap:var(--space-4);padding-inline:var(--space-3);text-align:center;border-left:1px solid {{ dividerColor }}">
+<span style="display:flex;align-items:center;justify-content:center;height:40px;color:var(--c-blue-deep)"><sc-if value="{{ iconsReady }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Icon" name="map-pin" size="{{ iconLg }}" hint-size="34px,34px"></x-import></sc-if></span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;line-height:1.6;color:var(--c-ink)">Beachfront location</span>
+</div>
+<div style="flex:1 1 {{ stripBasis }};min-width:0;display:flex;flex-direction:column;align-items:center;gap:var(--space-4);padding-inline:var(--space-3);text-align:center;border-left:1px solid {{ dividerColor }}">
+<span style="display:flex;align-items:center;justify-content:center;height:40px;color:var(--c-blue-deep)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block">
+<circle cx="12" cy="7.6" r="2.7"></circle><path d="M6.7 18.4v-1.4a5.3 5.3 0 0 1 10.6 0v1.4"></path><circle cx="5.4" cy="10.2" r="1.9"></circle><path d="M2 18.4v-1a3.5 3.5 0 0 1 3.5-3.5h.6"></path><circle cx="18.6" cy="10.2" r="1.9"></circle><path d="M22 18.4v-1a3.5 3.5 0 0 0-3.5-3.5h-.6"></path>
+</svg></span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;line-height:1.6;color:var(--c-ink)">Small groups</span>
+</div>
+<div style="flex:1 1 {{ stripBasis }};min-width:0;display:flex;flex-direction:column;align-items:center;gap:var(--space-4);padding-inline:var(--space-3);text-align:center;border-left:1px solid {{ dividerColor }}">
+<span style="display:flex;align-items:center;justify-content:center;height:40px;color:var(--c-blue-deep)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block">
+<g transform="translate(8.7,19.6) rotate(-9)"><path d="M-2.2 0v1.9a1.7 1.7 0 0 0 1.7 1.7h1a1.7 1.7 0 0 0 1.7-1.7V0"></path><path d="M-2.2 0-2.9-12.2a1.7 1.7 0 0 1 1.3-1.9h3.2a1.7 1.7 0 0 1 1.3 1.9L2.2 0Z"></path><path d="M0-1.4v-10.8"></path></g>
+<g transform="translate(15.3,19.6) rotate(9)"><path d="M-2.2 0v1.9a1.7 1.7 0 0 0 1.7 1.7h1a1.7 1.7 0 0 0 1.7-1.7V0"></path><path d="M-2.2 0-2.9-12.2a1.7 1.7 0 0 1 1.3-1.9h3.2a1.7 1.7 0 0 1 1.3 1.9L2.2 0Z"></path><path d="M0-1.4v-10.8"></path></g>
+</svg></span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;line-height:1.6;color:var(--c-ink)">New equipment</span>
+</div>
+<div style="flex:1 1 {{ stripBasis }};min-width:0;display:flex;flex-direction:column;align-items:center;gap:var(--space-4);padding-inline:var(--space-3);text-align:center;border-left:1px solid {{ dividerColor }}">
+<span style="display:flex;align-items:center;justify-content:center;height:40px;color:var(--c-blue-deep)"><sc-if value="{{ iconsReady }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Icon" name="heart" size="{{ iconLg }}" hint-size="34px,34px"></x-import></sc-if></span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;line-height:1.6;color:var(--c-ink)">All levels welcome</span>
+</div>
+<div style="flex:1 1 {{ stripBasis }};min-width:0;display:flex;flex-direction:column;align-items:center;gap:var(--space-4);padding-inline:var(--space-3);text-align:center;border-left:1px solid {{ dividerColor }}">
+<span style="display:flex;align-items:center;justify-content:center;height:40px;color:var(--c-blue-deep)"><sc-if value="{{ iconsReady }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Icon" name="award" size="{{ iconLg }}" hint-size="34px,34px"></x-import></sc-if></span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;line-height:1.6;color:var(--c-ink)">Certified Molchanovs</span>
+</div>
+</div>
+</section>
+
+<section data-screen-label="Why train with us" style="padding-block:clamp(56px,6vw,96px)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(36px,4.5vw,72px);align-items:center">
+<div style="display:flex;flex-direction:column;gap:var(--space-stack);min-width:0">
+<p style="margin:0;display:flex;align-items:center;gap:14px;font-family:var(--font-heading-alt);font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--text-accent);font-size:19px;letter-spacing:.22em"><span style="display:block;width:40px;height:1px;background:var(--c-sand-deep)"></span>Why train with us</p>
+<div style="display:flex;flex-direction:column;gap:var(--space-6);max-width:var(--measure-text)">
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">Whether you’re interested in freediving or looking to feel more confident in the surf, we’ll meet you where you are and help you progress at your own pace.</p>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">At Freedive Rote, we offer freediving courses and coaching sessions designed for different levels, from curious beginners taking their first steps into the world of freediving, to experienced ocean lovers who want to refine technique, safety, equalisation, depth and overall performance.</p>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">Our approach is personal, safety-focused and grounded in 15+ years of teaching experience. We keep groups small, so the training can be adapted to each student.</p>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">Join us at Freedive Rote, where safety, fun, and the beauty of the ocean come together for your unforgettable underwater journey.</p>
+</div>
+<div style="display:flex;padding-top:var(--space-2)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="primary" size="md" onClick="{{ go.location }}" hint-size="auto,48px">Explore our location</x-import>
+</div>
+</div>
+<figure style="margin:0;position:relative;border-radius:var(--radius-photo);overflow:hidden;aspect-ratio:4 / 5;background:var(--c-blue-wash)">
+<img src="assets/why-train-with-us.jpg" alt="Palms and white sand on the beach at Nemberala" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+<figcaption style="position:absolute;left:var(--space-6);right:var(--space-6);bottom:var(--space-6);display:flex;justify-content:center"><span style="padding:10px 20px;border-radius:var(--radius-pill);background:rgba(253,251,247,.88);font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink)">Nemberala, Rote Island</span></figcaption>
+</figure>
+</div>
+</section>
+
+
+
+<section id="offer" data-screen-label="What we offer" style="padding-block:clamp(56px,6vw,96px);background:var(--surface-sand)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;gap:clamp(32px,4vw,48px)">
+<header data-reveal="true" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-4)">
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-display-2);line-height:var(--leading-display);letter-spacing:var(--tracking-heading);color:var(--c-ink)">What we offer</h2>
+<span aria-hidden="true" style="display:block;width:48px;height:1px;background:var(--c-sand-deep)"></span>
+</header>
+<div style="display:grid;grid-template-columns:{{ offerGrid }};gap:clamp(28px,3.5vw,48px)">
+<article data-reveal="true" style="display:grid;grid-template-columns:{{ offerCardCols }};grid-template-rows:{{ offerCardRows }};gap:0;align-items:stretch;min-width:0;background:var(--surface-card);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-hairline)">
+<a href="#/surf-survival" onClick="{{ go.surfSurvival }}" onMouseEnter="{{ c2.enter }}" onMouseLeave="{{ c2.leave }}" onTouchStart="{{ c2.press }}" onTouchEnd="{{ c2.release }}" onTouchCancel="{{ c2.release }}" style="position:relative;display:block;overflow:hidden;aspect-ratio:{{ offerPhotoRatio }};width:100%;max-width:100%;height:{{ offerPhotoH }};background:var(--c-blue-wash);border:0;text-decoration:none;min-width:0">
+<img src="assets/offer-surf-3-w.jpg" alt="A diver on the pool floor holding a dumbbell during a breath-hold drill" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:48% 55%;transform:{{ c2.zoom }};transition:transform 600ms var(--ease-tide)">
+<span style="position:absolute;inset:0;background:{{ c2.veil }};transition:background 600ms var(--ease-tide)"></span>
+</a>
+<div style="display:flex;flex-direction:column;justify-content:{{ offerTextJustify }};flex:1;gap:var(--space-6);min-width:0;padding:clamp(28px,3.5vw,52px)">
+<h3 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:{{ offerTitleSize }};line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink)">Surf Survival</h3>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft);max-width:44ch">Breath-hold training for surfers. Learn practical tools for wipeouts, hold-downs, CO₂ tolerance, breath-hold technique, recovery breathing and managing high-risk surf situations.</p>
+<div style="display:flex;justify-content:center;padding-top:var(--space-6);margin-top:{{ offerBtnTop }};border-top:var(--border-hair)"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="sand" size="md" onClick="{{ go.surfSurvival }}" hint-size="auto,48px">Learn more</x-import></div>
+</div>
+</article>
+<article data-reveal="true" data-reveal-delay="80" style="display:grid;grid-template-columns:{{ offerCardCols }};grid-template-rows:{{ offerCardRows }};gap:0;align-items:stretch;min-width:0;background:var(--surface-card);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-hairline)">
+<a href="#/all-courses" onClick="{{ go.allCourses }}" onMouseEnter="{{ c1.enter }}" onMouseLeave="{{ c1.leave }}" onTouchStart="{{ c1.press }}" onTouchEnd="{{ c1.release }}" onTouchCancel="{{ c1.release }}" style="position:relative;display:block;overflow:hidden;aspect-ratio:{{ offerPhotoRatio }};width:100%;max-width:100%;height:{{ offerPhotoH }};background:var(--c-blue-wash);border:0;text-decoration:none;min-width:0">
+<img src="assets/courses-card.jpg" alt="A freediver descending the line in clear blue water" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:{{ c1.zoom }};transition:transform 600ms var(--ease-tide)">
+<span style="position:absolute;inset:0;background:{{ c1.veil }};transition:background 600ms var(--ease-tide)"></span>
+</a>
+<div style="display:flex;flex-direction:column;justify-content:{{ offerTextJustify }};flex:1;gap:var(--space-6);min-width:0;padding:clamp(28px,3.5vw,52px)">
+<h3 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:{{ offerTitleSize }};line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink)">Freediving Courses</h3>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft);max-width:44ch">Freediving courses from total beginner to advanced levels. Learn to move through the ocean with more calm, confidence and control.</p>
+<div style="display:flex;justify-content:center;padding-top:var(--space-6);margin-top:{{ offerBtnTop }};border-top:var(--border-hair)"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="sand" size="md" onClick="{{ go.allCourses }}" hint-size="auto,48px">Learn more</x-import></div>
+</div>
+</article>
+<article data-reveal="true" data-reveal-delay="80" style="display:grid;grid-template-columns:{{ offerCardCols }};grid-template-rows:{{ offerCardRows }};gap:0;align-items:stretch;min-width:0;background:var(--surface-card);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-hairline)">
+<a href="#/coaching" onClick="{{ go.coaching }}" onMouseEnter="{{ c3.enter }}" onMouseLeave="{{ c3.leave }}" onTouchStart="{{ c3.press }}" onTouchEnd="{{ c3.release }}" onTouchCancel="{{ c3.release }}" style="position:relative;display:block;overflow:hidden;aspect-ratio:{{ offerPhotoRatio }};width:100%;max-width:100%;height:{{ offerPhotoH }};background:var(--c-blue-wash);border:0;text-decoration:none;min-width:0">
+<img src="assets/coaching-card.jpg" alt="Two freedivers training together beside the line" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:{{ c3.zoom }};transition:transform 600ms var(--ease-tide)">
+<span style="position:absolute;inset:0;background:{{ c3.veil }};transition:background 600ms var(--ease-tide)"></span>
+</a>
+<div style="display:flex;flex-direction:column;justify-content:{{ offerTextJustify }};flex:1;gap:var(--space-6);min-width:0;padding:clamp(28px,3.5vw,52px)">
+<h3 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:{{ offerTitleSize }};line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink)">Coaching</h3>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft);max-width:44ch">Custom training programs tailored to your specific goals. Perfect for refining technique, safety, equalisation, depth and overall performance.</p>
+<div style="display:flex;justify-content:center;padding-top:var(--space-6);margin-top:{{ offerBtnTop }};border-top:var(--border-hair)"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="sand" size="md" onClick="{{ go.coaching }}" hint-size="auto,48px">Learn more</x-import></div>
+</div>
+</article>
+<article data-reveal="true" data-reveal-delay="80" style="display:grid;grid-template-columns:{{ offerCardCols }};grid-template-rows:{{ offerCardRows }};gap:0;align-items:stretch;min-width:0;background:var(--surface-card);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-hairline)">
+<a href="#/trips" onClick="{{ go.trips }}" onMouseEnter="{{ c4.enter }}" onMouseLeave="{{ c4.leave }}" onTouchStart="{{ c4.press }}" onTouchEnd="{{ c4.release }}" onTouchCancel="{{ c4.release }}" style="position:relative;display:block;overflow:hidden;aspect-ratio:{{ offerPhotoRatio }};width:100%;max-width:100%;height:{{ offerPhotoH }};background:var(--c-blue-wash);border:0;text-decoration:none;min-width:0">
+<img src="assets/excursions-card.jpg" alt="A small group on the boat jetty before a guided excursion" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 72%;transform:{{ c4.zoom }};transition:transform 600ms var(--ease-tide)">
+<span style="position:absolute;inset:0;background:{{ c4.veil }};transition:background 600ms var(--ease-tide)"></span>
+</a>
+<div style="display:flex;flex-direction:column;justify-content:{{ offerTextJustify }};flex:1;gap:var(--space-6);min-width:0;padding:clamp(28px,3.5vw,52px)">
+<h3 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:{{ offerTitleSize }};line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink)">Guided Ocean Excursions</h3>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft);max-width:44ch">Explore Rote on half- and full-day curated excursions to offshore islands and beautiful reefs. Guide, boat, equipment and planning all taken care of.</p>
+<div style="display:flex;justify-content:center;padding-top:var(--space-6);margin-top:{{ offerBtnTop }};border-top:var(--border-hair)"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="sand" size="md" onClick="{{ go.trips }}" hint-size="auto,48px">Learn more</x-import></div>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<section id="contact" data-screen-label="Contact CTA" style="padding-block:clamp(56px,6vw,96px);background:var(--surface-deep)">
+<div style="width:100%;max-width:var(--max-content);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(32px,4vw,56px)">
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-extralight);font-size:var(--text-display-2);line-height:var(--leading-quote);letter-spacing:var(--tracking-heading);color:var(--text-on-dark);max-width:30ch">Drop us a message, and we’ll help create your ideal ocean experience in Rote.</h2>
+<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-6)">
+<a href="https://wa.me/6285773216666" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:var(--space-4);min-height:var(--tap-min);padding:var(--space-5) var(--space-8);border:1px solid var(--border-on-dark);border-radius:var(--radius-md);text-decoration:none;color:var(--text-on-dark);transition:var(--transition-hover)" style-hover="background:rgba(255,255,255,.14);border-color:#ffffff">
+<sc-if value="{{ iconsReady }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Icon" name="phone" hint-size="20px,20px"></x-import></sc-if>
+<span style="display:flex;flex-direction:column;gap:6px;text-align:left">
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--text-on-dark-muted)">WhatsApp us</span>
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body-lg)">+62 857-7321-6666</span>
+</span>
+</a>
+<a href="mailto:info@freediverote.com" style="display:flex;align-items:center;gap:var(--space-4);min-height:var(--tap-min);padding:var(--space-5) var(--space-8);border:1px solid var(--border-on-dark);border-radius:var(--radius-md);text-decoration:none;color:var(--text-on-dark);transition:var(--transition-hover)" style-hover="background:rgba(255,255,255,.14);border-color:#ffffff">
+<sc-if value="{{ iconsReady }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Icon" name="mail" hint-size="20px,20px"></x-import></sc-if>
+<span style="display:flex;flex-direction:column;gap:6px;text-align:left">
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--text-on-dark-muted)">Email us</span>
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body-lg)">info@freediverote.com</span>
+</span>
+</a>
+</div>
+</div>
+</section>
+
+<div aria-hidden="true" style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter)"><div style="height:1px;background:linear-gradient(to right,rgba(201,175,139,0) 0%,rgba(201,175,139,.6) 18%,rgba(201,175,139,.6) 82%,rgba(201,175,139,0) 100%)"></div></div>
+
+<section data-screen-label="Reviews" style="padding-block:clamp(56px,6vw,96px)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;gap:clamp(32px,4vw,48px)">
+<header style="display:flex;flex-wrap:wrap;gap:var(--space-8);align-items:flex-end;justify-content:space-between">
+<div data-reveal="true" style="display:flex;flex-direction:column;gap:var(--space-5);min-width:0">
+<p style="margin:0;display:flex;align-items:center;gap:14px"><span style="display:block;width:44px;height:1px;background:var(--c-sand-deep)"></span><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Eyebrow" tone="muted" hint-size="auto,18px">Reviews</x-import></p>
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-heading-1);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink);max-width:26ch">Kind words from our amazing students</h2>
+</div>
+<div style="display:flex;align-items:center;gap:var(--space-8)">
+<sc-if value="{{ showRating }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="display:flex;align-items:baseline;gap:12px">
+<span style="font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:40px;line-height:1;color:var(--c-ink)">5.0</span>
+<span style="font-size:18px;letter-spacing:.14em;color:var(--text-accent)">★★★★★</span>
+</span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Google rating</span>
+</div>
+</sc-if>
+<div style="display:flex;gap:10px">
+<button onClick="{{ reviewPrev }}" aria-label="Previous reviews" style="width:48px;height:48px;border-radius:var(--radius-pill);border:1px solid var(--border-hairline-strong);background:transparent;color:var(--text-link);font-family:var(--font-sans);font-size:22px;line-height:1;cursor:pointer;transition:var(--transition-hover)" style-hover="background:var(--surface-sand);border-color:var(--c-ink)">‹</button>
+<button onClick="{{ reviewNext }}" aria-label="Next reviews" style="width:48px;height:48px;border-radius:var(--radius-pill);border:1px solid var(--border-hairline-strong);background:transparent;color:var(--text-link);font-family:var(--font-sans);font-size:22px;line-height:1;cursor:pointer;transition:var(--transition-hover)" style-hover="background:var(--surface-sand);border-color:var(--c-ink)">›</button>
+</div>
+</div>
+</header>
+<div data-reviews="true" ref="{{ reviewsRef }}" style="display:flex;gap:var(--grid-gap);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:var(--space-2);align-items:stretch">
+
+<blockquote style="margin:0;flex:0 0 min(84vw,380px);scroll-snap-align:start;display:flex;flex-direction:column;gap:var(--space-5);padding:var(--space-8);background:var(--surface-card);border:var(--border-hair);border-radius:var(--radius-lg);box-shadow:var(--shadow-hairline)">
+<span style="font-size:15px;letter-spacing:.14em;color:var(--text-accent)">★★★★★</span>
+<p style="margin:0;flex:1;font-size:var(--text-body-sm);line-height:var(--leading-body);color:var(--c-ink-soft)">I have had a traumatic experience surfing when I was younger and since then I never managed to surf average size waves without being anxious or fearful. I did the surf survival workshop in Freedive Rote and it was really amazing. With such simple and accessible concepts and exercises I managed to regain my confidence naturally. I am looking forward to have one more extra day of training as it was worth every second. Highly recommend.</p>
+<footer style="display:flex;flex-direction:column;gap:6px;padding-top:var(--space-4);border-top:var(--border-hair)">
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body);color:var(--c-ink)">Vera Costa</span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Google review</span>
+</footer>
+</blockquote>
+
+<blockquote style="margin:0;flex:0 0 min(84vw,380px);scroll-snap-align:start;display:flex;flex-direction:column;gap:var(--space-5);padding:var(--space-8);background:var(--surface-card);border:var(--border-hair);border-radius:var(--radius-lg);box-shadow:var(--shadow-hairline)">
+<span style="font-size:15px;letter-spacing:.14em;color:var(--text-accent)">★★★★★</span>
+<p style="margin:0;flex:1;font-size:var(--text-body-sm);line-height:var(--leading-body);color:var(--c-ink-soft)">Doing the course with Kwab at Freedive Rote just before a massive swell hit was hands down the best call I could have made. Kwab is an exceptional coach, calm, incredibly patient, and clearly backed by years of deep ocean experience. He has top quality gear and creates an environment where you feel completely supported from the minute you start. If you are a surfer wanting to overcome fear and perform better in heavy water, or anyone looking to get into freediving in Rote, do not hesitate. Freedive Rote is absolute world class.</p>
+<footer style="display:flex;flex-direction:column;gap:6px;padding-top:var(--space-4);border-top:var(--border-hair)">
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body);color:var(--c-ink)">Paul McMahon</span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Google review</span>
+</footer>
+</blockquote>
+
+<blockquote style="margin:0;flex:0 0 min(84vw,380px);scroll-snap-align:start;display:flex;flex-direction:column;gap:var(--space-5);padding:var(--space-8);background:var(--surface-card);border:var(--border-hair);border-radius:var(--radius-lg);box-shadow:var(--shadow-hairline)">
+<span style="font-size:15px;letter-spacing:.14em;color:var(--text-accent)">★★★★★</span>
+<p style="margin:0;flex:1;font-size:var(--text-body-sm);line-height:var(--leading-body);color:var(--c-ink-soft)">I did the freediving course with Kwab and it was such an interesting and amazing experience. I highly recommend anyone who wants to get more confidence in the water, or who is genuinely interested in getting more knowledge about breath hold, to do this course.</p>
+<footer style="display:flex;flex-direction:column;gap:6px;padding-top:var(--space-4);border-top:var(--border-hair)">
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body);color:var(--c-ink)">Emma Perrier</span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Google review</span>
+</footer>
+</blockquote>
+
+<blockquote style="margin:0;flex:0 0 min(84vw,380px);scroll-snap-align:start;display:flex;flex-direction:column;gap:var(--space-5);padding:var(--space-8);background:var(--surface-card);border:var(--border-hair);border-radius:var(--radius-lg);box-shadow:var(--shadow-hairline)">
+<span style="font-size:15px;letter-spacing:.14em;color:var(--text-accent)">★★★★★</span>
+<p style="margin:0;flex:1;font-size:var(--text-body-sm);line-height:var(--leading-body);color:var(--c-ink-soft)">This is so good. I think everyone should do this course whether you are a land based person or someone who spends their time in the ocean. You will gain so much from it. There are so many elements that you can apply to day to day life. Kwab has a vast amount of experience and knowledge in this field. The classes are insightful and fun, all set in a beautiful location. Go ahead and book it.</p>
+<footer style="display:flex;flex-direction:column;gap:6px;padding-top:var(--space-4);border-top:var(--border-hair)">
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body);color:var(--c-ink)">Adrian Bailey</span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Google review</span>
+</footer>
+</blockquote>
+
+<blockquote style="margin:0;flex:0 0 min(84vw,380px);scroll-snap-align:start;display:flex;flex-direction:column;gap:var(--space-5);padding:var(--space-8);background:var(--surface-card);border:var(--border-hair);border-radius:var(--radius-lg);box-shadow:var(--shadow-hairline)">
+<span style="font-size:15px;letter-spacing:.14em;color:var(--text-accent)">★★★★★</span>
+<p style="margin:0;flex:1;font-size:var(--text-body-sm);line-height:var(--leading-body);color:var(--c-ink-soft)">I had been waiting for an opportunity to learn the art of freediving in Bali but took the opportunity to join Kwab now that he is providing this service in Rote. He provides an excellent course with amazing outcomes. A great experience, and another skillset to add to surf trips.</p>
+<footer style="display:flex;flex-direction:column;gap:6px;padding-top:var(--space-4);border-top:var(--border-hair)">
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body);color:var(--c-ink)">Mick Lavery</span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Google review</span>
+</footer>
+</blockquote>
+
+<blockquote style="margin:0;flex:0 0 min(84vw,380px);scroll-snap-align:start;display:flex;flex-direction:column;gap:var(--space-5);padding:var(--space-8);background:var(--surface-card);border:var(--border-hair);border-radius:var(--radius-lg);box-shadow:var(--shadow-hairline)">
+<span style="font-size:15px;letter-spacing:.14em;color:var(--text-accent)">★★★★★</span>
+<p style="margin:0;flex:1;font-size:var(--text-body-sm);line-height:var(--leading-body);color:var(--c-ink-soft)">Outstanding experience with a very knowledgeable instructor who made it fun and interesting. Did my level 1 refresher and my wave recovery and truly enjoyed it. Thanks Kwab.</p>
+<footer style="display:flex;flex-direction:column;gap:6px;padding-top:var(--space-4);border-top:var(--border-hair)">
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body);color:var(--c-ink)">Adi Khodja</span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Google review</span>
+</footer>
+</blockquote>
+
+<blockquote style="margin:0;flex:0 0 min(84vw,380px);scroll-snap-align:start;display:flex;flex-direction:column;gap:var(--space-5);padding:var(--space-8);background:var(--surface-card);border:var(--border-hair);border-radius:var(--radius-lg);box-shadow:var(--shadow-hairline)">
+<span style="font-size:15px;letter-spacing:.14em;color:var(--text-accent)">★★★★★</span>
+<p style="margin:0;flex:1;font-size:var(--text-body-sm);line-height:var(--leading-body);color:var(--c-ink-soft)">This was an amazing experience for our family of 4. Kwab is a very good teacher, and there is so much to learn from him. Diving so deep without any gear was so fun, and our kids (10 and 12) absolutely loved it. The class also helped the kids with surfing, and they are still doing the breath-holding exercises 6 months later.</p>
+<footer style="display:flex;flex-direction:column;gap:6px;padding-top:var(--space-4);border-top:var(--border-hair)">
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body);color:var(--c-ink)">Marcelo Wesseler</span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Google review</span>
+</footer>
+</blockquote>
+
+<blockquote style="margin:0;flex:0 0 min(84vw,380px);scroll-snap-align:start;display:flex;flex-direction:column;gap:var(--space-5);padding:var(--space-8);background:var(--surface-card);border:var(--border-hair);border-radius:var(--radius-lg);box-shadow:var(--shadow-hairline)">
+<span style="font-size:15px;letter-spacing:.14em;color:var(--text-accent)">★★★★★</span>
+<p style="margin:0;flex:1;font-size:var(--text-body-sm);line-height:var(--leading-body);color:var(--c-ink-soft)">We had such a great day out on the water with Freedive Rote. The whole trip was very well organised, from the boat and route to the different spots we visited. We explored some really vibrant, largely untouched reefs around the offshore islands, and had the chance to dive around one of the islands, which was definitely a highlight. What made the trip especially great was the guidance. Since the trip was led by a professional freediver and instructor, we also got lots of practical tips on how to approach the dives safely and efficiently. If you’re in Rote and want to spend a day exploring the ocean, I’d definitely recommend it.</p>
+<footer style="display:flex;flex-direction:column;gap:6px;padding-top:var(--space-4);border-top:var(--border-hair)">
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body);color:var(--c-ink)">A. Ivanova</span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Google review</span>
+</footer>
+</blockquote>
+
+</div>
+</div>
+</section>
+
+<section data-screen-label="Meet us" aria-label="Discover the story behind this place" style="position:relative;min-height:clamp(280px,32vw,420px);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;background:var(--c-blue-wash)">
+<img src="assets/about-banner-2-w.jpg" alt="Instructors and a student at the buoy in the shallow lagoon, palms and white sand of Nemberala behind" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:55% 40%">
+<span style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,14,18,.64) 0%,rgba(8,14,18,.5) 40%,rgba(8,14,18,.24) 75%,rgba(8,14,18,.1) 100%)"></span>
+<div data-reveal="true" style="position:relative;width:100%;max-width:var(--max-content);margin-inline:auto;padding:clamp(40px,5vw,64px) var(--gutter) clamp(28px,3.5vw,44px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-6)">
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-display-2);line-height:var(--leading-display);letter-spacing:var(--tracking-heading);color:var(--c-white);text-shadow:0 2px 18px rgba(8,14,18,.35);max-width:20ch;text-wrap:balance">Discover the story behind this place</h2>
+<div style="display:flex;justify-content:center"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="onPhotoSolid" size="lg" onClick="{{ go.about }}" hint-size="auto,56px">About Freedive Rote</x-import></div>
+</div>
+</section>
+
+</main>
+</sc-if>
+
+<sc-if value="{{ isPage }}" hint-placeholder-val="{{ false }}">
+<main>
+<section style="position:relative;margin-top:calc((92px + var(--space-4) * 2) * -1);min-height:min(72vh,640px);display:flex;align-items:flex-end;overflow:hidden;background:var(--surface-deep)">
+<sc-if value="{{ isSurfSurvival }}" hint-placeholder-val="{{ false }}">
+<img src="assets/surf-banner-2-w.jpg" alt="A surfer crouched in the barrel of a heavy blue wave" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:45% 34%">
+<span style="position:absolute;inset:0;background:linear-gradient(to top,rgba(15,36,48,.62) 0%,rgba(15,36,48,.18) 46%,rgba(15,36,48,0) 76%)"></span>
+</sc-if>
+<sc-if value="{{ isTrips }}" hint-placeholder-val="{{ false }}">
+<img src="assets/trips-banner-boat-w.jpg" alt="A blue-canopied boat with guests aboard speeding across the water past a white-sand coastline" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 55%">
+<span style="position:absolute;bottom:0;left:0;right:0;height:72%;background:linear-gradient(to top,rgba(15,36,48,.66) 0%,rgba(15,36,48,.46) 40%,rgba(15,36,48,0) 100%)"></span>
+</sc-if>
+<sc-if value="{{ isCoaching }}" hint-placeholder-val="{{ false }}">
+<img src="assets/coaching-banner-2-w.jpg" alt="A coach beside a student on the line in deep blue water, guiding her equalisation" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%">
+<span style="position:absolute;bottom:0;left:0;right:0;height:72%;background:linear-gradient(to top,rgba(15,36,48,.66) 0%,rgba(15,36,48,.46) 40%,rgba(15,36,48,0) 100%)"></span>
+</sc-if>
+</sc-if>
+<sc-if value="{{ isLevel3 }}" hint-placeholder-val="{{ false }}">
+<img src="assets/level-3-banner-2-w.jpg" alt="A freediver descending head-first beside the line while her buddy equalises on the rope" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 61%">
+<span style="position:absolute;bottom:0;left:0;right:0;height:72%;background:linear-gradient(to top,rgba(15,36,48,.66) 0%,rgba(15,36,48,.46) 40%,rgba(15,36,48,0) 100%)"></span>
+</sc-if>
+<sc-if value="{{ isLevel2 }}" hint-placeholder-val="{{ false }}">
+<img src="assets/level-2-advanced.jpg" alt="Two freedivers ascending the line towards the sun" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%">
+<span style="position:absolute;bottom:0;left:0;right:0;height:72%;background:linear-gradient(to top,rgba(15,36,48,.66) 0%,rgba(15,36,48,.46) 40%,rgba(15,36,48,0) 100%)"></span>
+</sc-if>
+<sc-if value="{{ isLevel1 }}" hint-placeholder-val="{{ false }}">
+<img src="assets/level-1-beginner.jpg" alt="Freedivers silhouetted on the line with sunlight breaking through the surface" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+<span style="position:absolute;bottom:0;left:0;right:0;height:72%;background:linear-gradient(to top,rgba(15,36,48,.66) 0%,rgba(15,36,48,.46) 40%,rgba(15,36,48,0) 100%)"></span>
+</sc-if>
+<sc-if value="{{ isTryFreediving }}" hint-placeholder-val="{{ false }}">
+<img src="assets/try-banner-3-w.jpg" alt="Freedivers silhouetted around the buoy against the sunlit surface" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 24%">
+<span style="position:absolute;bottom:0;left:0;right:0;height:72%;background:linear-gradient(to top,rgba(15,36,48,.66) 0%,rgba(15,36,48,.46) 40%,rgba(15,36,48,0) 100%)"></span>
+</sc-if>
+<sc-if value="{{ isAllCourses }}" hint-placeholder-val="{{ false }}">
+<img src="assets/courses-banner-2-w.jpg" alt="Four freedivers in hoods and masks smiling at the buoy, half above and half below the lagoon surface" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 14%">
+<span style="position:absolute;bottom:0;left:0;right:0;height:72%;background:linear-gradient(to top,rgba(15,36,48,.66) 0%,rgba(15,36,48,.46) 40%,rgba(15,36,48,0) 100%)"></span>
+</sc-if>
+<sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+<img src="assets/about-banner-2-w.jpg" alt="Instructors and a student at the buoy in the shallow lagoon, palms and white sand of Nemberala behind" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:55% 8%">
+<span style="position:absolute;bottom:0;left:0;right:0;height:72%;background:linear-gradient(to top,rgba(15,36,48,.66) 0%,rgba(15,36,48,.46) 40%,rgba(15,36,48,0) 100%)"></span>
+</sc-if>
+<sc-if value="{{ isLocation }}" hint-placeholder-val="{{ false }}">
+<img src="assets/loc-banner-3-w.jpg" alt="Students relaxing on cushions in the shade of the beachside shala" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 36%">
+<span style="position:absolute;bottom:0;left:0;right:0;height:72%;background:linear-gradient(to top,rgba(8,14,18,.62) 0%,rgba(8,14,18,.4) 40%,rgba(8,14,18,0) 100%)"></span>
+</sc-if>
+<sc-if value="{{ isComingSoon }}" hint-placeholder-val="{{ false }}">
+<img src="assets/location-3.jpg" alt="The reef flat and boats at Nemberala" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+<span style="position:absolute;bottom:0;left:0;right:0;height:72%;background:linear-gradient(to top,rgba(15,36,48,.66) 0%,rgba(15,36,48,.46) 40%,rgba(15,36,48,0) 100%)"></span>
+</sc-if>
+<span style="position:absolute;top:0;left:0;right:0;height:240px;background:linear-gradient(to bottom,rgba(15,36,48,.5),rgba(15,36,48,0))"></span>
+<div style="position:relative;width:100%;max-width:var(--max-page);margin-inline:auto;padding:calc(92px + var(--space-4) * 2 + var(--space-12)) var(--gutter) clamp(48px,6vw,80px);display:flex;flex-direction:column;gap:var(--space-5)">
+<p style="margin:0;font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--text-on-dark);text-shadow:0 1px 3px rgba(15,36,48,.45),0 2px 18px rgba(15,36,48,.65)">{{ pageEyebrow }}</p>
+<h1 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-extralight);font-size:var(--text-display-2);line-height:var(--leading-display);letter-spacing:var(--tracking-display);color:var(--text-on-photo);text-shadow:0 1px 4px rgba(15,36,48,.4),0 3px 28px rgba(15,36,48,.6);max-width:20ch">{{ pageTitle }}</h1>
+</div>
+</section>
+<sc-if value="{{ isSurfSurvival }}" hint-placeholder-val="{{ false }}">
+<section style="padding-block:clamp(56px,6vw,96px) clamp(32px,4vw,52px)">
+<div style="width:100%;max-width:var(--max-narrow);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;gap:clamp(32px,4vw,48px)">
+<p style="margin:0;font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">A wipeout, a hold-down, getting caught inside, losing the board, feeling fear or panic rise – these are the moments where breath, awareness and nervous system control matter most.</p>
+<p style="margin:0;max-width:var(--measure-text);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">Our Surf Survival workshop is designed to help surfers stay calm, feel more confident, and be better prepared in high-stress water situations.</p>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,6vw,88px);background:var(--surface-sand)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:{{ bandCols }};grid-template-rows:{{ bandRows }};gap:clamp(28px,4vw,80px);align-items:start">
+<div data-reveal="true" style="grid-area:{{ bandHead }};display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-5);min-width:0;padding-bottom:clamp(8px,2vw,24px)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Eyebrow" tone="muted" hint-size="auto,18px">The workshop</x-import>
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-heading-1);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink);max-width:none;white-space:{{ titleWrap }}">You will learn practical tools for</h2>
+<span aria-hidden="true" style="display:block;width:48px;height:1px;background:var(--c-sand-deep)"></span>
+</div>
+<figure data-reveal="true" data-reveal-delay="60" style="grid-area:{{ bandPhoto }};margin:0;position:relative;border-radius:var(--radius-photo);overflow:hidden;aspect-ratio:1 / 1;max-width:440px;width:100%;background:var(--c-blue-wash)">
+<img src="assets/breath-hold-training-v5-w.jpg" alt="An instructor guiding a student through a weighted breath-hold in the pool" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+</figure>
+<ul data-reveal="true" data-reveal-delay="100" style="grid-area:{{ bandList }};margin:0;padding:0;list-style:none;display:flex;flex-direction:column;justify-content:space-between;border-top:1px solid var(--border-sand);min-width:0;height:100%">
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Big wipeouts and long hold-downs</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Increasing breath-holding capability</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Breath control — staying calm under pressure</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Understanding O₂, CO₂ and the urge to breathe</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Recovery breathing between waves</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Managing high-risk surf scenarios</span></li>
+</ul>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,6vw,88px)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:{{ bandCols }};gap:clamp(36px,5vw,88px);align-items:center">
+<figure data-reveal="true" style="order:{{ quoteOrder }};margin:0;position:relative;border-radius:var(--radius-photo);overflow:hidden;aspect-ratio:4 / 5;max-width:520px;width:100%;justify-self:end;background:var(--c-blue-wash)">
+<img src="assets/pool-rest-w.jpg" alt="Resting in the pool under the palms after a session, looking out to the reef" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+</figure>
+<blockquote data-reveal="true" data-reveal-delay="100" style="order:0;margin:0;display:flex;flex-direction:column;gap:var(--space-8);min-width:0;max-width:44ch">
+<span aria-hidden="true" style="display:block;width:48px;height:1px;background:var(--c-sand-deep)"></span>
+<p style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-extralight);font-size:var(--text-heading-1);line-height:var(--leading-quote);letter-spacing:var(--tracking-heading);color:var(--c-ink);text-wrap:pretty">“Doing the course at Freedive Rote just before a massive swell hit was hands down the best call I could have made.”</p>
+<footer style="display:flex;flex-direction:column;gap:8px">
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body-lg);color:var(--c-ink)">Paul McMahon</span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Google review</span>
+</footer>
+</blockquote>
+</div>
+</section>
+
+<section style="padding-block:clamp(56px,6vw,96px)">
+<div style="width:100%;max-width:var(--max-narrow);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;gap:var(--space-8)">
+<div style="display:flex;flex-direction:column;width:100%">
+<div style="display:flex;justify-content:space-between;gap:var(--space-6);padding-block:var(--space-4);border-bottom:var(--border-hair)">
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Duration</span>
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body-lg);color:var(--c-ink)">1 full day</span>
+</div>
+<div style="display:flex;justify-content:space-between;gap:var(--space-6);padding-block:var(--space-4);border-bottom:var(--border-hair)">
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Where</span>
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body-lg);color:var(--c-ink)">Nemberala beachfront</span>
+</div>
+</div>
+<div style="display:flex;justify-content:center;padding-top:var(--space-2)">
+<a href="https://wa.me/6285773216666" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 var(--space-10);border-radius:var(--radius-pill);background:var(--c-sand);color:var(--c-ink);font-family:var(--font-sans);font-weight:var(--weight-regular);font-size:13px;letter-spacing:var(--tracking-button);text-transform:uppercase;text-decoration:none;box-shadow:var(--shadow-hairline);transition:background var(--duration-quick) var(--ease-tide),box-shadow var(--duration-quick) var(--ease-tide)" style-hover="background:var(--c-sand-deep);box-shadow:var(--shadow-soft)">Book a session</a>
+</div>
+</div>
+</section>
+
+</sc-if>
+<sc-if value="{{ isTrips }}" hint-placeholder-val="{{ false }}">
+<section style="padding-block:clamp(56px,6vw,96px) clamp(32px,4vw,52px)">
+<div style="position:relative;width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:{{ bandCols }};gap:clamp(36px,5vw,80px);align-items:center">
+<div data-reveal="true" style="display:flex;flex-direction:column;gap:var(--space-8);min-width:0">
+<p style="margin:0;max-width:var(--measure-lede);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">Curated half-day and full-day ocean excursions around Rote Island. Explore offshore islands, freedive sites, reefs, quiet beaches and hidden coastal corners.</p>
+<p style="margin:0;max-width:var(--measure-text);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">We arrange the boat, the route, the equipment and the ocean guidance — so you can simply arrive, explore and enjoy.</p>
+<div style="display:flex;flex-wrap:wrap;gap:var(--space-3)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="sand" hint-size="auto,30px">Half day</x-import>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="sand" hint-size="auto,30px">Full day</x-import>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="aqua" hint-size="auto,30px">Offshore islands</x-import>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="outline" hint-size="auto,30px">Boat & gear included</x-import>
+</div>
+</div>
+<div data-reveal="true" data-reveal-delay="100" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.6vw,20px);min-width:0;justify-self:end;max-width:540px;width:100%">
+<figure style="margin:0;grid-row:span 2;align-self:stretch;position:relative;border-radius:var(--radius-photo);overflow:hidden;min-height:0;height:100%;background:var(--c-blue-wash)">
+<img src="assets/trips-group-w.jpg" alt="Guests and guides on the jetty before heading out" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 72%">
+</figure>
+<figure style="margin:0;position:relative;border-radius:var(--radius-photo);overflow:hidden;aspect-ratio:1 / 1;background:var(--c-blue-wash)">
+<img src="assets/trips-wall-w.jpg" alt="A vivid reef wall crowded with fish" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+</figure>
+<figure style="margin:0;position:relative;border-radius:var(--radius-photo);overflow:hidden;aspect-ratio:1 / 1;background:var(--c-blue-wash)">
+<img src="assets/trips-diver.jpg" alt="A freediver gliding over the reef in a white monofin" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 50%">
+</figure>
+</div>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,6vw,88px);background:var(--surface-sand)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;gap:clamp(32px,4vw,56px)">
+<header data-reveal="true" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-4)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Eyebrow" tone="muted" hint-size="auto,18px">Ocean excursion</x-import>
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-heading-1);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink)">What is included</h2>
+</header>
+<div style="display:grid;grid-template-columns:{{ bandCols }};gap:clamp(28px,4vw,72px);align-items:center">
+<ul data-reveal="true" data-reveal-delay="100" style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;border-top:1px solid var(--border-sand);min-width:0">
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Reef exploration</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Freediving &amp; snorkelling</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Offshore island trips</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Sailing</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Quiet beaches and coastal exploration</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Line training for freedivers</span></li>
+</ul>
+<figure data-reveal="true" data-reveal-delay="120" style="margin:0;position:relative;border-radius:var(--radius-photo);overflow:hidden;aspect-ratio:4 / 5;max-width:460px;width:100%;justify-self:end;background:var(--c-blue-wash)">
+<img src="assets/trips-reef-w.jpg" alt="Damselfish over a plate coral garden on an offshore reef" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+</figure>
+</div>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,6vw,88px)">
+<div style="width:100%;max-width:var(--max-narrow);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;gap:var(--space-8)">
+<p data-reveal="true" style="margin:0;font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">Each experience can be tailored around what you are looking for.</p>
+<p data-reveal="true" style="margin:0;font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">Perfect for visitors, couples, small groups, ocean lovers, curious beginners and freedivers who want to experience more of Rote beyond the beach.</p>
+<p data-reveal="true" data-reveal-delay="60" style="margin:0;font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">These trips are guided with safety, awareness and respect for the ocean at the centre.</p>
+</div>
+</section>
+
+<section style="position:relative;padding-block:clamp(56px,6vw,96px);background:var(--surface-sand);overflow:hidden">
+<img aria-hidden="true" src="assets/rote-map-v2.png" alt="" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(960px,106%);height:auto;opacity:.3;pointer-events:none">
+<div style="position:relative;width:100%;max-width:var(--max-content);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-8)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Eyebrow" tone="muted" hint-size="auto,18px">Explore Rote</x-import>
+<h2 data-reveal="true" style="margin:0;max-width:24ch;font-family:var(--font-heading-alt);font-weight:var(--weight-extralight);font-size:var(--text-display-2);line-height:var(--leading-quote);letter-spacing:var(--tracking-heading);color:var(--c-ink)">Snorkel, freedive, explore — we’ll take care of the rest.</h2>
+<a href="https://wa.me/6285773216666" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 var(--space-10);border-radius:var(--radius-pill);background:var(--c-blue-reference);color:var(--c-white);font-family:var(--font-sans);font-weight:var(--weight-regular);font-size:13px;letter-spacing:var(--tracking-button);text-transform:uppercase;border:0;text-decoration:none;box-shadow:var(--shadow-hairline);transition:background var(--duration-quick) var(--ease-tide),box-shadow var(--duration-quick) var(--ease-tide)" style-hover="background:var(--c-blue-deep);box-shadow:var(--shadow-soft)">Plan your trip</a>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,6vw,88px) clamp(56px,6vw,96px)">
+<div style="width:100%;max-width:var(--max-content);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-8)">
+<span aria-hidden="true" style="display:block;width:48px;height:1px;background:var(--c-sand-deep)"></span>
+<blockquote data-reveal="true" style="margin:0;display:flex;flex-direction:column;align-items:center;gap:var(--space-8)">
+<p style="margin:0;max-width:48ch;font-family:var(--font-heading-alt);font-weight:var(--weight-extralight);font-size:clamp(18px,1.9vw,23px);line-height:var(--leading-quote);letter-spacing:var(--tracking-heading);color:var(--c-ink);text-wrap:pretty">“The whole trip was very well organised, from the boat and route to the different spots we visited. We explored some really vibrant, largely untouched reefs around the offshore islands, and had the chance to dive around one of the islands, which was definitely a highlight. It really felt like we got to see a completely different side of Rote.”</p>
+<footer style="display:flex;flex-direction:column;gap:8px">
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body-lg);color:var(--c-ink)">A. Ivanova</span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Google review</span>
+</footer>
+</blockquote>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isCoaching }}" hint-placeholder-val="{{ false }}">
+<section style="padding-block:clamp(56px,6vw,96px) clamp(32px,4vw,52px)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:{{ bandCols }};gap:clamp(36px,5vw,80px);align-items:center">
+<div data-reveal="true" style="display:flex;flex-direction:column;gap:var(--space-8);min-width:0">
+<p style="margin:0;max-width:var(--measure-lede);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">Personalised coaching for freedivers who already have experience and want to refine their technique, equalisation, safety, depth, relaxation and overall performance.</p>
+<p style="margin:0;max-width:var(--measure-text);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">Each session is tailored to your level, your goals and the challenges you are working through right now.</p>
+<div style="display:flex;flex-wrap:wrap;gap:var(--space-3)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="sand" hint-size="auto,30px">3–4 hours</x-import>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="aqua" hint-size="auto,30px">One to one</x-import>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="outline" hint-size="auto,30px">Experienced divers</x-import>
+</div>
+</div>
+<figure data-reveal="true" data-reveal-delay="100" style="margin:0;position:relative;border-radius:var(--radius-photo);overflow:hidden;aspect-ratio:4 / 5;max-width:520px;width:100%;justify-self:end;background:var(--c-blue-wash)">
+<img src="assets/coaching-detail.jpg" alt="A coach diving alongside a student on the line" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+</figure>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,6vw,88px);background:var(--surface-sand)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:{{ bandCols }};grid-template-rows:{{ bandRows }};gap:clamp(28px,4vw,80px);align-items:start">
+<div data-reveal="true" style="grid-area:{{ bandHead }};display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-5);min-width:0;padding-bottom:clamp(8px,2vw,24px)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Eyebrow" tone="muted" hint-size="auto,18px">Coaching</x-import>
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-heading-1);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink);max-width:none;white-space:{{ titleWrap }}">What a session includes</h2>
+<span aria-hidden="true" style="display:block;width:48px;height:1px;background:var(--c-sand-deep)"></span>
+</div>
+<figure data-reveal="true" data-reveal-delay="60" style="grid-area:{{ bandPhoto }};margin:0;position:relative;border-radius:var(--radius-photo);overflow:hidden;aspect-ratio:1 / 1;max-width:440px;width:100%;background:var(--c-blue-wash)">
+<img src="assets/coaching-square-5-w.jpg" alt="The coach writing session notes on the whiteboard in the palm-thatch shala" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%">
+</figure>
+<ul data-reveal="true" data-reveal-delay="100" style="grid-area:{{ bandList }};align-self:center;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;border-top:1px solid var(--border-sand);min-width:0">
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Briefing</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>In-water training</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Technique correction</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Video analysis</span></li>
+</ul>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,6vw,88px)">
+<div style="width:100%;max-width:var(--max-narrow);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;gap:var(--space-8)">
+<div style="display:flex;justify-content:space-between;gap:var(--space-6);padding-block:var(--space-4);border-bottom:var(--border-hair)">
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Duration</span>
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body-lg);color:var(--c-ink)">3–4 hours</span>
+</div>
+<div style="display:flex;justify-content:center;flex-wrap:wrap;gap:var(--space-4);padding-top:var(--space-2)">
+<a href="https://wa.me/6285773216666" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 var(--space-10);border-radius:var(--radius-pill);background:var(--c-sand);color:var(--c-ink);font-family:var(--font-sans);font-weight:var(--weight-regular);font-size:13px;letter-spacing:var(--tracking-button);text-transform:uppercase;border:0;text-decoration:none;box-shadow:var(--shadow-hairline);transition:background var(--duration-quick) var(--ease-tide),box-shadow var(--duration-quick) var(--ease-tide)" style-hover="background:var(--c-sand-deep);box-shadow:var(--shadow-soft)">Book a session</a>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="secondary" size="md" onClick="{{ go.allCourses }}" hint-size="auto,48px">All courses</x-import>
+</div>
+</div>
+</section>
+
+<section style="padding-block:clamp(16px,2vw,28px) clamp(56px,6vw,96px)">
+<div style="width:100%;max-width:var(--max-content);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-8)">
+<span aria-hidden="true" style="display:block;width:48px;height:1px;background:var(--c-sand-deep)"></span>
+<blockquote data-reveal="true" style="margin:0;display:flex;flex-direction:column;align-items:center;gap:var(--space-8)">
+<p style="margin:0;max-width:26ch;font-family:var(--font-heading-alt);font-weight:var(--weight-extralight);font-size:var(--text-heading-1);line-height:var(--leading-quote);letter-spacing:var(--tracking-heading);color:var(--c-ink);text-wrap:pretty">“The classes are insightful and fun, all set in a beautiful location. Go ahead and book it.”</p>
+<footer style="display:flex;flex-direction:column;gap:8px">
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body-lg);color:var(--c-ink)">Adrian Bailey</span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Google review</span>
+</footer>
+</blockquote>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isLevel3 }}" hint-placeholder-val="{{ false }}">
+<section style="padding-block:clamp(56px,6vw,96px) clamp(32px,4vw,52px)">
+<div style="width:100%;max-width:var(--max-narrow);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;gap:clamp(28px,3.5vw,40px)">
+<p data-reveal="true" style="margin:0;font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">The deepest program for recreational divers and those people looking to dive up to 40m and beyond.</p>
+<p data-reveal="true" data-reveal-delay="60" style="margin:0;max-width:var(--measure-text);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">Building on Level 2, this course introduces mouthfill equalisation, FRC diving and advanced safety protocols.</p>
+<div data-reveal="true" data-reveal-delay="100" style="display:flex;flex-wrap:wrap;gap:var(--space-3)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="sand" hint-size="auto,30px">10 days – 2 weeks</x-import>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="aqua" hint-size="auto,30px">Level 2 required</x-import>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="outline" hint-size="auto,30px">Molchanovs certified</x-import>
+</div>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,6vw,88px);background:var(--surface-sand)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:{{ bandCols }};grid-template-rows:{{ bandRows }};gap:clamp(28px,4vw,80px);align-items:start">
+<div data-reveal="true" style="grid-area:{{ bandHead }};display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-5);min-width:0;padding-bottom:clamp(8px,2vw,24px)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Eyebrow" tone="muted" hint-size="auto,18px">Level three</x-import>
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-heading-1);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink);max-width:none;white-space:{{ titleWrap }}">What the course includes</h2>
+<span aria-hidden="true" style="display:block;width:48px;height:1px;background:var(--c-sand-deep)"></span>
+</div>
+<figure data-reveal="true" data-reveal-delay="60" style="grid-area:{{ bandPhoto }};margin:0;position:relative;border-radius:var(--radius-photo);overflow:hidden;aspect-ratio:1 / 1;max-width:440px;width:100%;background:var(--c-blue-wash)">
+<img src="assets/level-3-square-w.jpg" alt="A freediver ascending hand over hand on the line" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+</figure>
+<ul data-reveal="true" data-reveal-delay="100" style="grid-area:{{ bandList }};margin:0;padding:0;list-style:none;display:flex;flex-direction:column;justify-content:space-between;border-top:1px solid var(--border-sand);min-width:0;height:100%">
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-4) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:13px;background:var(--c-sand-deep)"></span><span>Freediving theory</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-4) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:13px;background:var(--c-sand-deep)"></span><span>Mouthfill equalisation workshop</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-4) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:13px;background:var(--c-sand-deep)"></span><span>FRC diving workshop</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-4) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:13px;background:var(--c-sand-deep)"></span><span>Advanced rescue protocols</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-4) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:13px;background:var(--c-sand-deep)"></span><span>Deep diving psychology</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-4) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:13px;background:var(--c-sand-deep)"></span><span>No fins workshop</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-4) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:13px;background:var(--c-sand-deep)"></span><span>Three pool sessions</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-4) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:13px;background:var(--c-sand-deep)"></span><span>Five open water sessions</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-4) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:13px;background:var(--c-sand-deep)"></span><span>Molchanovs T3/Lap 3 or Wave 3 certification</span></li>
+</ul>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,6vw,88px)">
+<div style="width:100%;max-width:var(--max-narrow);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;gap:var(--space-8)">
+<div data-reveal="true" style="display:flex;flex-direction:column;gap:var(--space-4);padding-block:var(--space-5);border-top:var(--border-hair);border-bottom:var(--border-hair)">
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Duration</span>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">This is a specialist program, and you may need time to integrate and consolidate the teachings, so it is best to allow at least 10 days — ideally two weeks. Contact us directly and we will design a schedule tailored to your needs.</p>
+</div>
+<div style="display:flex;justify-content:center;flex-wrap:wrap;gap:var(--space-4);padding-top:var(--space-2)">
+<a href="https://wa.me/6285773216666" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 var(--space-10);border-radius:var(--radius-pill);background:var(--c-sand);color:var(--c-ink);font-family:var(--font-sans);font-weight:var(--weight-regular);font-size:13px;letter-spacing:var(--tracking-button);text-transform:uppercase;border:0;text-decoration:none;box-shadow:var(--shadow-hairline);transition:background var(--duration-quick) var(--ease-tide),box-shadow var(--duration-quick) var(--ease-tide)" style-hover="background:var(--c-sand-deep);box-shadow:var(--shadow-soft)">Contact us</a>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="secondary" size="md" onClick="{{ go.allCourses }}" hint-size="auto,48px">All courses</x-import>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isLevel2 }}" hint-placeholder-val="{{ false }}">
+<section style="padding-block:clamp(56px,6vw,96px) clamp(32px,4vw,52px)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:{{ bandCols }};gap:clamp(36px,5vw,80px);align-items:center">
+<div data-reveal="true" style="display:flex;flex-direction:column;gap:var(--space-8);min-width:0">
+<p style="margin:0;max-width:var(--measure-lede);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">Level 2 is designed for freedivers who want to dive deeper into the world of freediving, improve technique and efficiency, and learn the skills needed to train independently.</p>
+<p style="margin:0;max-width:var(--measure-text);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">The course introduces freefall — the point at which you begin to sink on the descent, falling effortlessly into the blue.</p>
+<p style="margin:0;max-width:var(--measure-text);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">It also covers advanced equalisation, deeper diving techniques and the essential safety protocols that come with them.</p>
+<div style="display:flex;flex-wrap:wrap;gap:var(--space-3)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="sand" hint-size="auto,30px">3 days</x-import>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="aqua" hint-size="auto,30px">Level 1 required</x-import>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="outline" hint-size="auto,30px">Molchanovs certified</x-import>
+</div>
+</div>
+<figure data-reveal="true" data-reveal-delay="100" style="margin:0;position:relative;border-radius:var(--radius-photo);overflow:hidden;aspect-ratio:4 / 5;max-width:520px;width:100%;justify-self:end;background:var(--c-blue-wash)">
+<img src="assets/level-2-lightshaft.jpg" alt="Two freedivers equalising side by side on the line" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+</figure>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,6vw,88px);background:var(--surface-sand)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:{{ bandCols }};grid-template-rows:{{ bandRows }};gap:clamp(28px,4vw,80px);align-items:start">
+<div data-reveal="true" style="grid-area:{{ bandHead }};display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-5);min-width:0;padding-bottom:clamp(8px,2vw,24px)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Eyebrow" tone="muted" hint-size="auto,18px">Level two</x-import>
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-heading-1);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink);max-width:none;white-space:{{ titleWrap }}">What the course includes</h2>
+<span aria-hidden="true" style="display:block;width:48px;height:1px;background:var(--c-sand-deep)"></span>
+</div>
+<figure data-reveal="true" data-reveal-delay="60" style="grid-area:{{ bandPhoto }};margin:0;position:relative;border-radius:var(--radius-photo);overflow:hidden;aspect-ratio:1 / 1;max-width:440px;width:100%;background:var(--c-blue-wash)">
+<img src="assets/level-2-square-w.jpg" alt="Two freedivers on the line, silhouetted against the sun above" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+</figure>
+<ul data-reveal="true" data-reveal-delay="100" style="grid-area:{{ bandList }};margin:0;padding:0;list-style:none;display:flex;flex-direction:column;justify-content:space-between;border-top:1px solid var(--border-sand);min-width:0;height:100%">
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Freediving theory sessions and advanced equalisation workshop</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Two pool training sessions — static and dynamic apnea</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Four open water sessions</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>All equipment</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Level 2 freediving manual</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Underwater videos from training</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Molchanovs T2/Lap 2 or Wave 2 certification</span></li>
+</ul>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,6vw,88px)">
+<div style="width:100%;max-width:var(--max-narrow);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;gap:var(--space-8)">
+<div style="display:flex;justify-content:space-between;gap:var(--space-6);padding-block:var(--space-4);border-bottom:var(--border-hair)">
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Course duration</span>
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body-lg);color:var(--c-ink)">3 days</span>
+</div>
+<div style="display:flex;justify-content:center;flex-wrap:wrap;gap:var(--space-4);padding-top:var(--space-2)">
+<a href="https://wa.me/6285773216666" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 var(--space-10);border-radius:var(--radius-pill);background:var(--c-sand);color:var(--c-ink);font-family:var(--font-sans);font-weight:var(--weight-regular);font-size:13px;letter-spacing:var(--tracking-button);text-transform:uppercase;border:0;text-decoration:none;box-shadow:var(--shadow-hairline);transition:background var(--duration-quick) var(--ease-tide),box-shadow var(--duration-quick) var(--ease-tide)" style-hover="background:var(--c-sand-deep);box-shadow:var(--shadow-soft)">Book a session</a>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="secondary" size="md" onClick="{{ go.allCourses }}" hint-size="auto,48px">All courses</x-import>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isLevel1 }}" hint-placeholder-val="{{ false }}">
+<section style="padding-block:clamp(56px,6vw,96px) clamp(32px,4vw,52px)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:{{ bandCols }};gap:clamp(36px,5vw,80px);align-items:center">
+<div data-reveal="true" style="display:flex;flex-direction:column;gap:var(--space-8);min-width:0">
+<p style="margin:0;max-width:var(--measure-lede);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">Level 1 is a great starting point for anyone curious about the world of freediving. The goal of the course is to create a strong foundation to build off, so it suits complete beginners and people with plenty of water time but no formal training.</p>
+<p style="margin:0;max-width:var(--measure-text);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">We keep the atmosphere friendly and non-competitive — the right environment to learn and improve at your own pace.</p>
+<p style="margin:0;max-width:var(--measure-text);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">You will learn freediving theory, physiology, equalisation, breathing techniques for relaxation and nervous system regulation, plus essential safety protocols for diving with a buddy.</p>
+<div style="display:flex;flex-wrap:wrap;gap:var(--space-3)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="sand" hint-size="auto,30px">2.5 days</x-import>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="aqua" hint-size="auto,30px">No experience needed</x-import>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="outline" hint-size="auto,30px">Molchanovs certified</x-import>
+</div>
+</div>
+<figure data-reveal="true" data-reveal-delay="100" style="margin:0;position:relative;border-radius:var(--radius-photo);overflow:hidden;aspect-ratio:4 / 5;max-width:520px;width:100%;justify-self:end;background:var(--c-blue-wash)">
+<img src="assets/about-3.jpg" alt="A freediver descending along a coral wall alive with fish" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:35% 50%">
+</figure>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,6vw,88px);background:var(--surface-sand)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:{{ bandCols }};grid-template-rows:{{ bandRows }};gap:clamp(28px,4vw,80px);align-items:start">
+<div data-reveal="true" style="grid-area:{{ bandHead }};display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-5);min-width:0;padding-bottom:clamp(8px,2vw,24px)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Eyebrow" tone="muted" hint-size="auto,18px">Level one</x-import>
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-heading-1);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink);max-width:none;white-space:{{ titleWrap }}">What the course includes</h2>
+<span aria-hidden="true" style="display:block;width:48px;height:1px;background:var(--c-sand-deep)"></span>
+</div>
+<figure data-reveal="true" data-reveal-delay="60" style="grid-area:{{ bandPhoto }};margin:0;position:relative;border-radius:var(--radius-photo);overflow:hidden;aspect-ratio:1 / 1;max-width:440px;width:100%;background:var(--c-blue-wash)">
+<img src="assets/l1-included-2-w.jpg" alt="An instructor guiding a student through a relaxed static breath-hold in the palm-fringed pool" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 52%">
+</figure>
+<ul data-reveal="true" data-reveal-delay="100" style="grid-area:{{ bandList }};margin:0;padding:0;list-style:none;display:flex;flex-direction:column;justify-content:space-between;border-top:1px solid var(--border-sand);min-width:0;height:100%">
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Freediving theory and physiology</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Pool training — static and dynamic apnea</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Three open water sessions</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>All equipment</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Level 1 freediving manual</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Underwater videos from training</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Molchanovs T1/Lap 1 or Wave 1 certification</span></li>
+</ul>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,6vw,88px)">
+<div style="width:100%;max-width:var(--max-narrow);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;gap:var(--space-8)">
+<div style="display:flex;justify-content:space-between;gap:var(--space-6);padding-block:var(--space-4);border-bottom:var(--border-hair)">
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Course duration</span>
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body-lg);color:var(--c-ink)">2.5 days</span>
+</div>
+<div style="display:flex;justify-content:center;flex-wrap:wrap;gap:var(--space-4);padding-top:var(--space-2)"><a href="https://wa.me/6285773216666" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 var(--space-10);border-radius:var(--radius-pill);background:var(--c-sand);color:var(--c-ink);font-family:var(--font-sans);font-weight:var(--weight-regular);font-size:13px;letter-spacing:var(--tracking-button);text-transform:uppercase;border:0;text-decoration:none;box-shadow:var(--shadow-hairline);transition:background var(--duration-quick) var(--ease-tide),box-shadow var(--duration-quick) var(--ease-tide)" style-hover="background:var(--c-sand-deep);box-shadow:var(--shadow-soft)">Book a session</a>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="secondary" size="md" onClick="{{ go.allCourses }}" hint-size="auto,48px">All courses</x-import>
+</div>
+</div>
+</section>
+
+<section style="padding-block:0 clamp(48px,6vw,88px)">
+<div style="width:100%;max-width:var(--max-content);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-8)">
+<span aria-hidden="true" style="display:block;width:48px;height:1px;background:var(--c-sand-deep)"></span>
+<blockquote data-reveal="true" style="margin:0;display:flex;flex-direction:column;align-items:center;gap:var(--space-8)">
+<p style="margin:0;max-width:38ch;font-family:var(--font-heading-alt);font-weight:var(--weight-extralight);font-size:clamp(22px,2.4vw,30px);line-height:var(--leading-quote);letter-spacing:var(--tracking-heading);color:var(--c-ink);text-wrap:pretty">“I did the freediving course with Freedive Rote and it was such an interesting and amazing experience. I highly recommend anyone who wants to get more confidence in the water, or who is genuinely interested in getting more knowledge about breath hold, to do this course.”</p>
+<footer style="display:flex;flex-direction:column;gap:8px">
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body-lg);color:var(--c-ink)">Emma Perrier</span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Google review</span>
+</footer>
+</blockquote>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isTryFreediving }}" hint-placeholder-val="{{ false }}">
+<section style="padding-block:clamp(56px,6vw,96px) clamp(32px,4vw,52px)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:{{ bandCols }};gap:clamp(36px,5vw,80px);align-items:center">
+<div data-reveal="true" style="display:flex;flex-direction:column;gap:var(--space-8);min-width:0">
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-display-2);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink);max-width:18ch">Try freediving – a one-day introduction</h2>
+<p style="margin:0;max-width:var(--measure-lede);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">A one-day introduction to freediving for curious beginners. Learn the basics of freediving theory, breath, relaxation, equalisation and safe diving.</p>
+<div style="display:flex;flex-wrap:wrap;gap:var(--space-3)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="sand" hint-size="auto,30px">1 full day</x-import>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="aqua" hint-size="auto,30px">No experience needed</x-import>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="outline" hint-size="auto,30px">All equipment provided</x-import>
+</div>
+</div>
+<figure data-reveal="true" data-reveal-delay="100" style="margin:0;position:relative;border-radius:var(--radius-photo);overflow:hidden;aspect-ratio:4 / 5;max-width:520px;width:100%;justify-self:end;background:var(--c-blue-wash)">
+<img src="assets/try-intro-2.jpg" alt="A freediver in a white monofin gliding above anemones and coral in sunlit blue water" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 55%">
+</figure>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,6vw,88px);background:var(--surface-sand)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:{{ bandCols }};grid-template-rows:{{ bandRows }};gap:clamp(28px,4vw,80px);align-items:start">
+<div data-reveal="true" style="grid-area:{{ bandHead }};display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-5);min-width:0;padding-bottom:clamp(8px,2vw,24px)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Eyebrow" tone="muted" hint-size="auto,18px">One-day introduction</x-import>
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-heading-1);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink);max-width:none;white-space:{{ titleWrap }}">What is included</h2>
+<span aria-hidden="true" style="display:block;width:48px;height:1px;background:var(--c-sand-deep)"></span>
+</div>
+<figure data-reveal="true" data-reveal-delay="60" style="grid-area:{{ bandPhoto }};margin:0;position:relative;border-radius:var(--radius-photo);overflow:hidden;aspect-ratio:1 / 1;max-width:440px;width:100%;background:var(--c-blue-wash)">
+<img src="assets/try-included-2-w.jpg" alt="A theory session in the beachside shala, students on cushions listening to the instructor" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:52% 50%">
+</figure>
+<ul data-reveal="true" data-reveal-delay="100" style="grid-area:{{ bandList }};margin:0;padding:0;list-style:none;display:flex;flex-direction:column;justify-content:space-between;border-top:1px solid var(--border-sand);min-width:0;height:100%">
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Theory session</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>One pool training session</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>One open water session</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>Freediving manual</span></li>
+<li style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--border-sand);font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)"><span aria-hidden="true" style="flex:0 0 auto;width:20px;height:1px;margin-top:14px;background:var(--c-sand-deep)"></span><span>All equipment</span></li>
+</ul>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,6vw,88px)">
+<div style="width:100%;max-width:var(--max-narrow);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;gap:var(--space-8)">
+<p data-reveal="true" style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">This introduction course is the perfect first step if you would like to try freediving before committing to a full course. After completion, if you want to go further, you can use this course as a stepping stone to day 2 of the Level 1 course.</p>
+<div style="display:flex;justify-content:center;flex-wrap:wrap;gap:var(--space-4);padding-top:var(--space-2)">
+<a href="https://wa.me/6285773216666" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 var(--space-10);border-radius:var(--radius-pill);background:var(--c-sand);color:var(--c-ink);font-family:var(--font-sans);font-weight:var(--weight-regular);font-size:13px;letter-spacing:var(--tracking-button);text-transform:uppercase;border:0;text-decoration:none;box-shadow:var(--shadow-hairline);transition:background var(--duration-quick) var(--ease-tide),box-shadow var(--duration-quick) var(--ease-tide)" style-hover="background:var(--c-sand-deep);box-shadow:var(--shadow-soft)">Book a session</a>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="secondary" size="md" onClick="{{ go.allCourses }}" hint-size="auto,48px">All courses</x-import>
+</div>
+</div>
+</section>
+
+<section style="padding-block:clamp(16px,2vw,28px) clamp(56px,6vw,96px)">
+<div style="width:100%;max-width:var(--max-content);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-8)">
+<span aria-hidden="true" style="display:block;width:48px;height:1px;background:var(--c-sand-deep)"></span>
+<blockquote data-reveal="true" style="margin:0;display:flex;flex-direction:column;align-items:center;gap:var(--space-8)">
+<p style="margin:0;max-width:26ch;font-family:var(--font-heading-alt);font-weight:var(--weight-extralight);font-size:var(--text-heading-1);line-height:var(--leading-quote);letter-spacing:var(--tracking-heading);color:var(--c-ink);text-wrap:pretty">“Outstanding experience with a very knowledgeable instructor who made it fun and interesting.”</p>
+<footer style="display:flex;flex-direction:column;gap:8px">
+<span style="font-family:var(--font-heading-alt);font-size:var(--text-body-lg);color:var(--c-ink)">Adi Khodja</span>
+<span style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--c-ink-muted)">Google review</span>
+</footer>
+</blockquote>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isAllCourses }}" hint-placeholder-val="{{ false }}">
+<section style="padding-block:clamp(56px,6vw,96px)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;gap:clamp(32px,4vw,48px)">
+<header data-reveal="true" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-4)">
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-display-2);line-height:var(--leading-display);letter-spacing:var(--tracking-heading);color:var(--c-ink)">Choose your course</h2>
+<span aria-hidden="true" style="display:block;width:48px;height:1px;background:var(--c-sand-deep)"></span>
+</header>
+<div style="display:grid;grid-template-columns:{{ bandCols }};gap:clamp(28px,3.5vw,48px)">
+<article data-reveal="true" style="display:flex;flex-direction:column;min-width:0;background:var(--surface-card);border:var(--border-hair);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-hairline)">
+<a href="#/try-freediving" onClick="{{ go.tryFreediving }}" onMouseEnter="{{ k1.enter }}" onMouseLeave="{{ k1.leave }}" onTouchStart="{{ k1.press }}" onTouchEnd="{{ k1.release }}" onTouchCancel="{{ k1.release }}" style="position:relative;display:block;aspect-ratio:3 / 2;background:var(--c-blue-wash);border:0;text-decoration:none">
+<img src="assets/try-freediving.jpg" alt="A first-time freediver gliding over the reef" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:{{ k1.zoom }};transition:transform 600ms var(--ease-tide)">
+<span style="position:absolute;inset:0;background:{{ k1.veil }};transition:background 600ms var(--ease-tide)"></span>
+<span style="position:absolute;top:var(--space-5);left:var(--space-5);display:flex"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="onPhoto" hint-size="auto,30px">One day</x-import></span>
+</a>
+<div style="display:flex;flex-direction:column;gap:var(--space-5);flex:1;padding:clamp(24px,3vw,36px)">
+<h3 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-heading-1);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink)">Try freediving</h3>
+<p style="margin:0;flex:1;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">A one-day introduction to freediving for curious beginners. Learn the basics of breath, relaxation, equalisation and safe diving.</p>
+<div style="display:flex;justify-content:center;padding-top:var(--space-6);border-top:var(--border-hair)"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="sand" size="md" onClick="{{ go.tryFreediving }}" hint-size="auto,48px">Learn more</x-import></div>
+</div>
+</article>
+<article data-reveal="true" data-reveal-delay="80" style="display:flex;flex-direction:column;min-width:0;background:var(--surface-card);border:var(--border-hair);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-hairline)">
+<a href="#/level-1" onClick="{{ go.level1 }}" onMouseEnter="{{ k2.enter }}" onMouseLeave="{{ k2.leave }}" onTouchStart="{{ k2.press }}" onTouchEnd="{{ k2.release }}" onTouchCancel="{{ k2.release }}" style="position:relative;display:block;aspect-ratio:3 / 2;background:var(--c-blue-wash);border:0;text-decoration:none">
+<img src="assets/level-1-beginner.jpg" alt="Freedivers on the line with light breaking through the surface" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:{{ k2.zoom }};transition:transform 600ms var(--ease-tide)">
+<span style="position:absolute;inset:0;background:{{ k2.veil }};transition:background 600ms var(--ease-tide)"></span>
+<span style="position:absolute;top:var(--space-5);left:var(--space-5);display:flex"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="onPhoto" hint-size="auto,30px">Beginner</x-import></span>
+</a>
+<div style="display:flex;flex-direction:column;gap:var(--space-5);flex:1;padding:clamp(24px,3vw,36px)">
+<h3 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-heading-1);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink)">Level 1</h3>
+<p style="margin:0;flex:1;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">Your first complete freediving course covering freediving theory, equalisation, breathing techniques for relaxation and nervous system regulation, plus essential safety protocols.</p>
+<div style="display:flex;justify-content:center;padding-top:var(--space-6);border-top:var(--border-hair)"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="sand" size="md" onClick="{{ go.level1 }}" hint-size="auto,48px">Learn more</x-import></div>
+</div>
+</article>
+<article data-reveal="true" data-reveal-delay="160" style="display:flex;flex-direction:column;min-width:0;background:var(--surface-card);border:var(--border-hair);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-hairline)">
+<a href="#/level-2" onClick="{{ go.level2 }}" onMouseEnter="{{ k3.enter }}" onMouseLeave="{{ k3.leave }}" onTouchStart="{{ k3.press }}" onTouchEnd="{{ k3.release }}" onTouchCancel="{{ k3.release }}" style="position:relative;display:block;aspect-ratio:3 / 2;background:var(--c-blue-wash);border:0;text-decoration:none">
+<img src="assets/level-2-advanced.jpg" alt="Two freedivers silhouetted against the sun beside the line" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:{{ k3.zoom }};transition:transform 600ms var(--ease-tide)">
+<span style="position:absolute;inset:0;background:{{ k3.veil }};transition:background 600ms var(--ease-tide)"></span>
+<span style="position:absolute;top:var(--space-5);left:var(--space-5);display:flex"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="onPhoto" hint-size="auto,30px">Advanced</x-import></span>
+</a>
+<div style="display:flex;flex-direction:column;gap:var(--space-5);flex:1;padding:clamp(24px,3vw,36px)">
+<h3 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-heading-1);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink)">Level 2</h3>
+<p style="margin:0;flex:1;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">Your step towards becoming an independent freediver and competent safety diver. This course explores the Mammalian Dive Reflex and deeper diving techniques.</p>
+<div style="display:flex;justify-content:center;padding-top:var(--space-6);border-top:var(--border-hair)"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="sand" size="md" onClick="{{ go.level2 }}" hint-size="auto,48px">Learn more</x-import></div>
+</div>
+</article>
+<article data-reveal="true" data-reveal-delay="240" style="display:flex;flex-direction:column;min-width:0;background:var(--surface-card);border:var(--border-hair);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-hairline)">
+<a href="#/level-3" onClick="{{ go.level3 }}" onMouseEnter="{{ k4.enter }}" onMouseLeave="{{ k4.leave }}" onTouchStart="{{ k4.press }}" onTouchEnd="{{ k4.release }}" onTouchCancel="{{ k4.release }}" style="position:relative;display:block;aspect-ratio:3 / 2;background:var(--c-blue-wash);border:0;text-decoration:none">
+<img src="assets/level-3-deep.jpg" alt="A freediver ascending the line from deep blue water" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:{{ k4.zoom }};transition:transform 600ms var(--ease-tide)">
+<span style="position:absolute;inset:0;background:{{ k4.veil }};transition:background 600ms var(--ease-tide)"></span>
+<span style="position:absolute;top:var(--space-5);left:var(--space-5);display:flex"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Badge" tone="onPhoto" hint-size="auto,30px">Deep</x-import></span>
+</a>
+<div style="display:flex;flex-direction:column;gap:var(--space-5);flex:1;padding:clamp(24px,3vw,36px)">
+<h3 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-heading-1);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink)">Level 3</h3>
+<p style="margin:0;flex:1;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">The deepest program for recreational divers and those people looking to dive up to 40m and beyond. This course introduces Mouthfill Equalisation, FRC diving and advanced safety protocols.</p>
+<div style="display:flex;justify-content:center;padding-top:var(--space-6);border-top:var(--border-hair)"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="sand" size="md" onClick="{{ go.level3 }}" hint-size="auto,48px">Learn more</x-import></div>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,5vw,80px);background:var(--surface-sand)">
+<div style="width:100%;max-width:var(--max-content);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-8)">
+<p data-reveal="true" style="margin:0;max-width:30ch;font-family:var(--font-heading-alt);font-weight:var(--weight-extralight);font-size:var(--text-heading-1);line-height:var(--leading-quote);letter-spacing:var(--tracking-heading);color:var(--c-ink)">Not sure which course is right for you? Tell us about your experience in the water, and we’ll work it out together.</p>
+<div style="display:flex;justify-content:center">
+<a href="https://wa.me/6285773216666" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 var(--space-10);border-radius:var(--radius-pill);background:var(--c-blue-deep);color:var(--c-white);font-family:var(--font-sans);font-weight:var(--weight-regular);font-size:13px;letter-spacing:var(--tracking-button);text-transform:uppercase;border:0;text-decoration:none;transition:background var(--duration-quick) var(--ease-tide)" style-hover="background:var(--c-blue-mid)">Contact us</a>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+
+<section style="padding-block:clamp(56px,6vw,92px) clamp(36px,4vw,56px)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:{{ aboutIntroCols }};gap:clamp(36px,5vw,84px);align-items:start">
+<div data-reveal="true" style="display:flex;flex-direction:column;gap:var(--space-6);min-width:0">
+<span style="display:flex"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Eyebrow" hint-size="auto,18px">Who we are</x-import></span>
+<p style="margin:0;max-width:26ch;font-family:var(--font-heading-alt);font-weight:var(--weight-extralight);font-size:clamp(27px,3.4vw,44px);line-height:1.18;letter-spacing:var(--tracking-heading);color:var(--c-ink)">We are surfers, freedivers and ocean people, probably much like yourself.</p>
+</div>
+<div data-reveal="true" data-reveal-delay="80" style="display:flex;flex-direction:column;gap:var(--space-5);min-width:0;padding-top:clamp(0px,1vw,14px)">
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">Freedive Rote is a beach-based ocean centre in Nemberala, Rote Island, built around a simple idea: helping people feel more calm, confident and connected in the water.</p>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">Our connection to the ocean has been shaped by many years spent surfing and sailing throughout Indonesia and Papua. Freediving became a natural extension of that relationship, and for more than 15 years we have been coaching, teaching and exploring the underwater world.</p>
+</div>
+</div>
+</section>
+
+<section style="margin-block:clamp(36px,4vw,56px);background:var(--surface-sand)">
+<div data-reveal="true" style="display:grid;grid-template-columns:{{ aboutJourneyCols }};align-items:stretch">
+<div style="display:flex;flex-direction:column;justify-content:center;gap:var(--space-5);min-width:0;padding:clamp(40px,5vw,80px) clamp(28px,5vw,80px) clamp(40px,5vw,80px) max(var(--gutter),calc((100vw - var(--max-page)) / 2 + var(--gutter)))">
+<span style="display:flex"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Eyebrow" hint-size="auto,18px">Our journey</x-import></span>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">Our journey includes co-founding Apneista Freediving &amp; Yoga in Amed, Bali, along with Above Below, an expedition company running freediving trips and liveaboards to Raja Ampat, the Banda Sea, North Sumatra, Komodo, Tonga and Baja Mexico.</p>
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(48px,7vw,88px);padding-top:var(--space-6);margin-top:var(--space-2);border-top:1px solid var(--border-sand)">
+<a href="https://www.apneista.com/" target="_blank" rel="noopener" aria-label="Apneista Freediving &amp; Yoga" style="display:flex;align-items:center;border:0;text-decoration:none;opacity:.82;transition:opacity var(--duration-quick) var(--ease-tide)" style-hover="opacity:1"><span role="img" aria-label="Apneista Freediving &amp; Yoga logo" style="display:block;width:62px;height:68px;background:var(--c-ink);-webkit-mask:url(assets/logo-apneista.png) center / contain no-repeat;mask:url(assets/logo-apneista.png) center / contain no-repeat"></span></a>
+<a href="https://www.abovebelow.life/" target="_blank" rel="noopener" aria-label="Above Below" style="display:flex;align-items:center;border:0;text-decoration:none;opacity:.82;transition:opacity var(--duration-quick) var(--ease-tide)" style-hover="opacity:1"><span role="img" aria-label="Above Below logo" style="display:block;width:168px;height:38px;background:var(--c-ink);-webkit-mask:url(assets/logo-above-below.png) center / contain no-repeat;mask:url(assets/logo-above-below.png) center / contain no-repeat"></span></a>
+</div>
+</div>
+<figure style="margin:0;position:relative;min-height:clamp(280px,34vw,460px);overflow:hidden;background:var(--c-blue-wash)">
+<img src="assets/about-portrait.jpg" alt="A freediver swimming with sea lions over a rocky seabed" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%">
+</figure>
+</div>
+</section>
+
+<section style="margin-block:clamp(36px,4vw,56px)">
+<div data-reveal="true" style="display:grid;grid-template-columns:{{ aboutSurfCols }};align-items:stretch">
+<figure style="margin:0;position:relative;min-height:clamp(280px,34vw,460px);overflow:hidden;background:var(--c-blue-wash)">
+<img src="assets/breath-hold-training-v5-w.jpg" alt="An instructor guiding a student through a weighted breath-hold in the pool" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 34%">
+</figure>
+<div style="display:flex;flex-direction:column;justify-content:center;gap:var(--space-5);min-width:0;padding:clamp(40px,5vw,80px) max(var(--gutter),calc((100vw - var(--max-page)) / 2 + var(--gutter))) clamp(40px,5vw,80px) clamp(28px,5vw,80px)">
+<span style="display:flex"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Eyebrow" hint-size="auto,18px">For surfers</x-import></span>
+<h2 style="margin:0;max-width:22ch;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-heading-1);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--c-ink)">More than teaching freediving</h2>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">Freedive Rote is not just about teaching freediving. As surfers ourselves, we know how much the skills and awareness developed through freediving can help build confidence in the surf.</p>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">We offer surf survival, breath-hold training, ocean awareness and nervous system regulation to help surfers stay calmer, feel more prepared and build confidence when things get challenging, whether that is a hold down, a bigger wave or simply learning to stay relaxed under pressure.</p>
+<div style="display:flex;padding-top:var(--space-2)"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="sand" size="md" onClick="{{ go.surfSurvival }}" hint-size="auto,48px">Surf survival</x-import></div>
+</div>
+</div>
+</section>
+
+<section style="padding-block:clamp(36px,4vw,56px)">
+<div style="width:100%;max-width:var(--max-content);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;gap:var(--space-5)">
+<span data-reveal="true" style="display:flex"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Eyebrow" hint-size="auto,18px">Breath, awareness, presence</x-import></span>
+<div data-reveal="true" data-reveal-delay="60" style="display:flex;flex-direction:column;gap:var(--space-5);padding-left:clamp(0px,2vw,28px);border-left:{{ aboutRule }}">
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">Meditation and mindfulness are also central to our approach. A long standing Vipassana practice has shaped the way we teach, with an emphasis on breath, awareness, relaxation and the connection between body and mind.</p>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">For us, freediving is not simply about going deeper or holding your breath longer. It is about learning to become calm, present and comfortable in the ocean.</p>
+</div>
+</div>
+</section>
+
+<section style="position:relative;margin-top:clamp(36px,4vw,56px);min-height:clamp(340px,46vw,540px);display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--surface-deep)">
+<img src="assets/about-still-2.jpg" alt="A freediver in white fins gliding alongside a manta ray over a dark reef" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%">
+<span style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,14,18,.56) 0%,rgba(8,14,18,.34) 50%,rgba(8,14,18,.22) 100%)"></span>
+<blockquote data-reveal="true" style="position:relative;margin:0;padding:clamp(40px,6vw,80px) var(--gutter);display:flex;flex-direction:column;align-items:center;gap:var(--space-5);text-align:center">
+<p style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-extralight);font-size:clamp(34px,5.4vw,68px);line-height:1.1;letter-spacing:var(--tracking-display);color:var(--c-white);text-shadow:0 1px 4px rgba(8,14,18,.4),0 3px 28px rgba(8,14,18,.55)">Stillness in motion.</p>
+<span aria-hidden="true" style="display:block;width:48px;height:1px;background:rgba(255,255,255,.55)"></span>
+</blockquote>
+</section>
+
+<section style="padding-block:clamp(48px,5.5vw,84px)">
+<div style="width:100%;max-width:var(--max-content);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-8)">
+<p data-reveal="true" style="margin:0;max-width:52ch;font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">Whether you are learning to freedive, looking to improve your surf survival skills, or simply wanting to feel more relaxed and at home in the water, we combine 15+ years of coaching experience, practical ocean knowledge, modern training techniques and a mindful approach to help you progress at your own pace.</p>
+<div data-reveal="true" data-reveal-delay="60" style="display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-4)">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="primary" size="lg" onClick="{{ goOffer }}" hint-size="auto,56px">See the courses</x-import>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="secondary" size="lg" href="https://wa.me/6285773216666" target="_blank" rel="noopener" hint-size="auto,56px">Contact us</x-import>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isLocation }}" hint-placeholder-val="{{ false }}">
+
+<section style="position:relative;padding-block:clamp(56px,6vw,92px) clamp(40px,4.5vw,64px);overflow:hidden">
+<img aria-hidden="true" src="assets/rote-map-v2.png" alt="" style="position:absolute;right:-12%;top:50%;transform:translateY(-50%);width:min(820px,70%);height:auto;opacity:.3;pointer-events:none">
+<div style="position:relative;width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:{{ locIntroCols }};gap:clamp(32px,5vw,84px);align-items:start">
+<div data-reveal="true" style="display:flex;flex-direction:column;gap:var(--space-6);min-width:0">
+<span style="display:flex"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Eyebrow" hint-size="auto,18px">Oenggaut village · Nemberala Beach</x-import></span>
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-display-2);line-height:var(--leading-display);letter-spacing:var(--tracking-heading);color:var(--c-ink)">Rote Island &amp; Nemberala</h2>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink);max-width:36ch">Freedive Rote is located right on the shores of Nemberala Beach, in the village of Oenggaut on Rote Island.</p>
+</div>
+<div data-reveal="true" data-reveal-delay="80" style="display:flex;flex-direction:column;gap:var(--space-5);min-width:0;padding-top:clamp(0px,3vw,44px)">
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">Rote lies at the southern edge of Indonesia, known for its pristine beaches, world class surf, beautiful reefs and abundant marine life.</p>
+<p style="margin:0;padding-left:var(--space-5);border-left:1px solid var(--c-sand-deep);font-family:var(--font-heading-alt);font-weight:var(--weight-extralight);font-size:clamp(20px,2vw,25px);line-height:var(--leading-quote);color:var(--c-ink)">It is a place where life still moves at a slower pace, far removed from the hustle and bustle of Bali.</p>
+</div>
+</div>
+</section>
+
+<section style="margin-block:clamp(24px,3vw,40px);background:var(--surface-sand)">
+<div data-reveal="true" style="display:grid;grid-template-columns:{{ locShalaCols }};align-items:stretch">
+<div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:4px;min-height:clamp(320px,38vw,520px)">
+<figure style="margin:0;position:relative;overflow:hidden;background:var(--c-blue-wash)"><img src="assets/loc-shala-3-w.jpg" alt="A group stretching arms overhead under the palm-thatch roof of the shala" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%"></figure>
+<figure style="margin:0;position:relative;overflow:hidden;background:var(--c-blue-wash)"><img src="assets/loc-shala-rest-w.jpg" alt="Students resting on cushions in the thatched beachside shala, the lagoon beyond" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 60%"></figure>
+</div>
+<div style="display:flex;flex-direction:column;justify-content:center;gap:var(--space-5);min-width:0;padding:clamp(40px,5vw,80px) max(var(--gutter),calc((100vw - var(--max-page)) / 2 + var(--gutter))) clamp(40px,5vw,80px) clamp(28px,5vw,80px)">
+<span style="display:flex"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Eyebrow" hint-size="auto,18px">Our school</x-import></span>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">Our school sits directly on the beach, with our training taking place in a beachside shala.</p>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">Water sessions begin in the calm, shallow lagoon before progressing behind the waves for deeper water sessions as students develop their skills and confidence.</p>
+</div>
+</div>
+</section>
+
+<section style="padding-block:clamp(48px,5.5vw,84px)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:{{ locDiscoverCols }};gap:clamp(36px,5vw,84px);align-items:center">
+<div data-reveal="true" style="display:flex;flex-direction:column;gap:var(--space-5);min-width:0">
+<span style="display:flex"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Eyebrow" hint-size="auto,18px">Beyond the waves</x-import></span>
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-display-2);line-height:var(--leading-display);letter-spacing:var(--tracking-heading);color:var(--c-ink)">Discover Rote</h2>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink)">Rote is still something of a hidden gem. While the island is famous among surfers for Besialu / T-Land, the long left hander that draws surfers from around the world during the main surf season from June to September, there is much more to Rote than its waves.</p>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">The island offers a chance to slow down and experience a simpler way of life. Explore quiet beaches and coral reefs, paddle through mangrove lagoons, discover traditional Ikat weaving, encounter the island’s famous wild horses, or simply enjoy the small collection of cafes and restaurants around Nemberala.</p>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft)">Goats wander through the villages, while the landscape shifts between dry savannah and palm fringed coastal areas.</p>
+<p style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-extralight);font-style:italic;font-size:clamp(22px,2.2vw,28px);line-height:var(--leading-quote);color:var(--c-blue-deep)">Oh, and the sunsets over the ocean are spectacular!</p>
+</div>
+<figure data-reveal="true" data-reveal-delay="80" style="margin:0;position:relative;aspect-ratio:3 / 4;border-radius:var(--radius-photo);overflow:hidden;background:var(--c-blue-wash)">
+<img src="assets/loc-discover-2-w.jpg" alt="Leaning coconut palms along the white sand of Nemberala, boats moored on the turquoise lagoon" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%">
+</figure>
+</div>
+</section>
+
+<section aria-label="Breathwork in the shala" style="position:relative;height:clamp(300px,44vw,560px);overflow:hidden;background:var(--c-blue-wash)">
+<img src="assets/loc-meditation-w.jpg" alt="Students sitting in breathwork practice in the shala, the beach and lagoon glowing behind them" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 55%">
+</section>
+
+<section style="position:relative;padding-block:clamp(56px,6vw,96px);overflow:hidden">
+<img aria-hidden="true" src="assets/rote-map-v2.png" alt="" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(960px,106%);height:auto;opacity:.28;pointer-events:none">
+<div style="position:relative;width:100%;max-width:var(--max-content);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-6)">
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-display-2);line-height:var(--leading-display);letter-spacing:var(--tracking-heading);color:var(--c-ink)">Freedive Rote</h2>
+<span aria-hidden="true" style="display:block;width:48px;height:1px;background:var(--c-sand-deep)"></span>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft);font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink);max-width:52ch">With direct beach access, calm sheltered water and a peaceful environment, Freedive Rote is an ideal place to learn, slow down and connect with the ocean.</p>
+<p style="margin:0;font-size:var(--text-body);line-height:var(--leading-body);color:var(--c-ink-soft);max-width:56ch">Whether you are here to learn freediving, improve your surf survival skills, explore the reefs or simply spend some time in the water, Rote offers the space to breathe, reset and reconnect.</p>
+</div>
+</section>
+
+<section style="background:var(--surface-deep);padding-block:clamp(48px,5.5vw,84px)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:{{ locCols }};gap:clamp(32px,4.5vw,72px);align-items:center">
+<div data-reveal="true" style="display:flex;flex-direction:column;gap:var(--space-5);min-width:0;color:var(--text-on-dark)">
+<span style="display:flex;align-items:center;gap:12px;font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--text-on-dark-muted)"><sc-if value="{{ iconsReady }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Icon" name="map-pin" hint-size="20px,20px"></x-import></sc-if>Find us</span>
+<h2 style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-light);font-size:var(--text-display-2);line-height:var(--leading-display);letter-spacing:var(--tracking-heading);color:var(--c-white)">Nemberala Beach, Rote Island</h2>
+<p style="margin:0;max-width:40ch;font-size:var(--text-body);line-height:var(--leading-loose);color:var(--text-on-dark)">Freedive Rote, Desa Oenggaut, Nemberala, Kec. Rote Bar., Kabupaten Rote Ndao, Nusa Tenggara Tim. 85982, Indonesia</p>
+<div style="display:flex;flex-wrap:wrap;gap:var(--space-4);padding-top:var(--space-2)">
+<a href="https://maps.app.goo.gl/kozkb5j8g4gNRhdc6" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 var(--space-8);border-radius:var(--radius-pill);background:var(--c-sand);color:var(--c-ink);font-family:var(--font-sans);font-weight:var(--weight-regular);font-size:13px;letter-spacing:var(--tracking-button);text-transform:uppercase;border:0;text-decoration:none;transition:background var(--duration-quick) var(--ease-tide)" style-hover="background:var(--c-sand-deep)">Open in Google Maps</a>
+</div>
+</div>
+<div data-reveal="true" data-reveal-delay="80" style="position:relative;min-width:0;aspect-ratio:4 / 3;border-radius:var(--radius-lg);overflow:hidden;background:var(--c-blue-wash);box-shadow:var(--shadow-photo)">
+<iframe title="Map showing Freedive Rote on Nemberala Beach" src="https://maps.google.com/maps?q=Freedive%20Rote%2C%20Nemberala%2C%20Rote%20Ndao&amp;z=14&amp;hl=en&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isComingSoon }}" hint-placeholder-val="{{ false }}">
+<section style="padding-block:clamp(56px,6vw,96px)">
+<div style="width:100%;max-width:var(--max-narrow);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;gap:var(--space-8)">
+<p style="margin:0;font-size:var(--text-body-lg);line-height:var(--leading-loose);color:var(--c-ink-soft)">Content coming soon. In the meantime, send us a message and we will answer from the beach.</p>
+<div style="display:flex;gap:var(--space-4);flex-wrap:wrap">
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="primary" size="md" href="https://wa.me/6285773216666" target="_blank" rel="noopener" hint-size="auto,48px">Book a session</x-import>
+<x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Button" variant="secondary" size="md" onClick="{{ go.home }}" hint-size="auto,48px">Back to home</x-import>
+</div>
+</div>
+</section>
+</sc-if>
+</main>
+</sc-if>
+
+<footer style="background:var(--surface-night);color:var(--text-on-dark);padding-block:clamp(40px,4.5vw,64px) var(--space-8)">
+<div style="width:100%;max-width:var(--max-page);margin-inline:auto;padding-inline:var(--gutter);display:flex;flex-direction:column;gap:clamp(32px,4vw,52px)">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:clamp(28px,3.5vw,56px)">
+<div style="display:flex;flex-direction:column;gap:var(--space-5);min-width:0">
+<img src="assets/logo-freedive-rote-white.png" alt="Freedive Rote — Ocean Performance" style="height:62px;width:auto;display:block;align-self:flex-start;object-fit:contain">
+<p style="margin:0;max-width:30ch;font-size:var(--text-body-sm);line-height:var(--leading-loose);color:var(--text-on-dark-muted)">Join us for freediving courses, training, surf survival workshops and guided ocean excursions.</p>
+<div style="display:flex;gap:var(--space-3)">
+<a href="https://wa.me/6285773216666" target="_blank" rel="noopener" aria-label="WhatsApp" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-on-dark);border-radius:var(--radius-pill);color:var(--text-on-dark);text-decoration:none;transition:var(--transition-hover)" style-hover="background:rgba(255,255,255,.14);border-color:#ffffff">
+<sc-if value="{{ iconsReady }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Icon" name="phone" hint-size="20px,20px"></x-import></sc-if>
+</a>
+<a href="https://www.instagram.com/freediverote/" target="_blank" rel="noopener" aria-label="Instagram" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-on-dark);border-radius:var(--radius-pill);color:var(--text-on-dark);text-decoration:none;transition:var(--transition-hover)" style-hover="background:rgba(255,255,255,.14);border-color:#ffffff">
+<sc-if value="{{ iconsReady }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Icon" name="instagram" hint-size="20px,20px"></x-import></sc-if>
+</a>
+</div>
+</div>
+<nav style="display:flex;flex-direction:column;gap:var(--space-4);min-width:0">
+<p style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-regular);font-size:22px;line-height:1.3;letter-spacing:-.01em;color:var(--c-white)">Quick links</p>
+<div style="display:flex;flex-direction:column;gap:var(--space-3)">
+<a href="#/all-courses" onClick="{{ go.allCourses }}" style="font-size:var(--text-body-sm);color:var(--text-on-dark-muted);text-decoration:none;min-height:28px;display:flex;align-items:center;transition:var(--transition-hover)" style-hover="color:#ffffff">Freediving Courses</a>
+<a href="#/surf-survival" onClick="{{ go.surfSurvival }}" style="font-size:var(--text-body-sm);color:var(--text-on-dark-muted);text-decoration:none;min-height:28px;display:flex;align-items:center;transition:var(--transition-hover)" style-hover="color:#ffffff">Surf Survival</a>
+<a href="#/coaching" onClick="{{ go.coaching }}" style="font-size:var(--text-body-sm);color:var(--text-on-dark-muted);text-decoration:none;min-height:28px;display:flex;align-items:center;transition:var(--transition-hover)" style-hover="color:#ffffff">Coaching</a>
+<a href="#/trips" onClick="{{ go.trips }}" style="font-size:var(--text-body-sm);color:var(--text-on-dark-muted);text-decoration:none;min-height:28px;display:flex;align-items:center;transition:var(--transition-hover)" style-hover="color:#ffffff">Trips</a>
+<a href="#/location" onClick="{{ go.location }}" style="font-size:var(--text-body-sm);color:var(--text-on-dark-muted);text-decoration:none;min-height:28px;display:flex;align-items:center;transition:var(--transition-hover)" style-hover="color:#ffffff">Location</a>
+<a href="#/about" onClick="{{ go.about }}" style="font-size:var(--text-body-sm);color:var(--text-on-dark-muted);text-decoration:none;min-height:28px;display:flex;align-items:center;transition:var(--transition-hover)" style-hover="color:#ffffff">About</a>
+</div>
+</nav>
+<div style="display:flex;flex-direction:column;gap:var(--space-4);min-width:0">
+<p style="margin:0;font-family:var(--font-heading-alt);font-weight:var(--weight-regular);font-size:22px;line-height:1.3;letter-spacing:-.01em;color:var(--c-white)">Contact info</p>
+<div style="display:flex;flex-direction:column;gap:var(--space-4);font-size:var(--text-body-sm);line-height:var(--leading-loose);color:var(--text-on-dark-muted)">
+<p style="margin:0;display:flex;align-items:flex-start;gap:var(--space-4);max-width:36ch"><span style="flex:0 0 auto;margin-top:5px;display:flex;color:var(--c-aqua)"><sc-if value="{{ iconsReady }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Icon" name="map-pin" hint-size="18px,18px"></x-import></sc-if></span><span>Desa Oenggaut, Nemberala, Kec. Rote Bar., Kabupaten Rote Ndao, Nusa Tenggara Tim. 85982, Indonesia</span></p>
+<a href="https://wa.me/6285773216666" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:var(--space-4);color:var(--text-on-dark);text-decoration:none;transition:var(--transition-hover)" style-hover="color:var(--c-aqua)"><span style="flex:0 0 auto;display:flex;color:var(--c-aqua)"><sc-if value="{{ iconsReady }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Icon" name="phone" hint-size="18px,18px"></x-import></sc-if></span><span>+62 857-7321-6666</span></a>
+<a href="mailto:info@freediverote.com" style="display:flex;align-items:center;gap:var(--space-4);color:var(--text-on-dark);text-decoration:none;transition:var(--transition-hover)" style-hover="color:var(--c-aqua)"><span style="flex:0 0 auto;display:flex;color:var(--c-aqua)"><sc-if value="{{ iconsReady }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="FreediveRoteDesignSystem_2a042d.Icon" name="mail" hint-size="18px,18px"></x-import></sc-if></span><span>info@freediverote.com</span></a>
+</div>
+</div>
+</div>
+<div style="border-top:1px solid var(--border-on-dark);padding-top:var(--space-5);display:flex;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;font-size:var(--text-caption);letter-spacing:.04em;color:var(--text-on-dark-muted)">
+<span>© Freedive Rote · Nemberala, Rote Ndao, Indonesia</span>
+<span>Breath · Depth · Presence</span>
+</div>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;offerLayout&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Two-up cards&quot;, &quot;Wide rows&quot;], &quot;default&quot;: &quot;Two-up cards&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;What we offer&quot; },
+  &quot;heroScrim&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Bright (recommended)&quot;, &quot;Readable (AA)&quot;, &quot;Warm shore&quot;, &quot;Ocean night&quot;], &quot;default&quot;: &quot;Bright (recommended)&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Hero&quot; },
+  &quot;showRating&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Reviews&quot; },
+  &quot;showCoursesDropdown&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Header&quot; },
+  &quot;headerCta&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Header&quot; }
+}">
+class Component extends DCLogic {
+  pages = {
+    'try-freediving': { eyebrow: 'One-day introduction', title: 'Try Freediving' },
+    'level-1': { eyebrow: 'Beginner course', title: 'Level 1 — Beginner' },
+    'level-2': { eyebrow: 'Advanced course', title: 'Level 2 — Advanced' },
+    'level-3': { eyebrow: 'Deep specialist program', title: 'Level 3 — Deep' },
+    'coaching': { eyebrow: 'One to one', title: 'Coaching Session' },
+    'all-courses': { eyebrow: 'Nemberala, Rote Ndao', title: 'Freediving Courses' },
+    'surf-survival': { eyebrow: 'Breath-hold training for surfers', title: 'Surf Survival' },
+    'trips': { eyebrow: 'Explore Rote', title: 'Guided Ocean Excursions' },
+    'location': { eyebrow: 'Location', title: 'Welcome to our beach front home' },
+    'about': { eyebrow: 'Nemberala, Rote Island', title: 'About Freedive Rote' }
+  };
+
+  state = {
+    route: 'home',
+    scrolled: false,
+    narrow: typeof window !== 'undefined' ? window.matchMedia('(max-width: 900px)').matches : false,
+    menuOpen: false,
+    coursesOpen: false,
+    iconsReady: typeof window !== 'undefined' && !!window.lucide,
+    hoverOffer: null,
+    pressOffer: null
+  };
+
+  reduced = false;
+
+  reviewsRef = React.createRef();
+
+  routeFromHash() {
+    const id = (window.location.hash || '').replace(/^#\/?/, '').trim();
+    if (id === 'courses') return 'all-courses';
+    if (!id || id === 'contact') return 'home';
+    return (id === 'home' || this.pages[id]) ? id : 'home';
+  }
+
+  componentDidMount() {
+    this.rmq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    this.reduced = this.rmq.matches;
+    this.onRm = () => { this.reduced = this.rmq.matches; this.forceUpdate(); };
+    this.rmq.addEventListener('change', this.onRm);
+    this.armReveal();
+
+    this.onHash = () => {
+      this.setState({ route: this.routeFromHash(), menuOpen: false, coursesOpen: false });
+      if (/^#\/?contact$/.test(window.location.hash)) this.scrollWhenReady('contact');
+    };
+    window.addEventListener('hashchange', this.onHash);
+    const start = this.routeFromHash();
+    if (start !== this.state.route) this.setState({ route: start });
+    if (/^#\/?contact$/.test(window.location.hash)) this.scrollWhenReady('contact');
+
+    this.onScroll = () => {
+      this.sawScroll = true;
+      this.revealVisible();
+      const s = window.scrollY > 24;
+      if (s !== this.state.scrolled) this.setState({ scrolled: s });
+    };
+    this.onResize = () => this.revealVisible();
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+
+    this.mq = window.matchMedia('(max-width: 900px)');
+    this.onMq = () => this.setState({ narrow: this.mq.matches, menuOpen: false });
+    this.mq.addEventListener('change', this.onMq);
+
+    if (!this.state.iconsReady) {
+      let tries = 0;
+      this.iconTimer = setInterval(() => {
+        tries += 1;
+        if (window.lucide) { this.setState({ iconsReady: true }); clearInterval(this.iconTimer); }
+        else if (tries > 40) clearInterval(this.iconTimer);
+      }, 120);
+    }
+  }
+
+  offerCards() {
+    return Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+  }
+
+  showCard(el) {
+    el.dataset.revealed = 'true';
+    el.style.opacity = '1';
+    el.style.transform = 'translateY(0)';
+  }
+
+  armReveal() {
+    if (this.reduced) return;
+    if (this.revealTick) clearTimeout(this.revealTick);
+    if (this.revealSafety) clearTimeout(this.revealSafety);
+    if (this.revealBackstop) clearTimeout(this.revealBackstop);
+    this.revealTries = 0;
+    this.tickReveal();
+    this.revealSafety = setTimeout(() => this.revealVisible(true), 2500);
+    this.revealBackstop = setTimeout(() => {
+      this.offerCards().forEach((el) => this.showCard(el));
+    }, 10000);
+  }
+
+  tickReveal() {
+    if (this.reduced) return;
+    this.offerCards().forEach((el) => {
+      if (el.dataset.armed === 'true' || el.dataset.revealed === 'true') return;
+      el.dataset.armed = 'true';
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(18px)';
+      el.style.transition = 'opacity 700ms var(--ease-tide), transform 700ms var(--ease-tide)';
+      el.style.transitionDelay = (el.dataset.revealDelay || 0) + 'ms';
+    });
+    this.revealVisible();
+    this.revealTries = (this.revealTries || 0) + 1;
+    if (this.revealTries < 24) this.revealTick = setTimeout(() => this.tickReveal(), 60);
+  }
+
+  revealVisible(inViewOnly) {
+    if (this.reduced) return;
+    const limit = inViewOnly ? window.innerHeight : window.innerHeight * 0.9;
+    this.offerCards().forEach((el) => {
+      if (el.dataset.revealed === 'true') return;
+      if (el.getBoundingClientRect().top < limit) this.showCard(el);
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const prev = prevState ? prevState.route : this._lastRoute;
+    this._lastRoute = this.state.route;
+    if (prev !== this.state.route) this.armReveal();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('hashchange', this.onHash);
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onResize);
+    if (this.revealSafety) clearTimeout(this.revealSafety);
+    if (this.mq) this.mq.removeEventListener('change', this.onMq);
+    if (this.rmq) this.rmq.removeEventListener('change', this.onRm);
+    if (this.iconTimer) clearInterval(this.iconTimer);
+    if (this.scrollTimer) clearTimeout(this.scrollTimer);
+    if (this.revealTick) clearTimeout(this.revealTick);
+    if (this.revealBackstop) clearTimeout(this.revealBackstop);
+  }
+
+  navigate(id) {
+    this.setState({ route: id, menuOpen: false, coursesOpen: false });
+    if (window.location.hash !== '#/' + id) window.location.hash = '#/' + id;
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  scrollToId(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const hdr = document.querySelector('header');
+    const top = el.getBoundingClientRect().top + window.scrollY - (hdr ? hdr.offsetHeight : 0) + 1;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+
+  scrollWhenReady(id) {
+    if (this.scrollTimer) clearTimeout(this.scrollTimer);
+    let tries = 0;
+    const tick = () => {
+      if (document.getElementById(id)) {
+        this.scrollToId(id);
+        this.scrollTimer = setTimeout(() => {
+          const el = document.getElementById(id);
+          const hdr = document.querySelector('header');
+          if (el && Math.abs(el.getBoundingClientRect().top - (hdr ? hdr.offsetHeight : 0)) > 8) this.scrollToId(id);
+        }, 1100);
+      } else if (++tries < 60) this.scrollTimer = setTimeout(tick, 50);
+    };
+    this.scrollTimer = setTimeout(tick, 80);
+  }
+
+  goContact(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    this.setState({ menuOpen: false, coursesOpen: false });
+    if (this.state.route !== 'home') {
+      this.setState({ route: 'home' });
+      if (window.location.hash !== '#/home') window.location.hash = '#/home';
+    }
+    this.scrollWhenReady('contact');
+  }
+
+  scrollToOffer() {
+    const el = document.getElementById('offer');
+    if (!el) return;
+    const hdr = document.querySelector('header');
+    const top = el.getBoundingClientRect().top + window.scrollY - (hdr ? hdr.offsetHeight : 0) + 1;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+
+  offerCard(i) {
+    const active = this.state.hoverOffer === i || this.state.pressOffer === i;
+    return {
+      zoom: (active && !this.reduced) ? 'scale(1.04)' : 'scale(1)',
+      veil: active ? 'rgba(15,36,48,.3)' : 'rgba(15,36,48,.18)',
+      enter: () => this.setState({ hoverOffer: i }),
+      leave: () => this.setState({ hoverOffer: null }),
+      press: () => this.setState({ pressOffer: i }),
+      release: () => this.setState({ pressOffer: null })
+    };
+  }
+
+  heroScrims = {
+    'Bright (recommended)': {
+      top: 'linear-gradient(to bottom,rgba(8,14,18,.44),rgba(8,14,18,0) 65%)',
+      main: 'linear-gradient(to top,rgba(8,14,18,.60) 0%,rgba(8,14,18,.40) 30%,rgba(8,14,18,.16) 58%,rgba(8,14,18,0) 80%)'
+    },
+    'Readable (AA)': {
+      top: 'linear-gradient(to bottom,rgba(8,14,18,.70),rgba(8,14,18,.35) 62%,rgba(8,14,18,0))',
+      main: 'linear-gradient(to top,rgba(8,14,18,.76) 0%,rgba(8,14,18,.68) 22%,rgba(8,14,18,.50) 40%,rgba(8,14,18,.18) 62%,rgba(8,14,18,0) 80%)'
+    },
+    'Warm shore': {
+      top: 'linear-gradient(to bottom,rgba(28,20,12,.70),rgba(28,20,12,.35) 62%,rgba(28,20,12,0))',
+      main: 'linear-gradient(to top,rgba(28,20,12,.76) 0%,rgba(28,20,12,.68) 22%,rgba(30,22,14,.50) 40%,rgba(30,22,14,.18) 62%,rgba(30,22,14,0) 80%)'
+    },
+    'Ocean night': {
+      top: 'linear-gradient(to bottom,rgba(15,36,48,.52),rgba(15,36,48,0))',
+      main: 'linear-gradient(to top,rgba(15,36,48,.62) 0%,rgba(15,36,48,.5) 45%,rgba(15,36,48,.34) 72%,rgba(15,36,48,.12) 90%,rgba(15,36,48,0) 100%)'
+    }
+  };
+
+  renderVals() {
+    const mk = (id) => (e) => { if (e && e.preventDefault) e.preventDefault(); this.navigate(id); };
+    const page = this.pages[this.state.route];
+    const dropdown = this.props.showCoursesDropdown ?? true;
+    return {
+      yes: true,
+      ...(() => {
+        const grid = (this.props.offerLayout ?? 'Two-up cards') === 'Two-up cards';
+        return {
+          offerGrid: grid ? 'repeat(auto-fit,minmax(max(320px,calc(50% - 24px)),1fr))' : 'minmax(0,1fr)',
+          offerCardCols: grid ? 'minmax(0,1fr)' : 'repeat(auto-fit,minmax(300px,1fr))',
+          offerCardRows: grid ? 'auto 1fr' : 'none',
+          offerPhotoRatio: grid ? '3 / 2' : '4 / 3',
+          offerPhotoH: grid ? 'auto' : '100%',
+          offerTextJustify: grid ? 'flex-start' : 'center',
+          offerTitleSize: grid ? 'var(--text-heading-1)' : 'var(--text-display-2)',
+          offerBtnTop: grid ? 'auto' : '0'
+        };
+      })(),
+      heroTopScrim: (this.heroScrims[this.props.heroScrim] || this.heroScrims['Bright (recommended)']).top,
+      heroScrimCss: (this.heroScrims[this.props.heroScrim] || this.heroScrims['Bright (recommended)']).main,
+      iconLg: 34,
+      iconWave: 48,
+      c1: this.offerCard(1),
+      c2: this.offerCard(2),
+      c3: this.offerCard(3),
+      c4: this.offerCard(4),
+      k1: this.offerCard(5),
+      k2: this.offerCard(6),
+      k3: this.offerCard(7),
+      k4: this.offerCard(8),
+      titleWrap: this.state.narrow ? 'normal' : 'nowrap',
+      quoteOrder: this.state.narrow ? -1 : 1,
+      bandCols: this.state.narrow ? '1fr' : 'minmax(0,1fr) minmax(0,1fr)',
+      bandRows: this.state.narrow ? 'auto' : 'auto 1fr',
+      bandHead: this.state.narrow ? 'auto' : '1 / 1 / 2 / 3',
+      bandPhoto: this.state.narrow ? 'auto' : '2 / 1 / 3 / 2',
+      bandList: this.state.narrow ? 'auto' : '2 / 2 / 3 / 3',
+      stripWrap: this.state.narrow ? 'wrap' : 'nowrap',
+      stripBasis: this.state.narrow ? '120px' : '0',
+      dividerColor: this.state.narrow ? 'transparent' : 'rgba(255,255,255,.28)',
+      isHome: this.state.route === 'home',
+      isPage: !!page,
+      pageTitle: page ? page.title : '',
+      pageEyebrow: page ? page.eyebrow : '',
+      isSurfSurvival: this.state.route === 'surf-survival',
+      isAllCourses: this.state.route === 'all-courses',
+      isTryFreediving: this.state.route === 'try-freediving',
+      isLevel1: this.state.route === 'level-1',
+      isLevel2: this.state.route === 'level-2',
+      isLevel3: this.state.route === 'level-3',
+      isCoaching: this.state.route === 'coaching',
+      isTrips: this.state.route === 'trips',
+      isAbout: this.state.route === 'about',
+      isLocation: this.state.route === 'location',
+      locCols: this.state.narrow ? '1fr' : 'minmax(0,1fr) minmax(0,1fr)',
+      locIntroCols: this.state.narrow ? '1fr' : 'minmax(0,0.9fr) minmax(0,1fr)',
+      locShalaCols: this.state.narrow ? '1fr' : 'minmax(0,1.05fr) minmax(0,1fr)',
+      locDiscoverCols: this.state.narrow ? '1fr' : 'minmax(0,1.15fr) minmax(0,0.85fr)',
+      aboutIntroCols: this.state.narrow ? '1fr' : 'minmax(0,0.92fr) minmax(0,1fr)',
+      aboutSurfCols: this.state.narrow ? '1fr' : 'minmax(0,0.84fr) minmax(0,1fr)',
+      aboutJourneyCols: this.state.narrow ? '1fr' : 'minmax(0,1fr) minmax(0,0.84fr)',
+      aboutRule: this.state.narrow ? '0' : '1px solid var(--c-sand-deep)',
+      isComingSoon: !!page && this.state.route !== 'surf-survival' && this.state.route !== 'all-courses' && this.state.route !== 'try-freediving' && this.state.route !== 'level-1' && this.state.route !== 'level-2' && this.state.route !== 'level-3' && this.state.route !== 'coaching' && this.state.route !== 'trips' && this.state.route !== 'about' && this.state.route !== 'location',
+      headerSolid: (this.state.scrolled || this.state.route !== 'home') ? 1 : 0,
+      wide: !this.state.narrow,
+      narrow: this.state.narrow,
+      menuOpen: this.state.menuOpen,
+      iconsReady: this.state.iconsReady,
+      coursesOpen: dropdown && this.state.coursesOpen,
+      showRating: this.props.showRating ?? true,
+      headerCta: this.props.headerCta ?? false,
+      openCourses: () => { if (dropdown && !this.state.coursesOpen) { this.hoverOpenedAt = Date.now(); this.setState({ coursesOpen: true }); } },
+      closeCourses: () => this.setState({ coursesOpen: false }),
+      toggleCourses: (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        if (!dropdown) return;
+        const keyboard = e && e.detail === 0;
+        const justHovered = this.hoverOpenedAt && (Date.now() - this.hoverOpenedAt) < 500;
+        if (!keyboard && this.state.coursesOpen && justHovered) return;
+        this.hoverOpenedAt = 0;
+        this.setState((st) => ({ coursesOpen: !st.coursesOpen }));
+      },
+      coursesKey: (e) => { if (e.key === 'Escape') this.setState({ coursesOpen: false }); },
+      coursesChevron: (dropdown && this.state.coursesOpen) ? 'rotate(225deg) translate(-2px,-2px)' : 'rotate(45deg) translateY(-2px)',
+      mobileCoursesOpen: !!this.state.mobileCoursesOpen,
+      mobileCoursesChevron: this.state.mobileCoursesOpen ? 'rotate(225deg)' : 'rotate(45deg)',
+      toggleMobileCourses: () => this.setState((st) => ({ mobileCoursesOpen: !st.mobileCoursesOpen })),
+      toggleMenu: () => this.setState((s) => ({ menuOpen: !s.menuOpen })),
+      goOffer: (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        if (this.state.route !== 'home') this.navigate('home');
+        this.scrollWhenReady('offer');
+      },
+      reviewPrev: () => this.scrollReviews(-1),
+      reviewNext: () => this.scrollReviews(1),
+      reviewsRef: this.reviewsRef,
+      go: {
+        home: mk('home'),
+        courses: mk('all-courses'),
+        tryFreediving: mk('try-freediving'),
+        level1: mk('level-1'),
+        level2: mk('level-2'),
+        level3: mk('level-3'),
+        coaching: mk('coaching'),
+        allCourses: mk('all-courses'),
+        surfSurvival: mk('surf-survival'),
+        trips: mk('trips'),
+        location: mk('location'),
+        about: mk('about'),
+        contact: (e) => this.goContact(e)
+      }
+    };
+  }
+
+  scrollReviews(dir) {
+    const el = this.reviewsRef.current;
+    if (!el) return;
+    const step = Math.min(el.clientWidth * 0.9, 412);
+    el.scrollBy({ left: dir * step, behavior: 'smooth' });
+  }
+}
+</script>
+</body>
+</html>

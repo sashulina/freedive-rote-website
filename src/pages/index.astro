@@ -1,0 +1,349 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Photo from '../components/Photo.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import KeyPointsStrip from '../components/KeyPointsStrip.astro';
+import OfferCard from '../components/OfferCard.astro';
+import Reviews from '../components/Reviews.astro';
+import { SITE } from '../data/site';
+
+import hero from '../assets/images/hero-beach-v3-w.jpg';
+import whyTrain from '../assets/images/why-train-with-us.jpg';
+import offerSurf from '../assets/images/offer-surf-3-w.jpg';
+import coursesCard from '../assets/images/courses-card.jpg';
+import coachingCard from '../assets/images/coaching-card.jpg';
+import excursionsCard from '../assets/images/excursions-card.jpg';
+import meetUs from '../assets/images/about-banner-2-w.jpg';
+
+const heroAlt = 'A freediver at the surface in the shallows off Nemberala beach, palms behind';
+---
+<BaseLayout
+  title="Freedive Rote — Freediving courses on Rote Island, Indonesia"
+  description="A beach-based freediving school on Nemberala Beach, Rote Island. Freediving courses, coaching, breath-hold training for surfers and guided ocean excursions."
+  ogImage={hero}
+  ogImageAlt={heroAlt}
+  transparentHeader
+>
+  <section class="hero" aria-labelledby="hero-title">
+    <Photo src={hero} alt={heroAlt} widths={[640, 960, 1280, 1400]} eager position="50% 96%" class="cover" />
+    <span class="hero__scrim-top" aria-hidden="true"></span>
+    <span class="hero__scrim" aria-hidden="true"></span>
+    <div class="hero__content">
+      <h1 class="hero__title" id="hero-title">Freediving in Rote</h1>
+      <p class="hero__lede">Welcome to the beach-based home for freediving, breath-hold training for surfers, and guided ocean excursions on Rote Island.</p>
+      <div class="hero__actions">
+        <Button variant="primary" size="lg" href="#offer">See the courses →</Button>
+        <Button variant="onPhotoSolid" size="lg" href={SITE.whatsappUrl} external>Book a session</Button>
+      </div>
+    </div>
+  </section>
+
+  <KeyPointsStrip />
+
+  <section class="why" aria-labelledby="why-title">
+    <div class="container why__grid">
+      <div class="why__text">
+        <h2 class="why__eyebrow" id="why-title"><span aria-hidden="true"></span>Why train with us</h2>
+        <div class="why__copy">
+          <p class="t-body">Whether you’re interested in freediving or looking to feel more confident in the surf, we’ll meet you where you are and help you progress at your own pace.</p>
+          <p class="t-body">At Freedive Rote, we offer freediving courses and coaching sessions designed for different levels, from curious beginners taking their first steps into the world of freediving, to experienced ocean lovers who want to refine technique, safety, equalisation, depth and overall performance.</p>
+          <p class="t-body">Our approach is personal, safety-focused and grounded in 15+ years of teaching experience. We keep groups small, so the training can be adapted to each student.</p>
+          <p class="t-body">Join us at Freedive Rote, where safety, fun, and the beauty of the ocean come together for your unforgettable underwater journey.</p>
+        </div>
+        <div class="why__action">
+          <Button variant="primary" href="/location">Explore our location</Button>
+        </div>
+      </div>
+      <figure class="photo why__photo">
+        <Photo src={whyTrain} alt="Palms and white sand on the beach at Nemberala" widths={[480, 720, 1000, 1200]} sizes="(max-width: 900px) calc(100vw - 40px), 600px" />
+        <figcaption class="why__caption"><span>Nemberala, Rote Island</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="offer" class="offer" aria-labelledby="offer-title">
+    <div class="container offer__inner">
+      <header class="offer__head" data-reveal>
+        <h2 class="t-display-2" id="offer-title">What we offer</h2>
+        <span class="sand-rule" aria-hidden="true"></span>
+      </header>
+      <div class="offer__grid">
+        <OfferCard
+          href="/surf-survival"
+          image={offerSurf}
+          alt="A diver on the pool floor holding a dumbbell during a breath-hold drill"
+          position="48% 55%"
+          title="Surf Survival"
+          text="Breath-hold training for surfers. Learn practical tools for wipeouts, hold-downs, CO₂ tolerance, breath-hold technique, recovery breathing and managing high-risk surf situations."
+        />
+        <OfferCard
+          href="/courses"
+          image={coursesCard}
+          alt="A freediver descending the line in clear blue water"
+          title="Freediving Courses"
+          text="Freediving courses from total beginner to advanced levels. Learn to move through the ocean with more calm, confidence and control."
+          revealDelay={80}
+        />
+        <OfferCard
+          href="/courses/coaching"
+          image={coachingCard}
+          alt="Two freedivers training together beside the line"
+          title="Coaching"
+          text="Custom training programs tailored to your specific goals. Perfect for refining technique, safety, equalisation, depth and overall performance."
+          revealDelay={80}
+        />
+        <OfferCard
+          href="/trips"
+          image={excursionsCard}
+          alt="A small group on the boat jetty before a guided excursion"
+          position="50% 72%"
+          title="Guided Ocean Excursions"
+          text="Explore Rote on half- and full-day curated excursions to offshore islands and beautiful reefs. Guide, boat, equipment and planning all taken care of."
+          revealDelay={80}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact" aria-labelledby="contact-title">
+    <div class="container container--content contact__inner">
+      <h2 class="contact__title" id="contact-title">Drop us a message, and we’ll help create your ideal ocean experience in Rote.</h2>
+      <div class="contact__tiles">
+        <a href={SITE.whatsappUrl} target="_blank" rel="noopener" class="contact__tile">
+          <Icon name="phone" />
+          <span class="contact__tile-text">
+            <span class="contact__tile-label">WhatsApp us</span>
+            <span class="contact__tile-value">{SITE.phoneDisplay}</span>
+          </span>
+        </a>
+        <a href={`mailto:${SITE.email}`} class="contact__tile">
+          <Icon name="mail" />
+          <span class="contact__tile-text">
+            <span class="contact__tile-label">Email us</span>
+            <span class="contact__tile-value">{SITE.email}</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container divider" aria-hidden="true"><div></div></div>
+
+  <Reviews />
+
+  <section class="meet" aria-labelledby="meet-title">
+    <Photo
+      src={meetUs}
+      alt="Instructors and a student at the buoy in the shallow lagoon, palms and white sand of Nemberala behind"
+      widths={[640, 960, 1280, 1800]}
+      position="55% 40%"
+      class="cover"
+    />
+    <span class="meet__scrim" aria-hidden="true"></span>
+    <div class="container container--content meet__content" data-reveal>
+      <h2 class="meet__title" id="meet-title">Discover the story behind this place</h2>
+      <div><Button variant="onPhotoSolid" size="lg" href="/about">About Freedive Rote</Button></div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero: extends up behind the sticky header. */
+  .hero {
+    position: relative;
+    margin-top: calc(var(--site-header-h) * -1);
+    min-height: min(100vh, 940px);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: var(--surface-night);
+  }
+  /* Neutral dark scrims (client rejected blue/green casts). */
+  .hero__scrim-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 260px;
+    background: linear-gradient(to bottom, rgba(8, 14, 18, .44), rgba(8, 14, 18, 0) 65%);
+  }
+  .hero__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(8, 14, 18, .60) 0%, rgba(8, 14, 18, .40) 30%, rgba(8, 14, 18, .16) 58%, rgba(8, 14, 18, 0) 80%);
+  }
+  .hero__content {
+    position: relative;
+    width: 100%;
+    max-width: var(--max-page);
+    margin-inline: auto;
+    padding: calc(var(--site-header-h) + var(--space-16)) var(--gutter) clamp(30px, 3.5vw, 46px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    align-items: flex-start;
+  }
+  .hero__title {
+    margin: 0;
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-extralight);
+    font-size: var(--text-display-1);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--text-on-photo);
+    text-shadow: 0 2px 24px rgba(15, 36, 48, .55);
+    max-width: 16ch;
+  }
+  .hero__lede {
+    margin: 0;
+    max-width: var(--measure-lede);
+    font-size: var(--text-body-lg);
+    line-height: var(--leading-loose);
+    color: var(--text-on-dark);
+    text-shadow: 0 2px 16px rgba(15, 36, 48, .55);
+  }
+  .hero__actions { display: flex; gap: var(--space-4); flex-wrap: wrap; padding-top: var(--space-2); }
+
+  /* Why train with us */
+  .why { padding-block: clamp(56px, 6vw, 96px); }
+  .why__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: clamp(36px, 4.5vw, 72px);
+    align-items: center;
+  }
+  .why__text { display: flex; flex-direction: column; gap: var(--space-stack); min-width: 0; }
+  .why__eyebrow {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-light);
+    font-size: 19px;
+    line-height: var(--leading-body);
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--text-accent);
+  }
+  .why__eyebrow span { display: block; flex: 0 0 auto; width: 40px; height: 1px; background: var(--c-sand-deep); }
+  .why__copy { display: flex; flex-direction: column; gap: var(--space-6); max-width: var(--measure-text); }
+  .why__action { display: flex; padding-top: var(--space-2); }
+  .why__photo { aspect-ratio: 4 / 5; }
+  .why__caption {
+    position: absolute;
+    left: var(--space-6);
+    right: var(--space-6);
+    bottom: var(--space-6);
+    display: flex;
+    justify-content: center;
+  }
+  .why__caption span {
+    padding: 10px 20px;
+    border-radius: var(--radius-pill);
+    background: rgba(253, 251, 247, .88);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--c-ink);
+  }
+
+  /* What we offer */
+  .offer { padding-block: clamp(56px, 6vw, 96px); background: var(--surface-sand); }
+  .offer__inner { display: flex; flex-direction: column; gap: clamp(32px, 4vw, 48px); }
+  .offer__head { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-4); }
+  .offer__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(max(320px, calc(50% - 24px)), 1fr));
+    gap: clamp(28px, 3.5vw, 48px);
+  }
+
+  /* Contact band */
+  .contact { padding-block: clamp(56px, 6vw, 96px); background: var(--surface-deep); }
+  .contact__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(32px, 4vw, 56px);
+  }
+  .contact__title {
+    margin: 0;
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-extralight);
+    font-size: var(--text-display-2);
+    line-height: var(--leading-quote);
+    letter-spacing: var(--tracking-heading);
+    color: var(--text-on-dark);
+    max-width: 30ch;
+  }
+  .contact__tiles { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-6); }
+  .contact__tile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    min-height: var(--tap-min);
+    padding: var(--space-5) var(--space-8);
+    border: 1px solid var(--border-on-dark);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--text-on-dark);
+    transition: var(--transition-hover);
+  }
+  .contact__tile:hover { background: rgba(255, 255, 255, .14); border-color: #ffffff; color: var(--text-on-dark); }
+  .contact__tile-text { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+  .contact__tile-label {
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-on-dark-muted);
+  }
+  .contact__tile-value { font-family: var(--font-heading-alt); font-size: var(--text-body-lg); }
+
+  .divider div {
+    height: 1px;
+    background: linear-gradient(to right, rgba(201, 175, 139, 0) 0%, rgba(201, 175, 139, .6) 18%, rgba(201, 175, 139, .6) 82%, rgba(201, 175, 139, 0) 100%);
+  }
+
+  /* Meet us */
+  .meet {
+    position: relative;
+    min-height: clamp(280px, 32vw, 420px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--c-blue-wash);
+  }
+  .meet__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(8, 14, 18, .64) 0%, rgba(8, 14, 18, .5) 40%, rgba(8, 14, 18, .24) 75%, rgba(8, 14, 18, .1) 100%);
+  }
+  .meet__content {
+    position: relative;
+    padding-block: clamp(40px, 5vw, 64px) clamp(28px, 3.5vw, 44px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-6);
+  }
+  .meet__title {
+    margin: 0;
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-light);
+    font-size: var(--text-display-2);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-heading);
+    color: var(--c-white);
+    text-shadow: 0 2px 18px rgba(8, 14, 18, .35);
+    max-width: 20ch;
+    text-wrap: balance;
+  }
+
+  @media (max-width: 900px) {
+    .why__grid { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>

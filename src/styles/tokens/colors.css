@@ -1,0 +1,61 @@
+/* Freedive Rote — colour system.
+   Sun-washed, never saturated: warm sand + clear Rote water + ocean-night ink. */
+:root{
+  /* Light & space */
+  --c-white:#FFFFFF;
+  --c-shell:#FDFBF7;        /* off-white page ground, a touch warm */
+  --c-cream:#F7EFE0;        /* light sand — large calm fields */
+  --c-sand:#EADCC4;         /* warm sand — cards, inputs, dividers on cream */
+  --c-sand-deep:#C9AF8B;    /* deeper wet-sand — rules, quiet accents */
+
+  /* Rote water — blues. Primary default is Rote Deep; two alternates shipped. */
+  --c-blue-deep:#0E4A6B;    /* PRIMARY */
+  --c-blue-reference:#1A5A8A;/* alt A — the reference screenshot's blue */
+  --c-blue-night:#0B3348;    /* alt B — deepest, used as footer/night ground */
+  --c-blue-mid:#2C6E92;     /* hovers, links on light */
+  --c-blue-wash:#E4EDF2;    /* faint blue tint surface */
+
+  /* Shallows — aqua / turquoise secondary */
+  --c-aqua:#57A9A6;
+  --c-aqua-light:#9FCBC6;
+  --c-aqua-wash:#DCEAE7;
+
+  /* Ink */
+  --c-ink:#0F2430;          /* ocean night, not black */
+  --c-ink-soft:#2E434E;
+  --c-ink-muted:#6B7F88;
+  --c-ink-faint:rgba(15,36,48,.12);
+
+  /* Semantic — text */
+  --text-heading:var(--c-ink);
+  --text-body:var(--c-ink-soft);
+  --text-muted:var(--c-ink-muted);
+  --text-link:var(--c-blue-deep);
+  --text-link-hover:var(--c-blue-mid);
+  --text-on-dark:var(--c-white);
+  --text-on-dark-muted:rgba(255,255,255,.76);
+  --text-on-photo:var(--c-white);
+  --text-accent:var(--c-blue-deep);
+
+  /* Semantic — surfaces */
+  --surface-page:var(--c-shell);
+  --surface-card:var(--c-white);
+  --surface-sand:var(--c-cream);
+  --surface-sand-strong:var(--c-sand);
+  --surface-deep:var(--c-blue-deep);
+  --surface-night:var(--c-blue-night);
+  --surface-shallow:var(--c-aqua-wash);
+  --surface-input:var(--c-white);
+
+  /* Semantic — lines & states */
+  --border-hairline:rgba(15,36,48,.12);
+  --border-hairline-strong:rgba(15,36,48,.22);
+  --border-on-dark:rgba(255,255,255,.28);
+  --border-sand:#DFCFB4;
+  --focus-ring:rgba(87,169,166,.55);
+
+  /* Photo protection — type over imagery stays 4.5:1 */
+  --scrim-bottom:linear-gradient(to top,rgba(11,51,72,.82) 0%,rgba(11,51,72,.45) 42%,rgba(11,51,72,0) 78%); /* @kind color */
+  --scrim-full:linear-gradient(to bottom,rgba(11,51,72,.34),rgba(11,51,72,.58)); /* @kind color */
+  --scrim-side:linear-gradient(to right,rgba(11,51,72,.72),rgba(11,51,72,.12) 62%,rgba(11,51,72,0)); /* @kind color */
+}
