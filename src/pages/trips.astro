@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageBanner from '../components/PageBanner.astro';
+import Photo from '../components/Photo.astro';
+import Badge from '../components/Badge.astro';
+import Button from '../components/Button.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import DashList from '../components/DashList.astro';
+import MapWatermark from '../components/MapWatermark.astro';
+import ReviewQuote from '../components/ReviewQuote.astro';
+import { SITE } from '../data/site';
+
+import banner from '../assets/images/trips-banner-boat-w.jpg';
+import group from '../assets/images/trips-group-w.jpg';
+import wall from '../assets/images/trips-wall-w.jpg';
+import diver from '../assets/images/trips-diver.jpg';
+import reef from '../assets/images/trips-reef-w.jpg';
+
+const bannerAlt = 'A blue-canopied boat with guests aboard speeding across the water past a white-sand coastline';
+---
+<BaseLayout
+  title="Guided ocean excursions around Rote Island | Freedive Rote"
+  description="Half-day and full-day guided ocean excursions around Rote Island: offshore islands, reefs, freediving and snorkelling, quiet beaches. Boat, route, equipment and guidance arranged."
+  ogImage={banner}
+  ogImageAlt={bannerAlt}
+>
+  <PageBanner image={banner} alt={bannerAlt} position="60% 55%" eyebrow="Explore Rote" title="Guided Ocean Excursions" />
+
+  <section class="intro">
+    <div class="container intro__grid">
+      <div class="intro__text" data-reveal>
+        <p class="t-lede measure-lede">Curated half-day and full-day ocean excursions around Rote Island. Explore offshore islands, freedive sites, reefs, quiet beaches and hidden coastal corners.</p>
+        <p class="t-lede measure-text">We arrange the boat, the route, the equipment and the ocean guidance — so you can simply arrive, explore and enjoy.</p>
+        <div class="badges">
+          <Badge tone="sand">Half day</Badge>
+          <Badge tone="sand">Full day</Badge>
+          <Badge tone="aqua">Offshore islands</Badge>
+          <Badge tone="outline">Boat &amp; gear included</Badge>
+        </div>
+      </div>
+      <div class="collage" data-reveal data-reveal-delay="100">
+        <figure class="photo collage__tall">
+          <Photo src={group} alt="Guests and guides on the jetty before heading out" position="50% 72%" widths={[260, 400, 540, 800]} sizes="(max-width: 900px) 50vw, 270px" />
+        </figure>
+        <figure class="photo collage__square">
+          <Photo src={wall} alt="A vivid reef wall crowded with fish" widths={[260, 400, 540]} sizes="(max-width: 900px) 50vw, 270px" />
+        </figure>
+        <figure class="photo collage__square">
+          <Photo src={diver} alt="A freediver gliding over the reef in a white monofin" position="60% 50%" widths={[260, 400, 540]} sizes="(max-width: 900px) 50vw, 270px" />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="included" aria-labelledby="included-title">
+    <div class="container included__inner">
+      <header class="included__head" data-reveal>
+        <Eyebrow>Ocean excursion</Eyebrow>
+        <h2 class="t-heading-1" id="included-title">What is included</h2>
+      </header>
+      <div class="included__grid">
+        <DashList
+          items={['Reef exploration', 'Freediving & snorkelling', 'Offshore island trips', 'Sailing', 'Quiet beaches and coastal exploration', 'Line training for freedivers']}
+          revealDelay={100}
+        />
+        <figure class="photo included__photo" data-reveal data-reveal-delay="120">
+          <Photo src={reef} alt="Damselfish over a plate coral garden on an offshore reef" widths={[460, 700, 920, 1286]} sizes="(max-width: 900px) min(calc(100vw - 40px), 460px), 460px" />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="perfect">
+    <div class="container container--narrow perfect__inner">
+      <p class="t-lede" data-reveal>Each experience can be tailored around what you are looking for.</p>
+      <p class="t-lede" data-reveal>Perfect for visitors, couples, small groups, ocean lovers, curious beginners and freedivers who want to experience more of Rote beyond the beach.</p>
+      <p class="t-lede" data-reveal data-reveal-delay="60">These trips are guided with safety, awareness and respect for the ocean at the centre.</p>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-title">
+    <MapWatermark placement="center" opacity={0.3} />
+    <div class="container container--content cta__inner">
+      <Eyebrow>Explore Rote</Eyebrow>
+      <h2 class="cta__title" id="cta-title" data-reveal>Snorkel, freedive, explore — we’ll take care of the rest.</h2>
+      <Button variant="reference" size="cta" href={SITE.whatsappUrl} external>Plan your trip</Button>
+    </div>
+  </section>
+
+  <ReviewQuote
+    text="The whole trip was very well organised, from the boat and route to the different spots we visited. We explored some really vibrant, largely untouched reefs around the offshore islands, and had the chance to dive around one of the islands, which was definitely a highlight. It really felt like we got to see a completely different side of Rote."
+    name="A. Ivanova"
+    size="small"
+    maxWidth={48}
+    paddingTop="clamp(48px,6vw,88px)"
+    paddingBottom="clamp(56px,6vw,96px)"
+  />
+</BaseLayout>
+
+<style>
+  .intro { padding-block: clamp(56px, 6vw, 96px) clamp(32px, 4vw, 52px); }
+  .intro__grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(36px, 5vw, 80px);
+    align-items: center;
+  }
+  .intro__text { display: flex; flex-direction: column; gap: var(--space-8); min-width: 0; }
+  .badges { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+  .collage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(12px, 1.6vw, 20px);
+    min-width: 0;
+    justify-self: end;
+    max-width: 540px;
+    width: 100%;
+  }
+  .collage__tall { grid-row: span 2; align-self: stretch; min-height: 0; height: 100%; }
+  .collage__square { aspect-ratio: 1 / 1; }
+
+  .included { padding-block: clamp(48px, 6vw, 88px); background: var(--surface-sand); }
+  .included__inner { display: flex; flex-direction: column; gap: clamp(32px, 4vw, 56px); }
+  .included__head { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-4); }
+  .included__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(28px, 4vw, 72px);
+    align-items: center;
+  }
+  .included__photo { aspect-ratio: 4 / 5; max-width: 460px; width: 100%; justify-self: end; }
+
+  .perfect { padding-block: clamp(48px, 6vw, 88px); }
+  .perfect__inner { display: flex; flex-direction: column; gap: var(--space-8); }
+
+  .cta { position: relative; padding-block: clamp(56px, 6vw, 96px); background: var(--surface-sand); overflow: hidden; }
+  .cta__inner { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-8); }
+  .cta__title {
+    margin: 0;
+    max-width: 24ch;
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-extralight);
+    font-size: var(--text-display-2);
+    line-height: var(--leading-quote);
+    letter-spacing: var(--tracking-heading);
+    color: var(--c-ink);
+  }
+
+  @media (max-width: 900px) {
+    .intro__grid, .included__grid { grid-template-columns: 1fr; }
+  }
+</style>

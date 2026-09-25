@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageBanner from '../components/PageBanner.astro';
+import Photo from '../components/Photo.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import MapWatermark from '../components/MapWatermark.astro';
+import { SITE } from '../data/site';
+
+import banner from '../assets/images/loc-banner-3-w.jpg';
+import shala from '../assets/images/loc-shala-3-w.jpg';
+import shalaRest from '../assets/images/loc-shala-rest-w.jpg';
+import discover from '../assets/images/loc-discover-2-w.jpg';
+import meditation from '../assets/images/loc-meditation-w.jpg';
+
+const bannerAlt = 'Students relaxing on cushions in the shade of the beachside shala';
+---
+<BaseLayout
+  title="Location — Nemberala Beach, Rote Island | Freedive Rote"
+  description="Freedive Rote sits on the beach at Nemberala, in the village of Oenggaut on Rote Island, Indonesia. A beachside shala, a calm shallow lagoon and deeper water beyond the waves."
+  ogImage={banner}
+  ogImageAlt={bannerAlt}
+>
+  <PageBanner image={banner} alt={bannerAlt} position="50% 36%" eyebrow="Location" title="Welcome to our beach front home" scrim="neutral" />
+
+  <section class="island">
+    <MapWatermark placement="right" opacity={0.3} />
+    <div class="container island__grid">
+      <div class="island__lead" data-reveal>
+        <Eyebrow>Oenggaut village · Nemberala Beach</Eyebrow>
+        <h2 class="t-display-2">Rote Island &amp; Nemberala</h2>
+        <p class="t-lede island__lede">Freedive Rote is located right on the shores of Nemberala Beach, in the village of Oenggaut on Rote Island.</p>
+      </div>
+      <div class="island__side" data-reveal data-reveal-delay="80">
+        <p class="t-body">Rote lies at the southern edge of Indonesia, known for its pristine beaches, world class surf, beautiful reefs and abundant marine life.</p>
+        <p class="island__pull">It is a place where life still moves at a slower pace, far removed from the hustle and bustle of Bali.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="school" aria-labelledby="school-title">
+    <div class="school__grid" data-reveal>
+      <div class="school__photos">
+        <figure class="school__photo">
+          <Photo src={shala} alt="A group stretching arms overhead under the palm-thatch roof of the shala" position="50% 58%" widths={[400, 600, 900, 1350]} sizes="(max-width: 900px) 57vw, 30vw" class="cover" />
+        </figure>
+        <figure class="school__photo">
+          <Photo src={shalaRest} alt="Students resting on cushions in the thatched beachside shala, the lagoon beyond" position="58% 60%" widths={[300, 450, 700, 900]} sizes="(max-width: 900px) 43vw, 23vw" class="cover" />
+        </figure>
+      </div>
+      <div class="school__text">
+        <Eyebrow as="h2"><span id="school-title">Our school</span></Eyebrow>
+        <p class="t-lede">Our school sits directly on the beach, with our training taking place in a beachside shala.</p>
+        <p class="t-body">Water sessions begin in the calm, shallow lagoon before progressing behind the waves for deeper water sessions as students develop their skills and confidence.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="discover" aria-labelledby="discover-title">
+    <div class="container discover__grid">
+      <div class="discover__text" data-reveal>
+        <Eyebrow>Beyond the waves</Eyebrow>
+        <h2 class="t-display-2" id="discover-title">Discover Rote</h2>
+        <p class="t-lede">Rote is still something of a hidden gem. While the island is famous among surfers for Besialu / T-Land, the long left hander that draws surfers from around the world during the main surf season from June to September, there is much more to Rote than its waves.</p>
+        <p class="t-body">The island offers a chance to slow down and experience a simpler way of life. Explore quiet beaches and coral reefs, paddle through mangrove lagoons, discover traditional Ikat weaving, encounter the island’s famous wild horses, or simply enjoy the small collection of cafes and restaurants around Nemberala.</p>
+        <p class="t-body">Goats wander through the villages, while the landscape shifts between dry savannah and palm fringed coastal areas.</p>
+        <p class="discover__sunset">Oh, and the sunsets over the ocean are spectacular!</p>
+      </div>
+      <figure class="photo discover__photo" data-reveal data-reveal-delay="80">
+        <Photo src={discover} alt="Leaning coconut palms along the white sand of Nemberala, boats moored on the turquoise lagoon" position="50% 60%" widths={[400, 600, 900, 1350]} sizes="(max-width: 900px) calc(100vw - 40px), 480px" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="still" aria-label="Breathwork in the shala">
+    <Photo src={meditation} alt="Students sitting in breathwork practice in the shala, the beach and lagoon glowing behind them" position="50% 55%" widths={[640, 960, 1280, 1500]} class="cover" />
+  </section>
+
+  <section class="closing" aria-labelledby="closing-title">
+    <MapWatermark placement="center" opacity={0.28} />
+    <div class="container container--content closing__inner">
+      <h2 class="t-display-2" id="closing-title">Freedive Rote</h2>
+      <span class="sand-rule" aria-hidden="true"></span>
+      <p class="t-lede closing__lede">With direct beach access, calm sheltered water and a peaceful environment, Freedive Rote is an ideal place to learn, slow down and connect with the ocean.</p>
+      <p class="t-body closing__body">Whether you are here to learn freediving, improve your surf survival skills, explore the reefs or simply spend some time in the water, Rote offers the space to breathe, reset and reconnect.</p>
+    </div>
+  </section>
+
+  <section class="find" aria-labelledby="find-title">
+    <div class="container find__grid">
+      <div class="find__text" data-reveal>
+        <p class="find__eyebrow"><Icon name="map-pin" />Find us</p>
+        <h2 class="find__title" id="find-title">Nemberala Beach, Rote Island</h2>
+        <p class="find__address">Freedive Rote, {SITE.address}</p>
+        <div class="find__action">
+          <Button variant="sand" size="cta" href={SITE.mapsUrl} external class="maps-btn">Open in Google Maps</Button>
+        </div>
+      </div>
+      <div class="find__map" data-reveal data-reveal-delay="80">
+        <iframe
+          title="Map showing Freedive Rote on Nemberala Beach"
+          src="https://maps.google.com/maps?q=Freedive%20Rote%2C%20Nemberala%2C%20Rote%20Ndao&z=14&hl=en&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .island { position: relative; padding-block: clamp(56px, 6vw, 92px) clamp(40px, 4.5vw, 64px); overflow: hidden; }
+  .island__grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 84px);
+    align-items: start;
+  }
+  .island__lead { display: flex; flex-direction: column; gap: var(--space-6); min-width: 0; }
+  .island__lede { max-width: 36ch; }
+  .island__side { display: flex; flex-direction: column; gap: var(--space-5); min-width: 0; padding-top: clamp(0px, 3vw, 44px); }
+  .island__pull {
+    margin: 0;
+    padding-left: var(--space-5);
+    border-left: 1px solid var(--c-sand-deep);
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-extralight);
+    font-size: clamp(20px, 2vw, 25px);
+    line-height: var(--leading-quote);
+    color: var(--c-ink);
+  }
+
+  .school { margin-block: clamp(24px, 3vw, 40px); background: var(--surface-sand); }
+  .school__grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: stretch; }
+  .school__photos {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: 4px;
+    min-height: clamp(320px, 38vw, 520px);
+  }
+  .school__photo { margin: 0; position: relative; overflow: hidden; background: var(--c-blue-wash); }
+  .school__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-5);
+    min-width: 0;
+    padding: clamp(40px, 5vw, 80px) max(var(--gutter), calc((100vw - var(--max-page)) / 2 + var(--gutter))) clamp(40px, 5vw, 80px) clamp(28px, 5vw, 80px);
+  }
+
+  .discover { padding-block: clamp(48px, 5.5vw, 84px); }
+  .discover__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+    gap: clamp(36px, 5vw, 84px);
+    align-items: center;
+  }
+  .discover__text { display: flex; flex-direction: column; gap: var(--space-5); min-width: 0; }
+  .discover__sunset {
+    margin: 0;
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-extralight);
+    font-style: italic;
+    font-size: clamp(22px, 2.2vw, 28px);
+    line-height: var(--leading-quote);
+    color: var(--c-blue-deep);
+  }
+  .discover__photo { aspect-ratio: 3 / 4; }
+
+  .still { position: relative; height: clamp(300px, 44vw, 560px); overflow: hidden; background: var(--c-blue-wash); }
+
+  .closing { position: relative; padding-block: clamp(56px, 6vw, 96px); overflow: hidden; }
+  .closing__inner { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-6); }
+  .closing__lede { max-width: 52ch; }
+  .closing__body { max-width: 56ch; }
+
+  .find { background: var(--surface-deep); padding-block: clamp(48px, 5.5vw, 84px); }
+  .find__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(32px, 4.5vw, 72px);
+    align-items: center;
+  }
+  .find__text { display: flex; flex-direction: column; gap: var(--space-5); min-width: 0; color: var(--text-on-dark); }
+  .find__eyebrow {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-on-dark-muted);
+  }
+  .find__title {
+    margin: 0;
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-light);
+    font-size: var(--text-display-2);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-heading);
+    color: var(--c-white);
+  }
+  .find__address { margin: 0; max-width: 40ch; font-size: var(--text-body); line-height: var(--leading-loose); color: var(--text-on-dark); }
+  .find__action { display: flex; flex-wrap: wrap; gap: var(--space-4); padding-top: var(--space-2); }
+  /* The prototype's Maps button: sand, 32px side padding, no shadow. */
+  .find__action :global(a.maps-btn) { padding-inline: var(--space-8); --shadow: none; --shadow-h: none; }
+  .find__map {
+    position: relative;
+    min-width: 0;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--c-blue-wash);
+    box-shadow: var(--shadow-photo);
+  }
+  .find__map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  @media (max-width: 900px) {
+    .island__grid, .school__grid, .discover__grid, .find__grid { grid-template-columns: 1fr; }
+  }
+</style>

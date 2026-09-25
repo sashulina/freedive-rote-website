@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageBanner from '../components/PageBanner.astro';
+import IncludesBand from '../components/IncludesBand.astro';
+import Photo from '../components/Photo.astro';
+import Button from '../components/Button.astro';
+import { SITE } from '../data/site';
+
+import banner from '../assets/images/surf-banner-2-w.jpg';
+import training from '../assets/images/breath-hold-training-v5-w.jpg';
+import poolRest from '../assets/images/pool-rest-w.jpg';
+
+const bannerAlt = 'A surfer crouched in the barrel of a heavy blue wave';
+---
+<BaseLayout
+  title="Surf Survival — breath-hold training for surfers | Freedive Rote"
+  description="A one-day Surf Survival workshop on Rote Island. Breath-hold training for surfers: wipeouts, hold-downs, CO₂ tolerance, recovery breathing and staying calm in heavy water."
+  ogImage={banner}
+  ogImageAlt={bannerAlt}
+>
+  <PageBanner image={banner} alt={bannerAlt} position="45% 34%" eyebrow="Breath-hold training for surfers" title="Surf Survival" scrim="surf" />
+
+  <section class="lead">
+    <div class="container container--narrow lead__inner">
+      <p class="t-lede">A wipeout, a hold-down, getting caught inside, losing the board, feeling fear or panic rise – these are the moments where breath, awareness and nervous system control matter most.</p>
+      <p class="t-lede measure-text">Our Surf Survival workshop is designed to help surfers stay calm, feel more confident, and be better prepared in high-stress water situations.</p>
+    </div>
+  </section>
+
+  <IncludesBand
+    eyebrow="The workshop"
+    heading="You will learn practical tools for"
+    image={training}
+    alt="An instructor guiding a student through a weighted breath-hold in the pool"
+    items={[
+      'Big wipeouts and long hold-downs',
+      'Increasing breath-holding capability',
+      'Breath control — staying calm under pressure',
+      'Understanding O₂, CO₂ and the urge to breathe',
+      'Recovery breathing between waves',
+      'Managing high-risk surf scenarios',
+    ]}
+  />
+
+  <section class="testimonial" aria-label="Review from Paul McMahon">
+    <div class="container testimonial__grid">
+      <figure class="photo testimonial__photo" data-reveal>
+        <Photo src={poolRest} alt="Resting in the pool under the palms after a session, looking out to the reef" widths={[480, 720, 1040, 1200]} sizes="(max-width: 900px) min(calc(100vw - 40px), 520px), 520px" />
+      </figure>
+      <figure class="testimonial__quote" data-reveal data-reveal-delay="100">
+        <span class="sand-rule" aria-hidden="true"></span>
+        <blockquote><p>“Doing the course at Freedive Rote just before a massive swell hit was hands down the best call I could have made.”</p></blockquote>
+        <figcaption>
+          <span class="testimonial__name">Paul McMahon</span>
+          <span class="testimonial__source">Google review</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="details">
+    <div class="container container--narrow details__inner">
+      <div class="details__facts">
+        <div class="fact-row"><span class="fact-label">Duration</span><span class="fact-value">1 full day</span></div>
+        <div class="fact-row"><span class="fact-label">Where</span><span class="fact-value">Nemberala beachfront</span></div>
+      </div>
+      <div class="details__action">
+        <Button variant="sand" size="cta" href={SITE.whatsappUrl} external>Book a session</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .lead { padding-block: clamp(56px, 6vw, 96px) clamp(32px, 4vw, 52px); }
+  .lead__inner { display: flex; flex-direction: column; gap: clamp(32px, 4vw, 48px); }
+
+  .testimonial { padding-block: clamp(48px, 6vw, 88px); }
+  .testimonial__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(36px, 5vw, 88px);
+    align-items: center;
+  }
+  .testimonial__photo { order: 1; aspect-ratio: 4 / 5; max-width: 520px; width: 100%; justify-self: end; }
+  .testimonial__quote { order: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-8); min-width: 0; max-width: 44ch; }
+  .testimonial__quote blockquote { margin: 0; }
+  .testimonial__quote blockquote p {
+    margin: 0;
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-extralight);
+    font-size: var(--text-heading-1);
+    line-height: var(--leading-quote);
+    letter-spacing: var(--tracking-heading);
+    color: var(--c-ink);
+    text-wrap: pretty;
+  }
+  .testimonial__quote figcaption { display: flex; flex-direction: column; gap: 8px; }
+  .testimonial__name { font-family: var(--font-heading-alt); font-size: var(--text-body-lg); color: var(--c-ink); }
+  .testimonial__source, .fact-label {
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--c-ink-muted);
+  }
+
+  .details { padding-block: clamp(56px, 6vw, 96px); }
+  .details__inner { display: flex; flex-direction: column; gap: var(--space-8); }
+  .details__facts { display: flex; flex-direction: column; width: 100%; }
+  .fact-row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding-block: var(--space-4);
+    border-bottom: var(--border-hair);
+  }
+  .fact-value { font-family: var(--font-heading-alt); font-size: var(--text-body-lg); color: var(--c-ink); }
+  .details__action { display: flex; justify-content: center; padding-top: var(--space-2); }
+
+  @media (max-width: 900px) {
+    .testimonial__grid { grid-template-columns: 1fr; }
+    .testimonial__photo { order: -1; }
+  }
+</style>

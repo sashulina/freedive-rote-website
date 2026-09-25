@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageBanner from '../../components/PageBanner.astro';
+import OfferCard from '../../components/OfferCard.astro';
+import Button from '../../components/Button.astro';
+import { SITE } from '../../data/site';
+
+import banner from '../../assets/images/courses-banner-2-w.jpg';
+import tryImg from '../../assets/images/try-freediving.jpg';
+import l1Img from '../../assets/images/level-1-beginner.jpg';
+import l2Img from '../../assets/images/level-2-advanced.jpg';
+import l3Img from '../../assets/images/level-3-deep.jpg';
+
+const bannerAlt = 'Four freedivers in hoods and masks smiling at the buoy, half above and half below the lagoon surface';
+---
+<BaseLayout
+  title="Freediving courses on Rote Island | Freedive Rote"
+  description="Freediving courses on Nemberala Beach, Rote Island: a one-day introduction, and Molchanovs Level 1, Level 2 and Level 3. Small groups, all equipment provided."
+  ogImage={banner}
+  ogImageAlt={bannerAlt}
+>
+  <PageBanner image={banner} alt={bannerAlt} position="50% 14%" eyebrow="Nemberala, Rote Ndao" title="Freediving Courses" />
+
+  <section class="choose" aria-labelledby="choose-title">
+    <div class="container choose__inner">
+      <header class="choose__head" data-reveal>
+        <h2 class="t-display-2" id="choose-title">Choose your course</h2>
+        <span class="sand-rule" aria-hidden="true"></span>
+      </header>
+      <div class="choose__grid">
+        <OfferCard variant="course" href="/courses/try-freediving" image={tryImg} alt="A first-time freediver gliding over the reef" badge="One day" title="Try freediving" text="A one-day introduction to freediving for curious beginners. Learn the basics of breath, relaxation, equalisation and safe diving." />
+        <OfferCard variant="course" href="/courses/level-1" image={l1Img} alt="Freedivers on the line with light breaking through the surface" badge="Beginner" title="Level 1" text="Your first complete freediving course covering freediving theory, equalisation, breathing techniques for relaxation and nervous system regulation, plus essential safety protocols." revealDelay={80} />
+        <OfferCard variant="course" href="/courses/level-2" image={l2Img} alt="Two freedivers silhouetted against the sun beside the line" badge="Advanced" title="Level 2" text="Your step towards becoming an independent freediver and competent safety diver. This course explores the Mammalian Dive Reflex and deeper diving techniques." revealDelay={160} />
+        <OfferCard variant="course" href="/courses/level-3" image={l3Img} alt="A freediver ascending the line from deep blue water" badge="Deep" title="Level 3" text="The deepest program for recreational divers and those people looking to dive up to 40m and beyond. This course introduces Mouthfill Equalisation, FRC diving and advanced safety protocols." revealDelay={240} />
+      </div>
+    </div>
+  </section>
+
+  <section class="unsure" aria-label="Help choosing a course">
+    <div class="container container--content unsure__inner">
+      <p class="unsure__text" data-reveal>Not sure which course is right for you? Tell us about your experience in the water, and we’ll work it out together.</p>
+      <div class="unsure__action">
+        <Button variant="primary" size="cta" href={SITE.whatsappUrl} external>Contact us</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .choose { padding-block: clamp(56px, 6vw, 96px); }
+  .choose__inner { display: flex; flex-direction: column; gap: clamp(32px, 4vw, 48px); }
+  .choose__head { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-4); }
+  .choose__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 3.5vw, 48px); }
+
+  .unsure { padding-block: clamp(48px, 5vw, 80px); background: var(--surface-sand); }
+  .unsure__inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-8); }
+  .unsure__text {
+    margin: 0;
+    max-width: 30ch;
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-extralight);
+    font-size: var(--text-heading-1);
+    line-height: var(--leading-quote);
+    letter-spacing: var(--tracking-heading);
+    color: var(--c-ink);
+  }
+  .unsure__action { display: flex; justify-content: center; }
+
+  @media (max-width: 900px) {
+    .choose__grid { grid-template-columns: 1fr; }
+  }
+</style>

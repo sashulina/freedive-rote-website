@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+import map from '../assets/images/rote-map-v2.png';
+/* Faint Rote Island map silhouette (traced from Google Maps) behind a section.
+   Decorative: empty alt, hidden from assistive tech, never intercepts clicks.
+   The parent section needs position:relative and overflow:hidden. */
+interface Props {
+  /** "center": centred, min(960px,106%) wide. "right": offset right, min(820px,70%). */
+  placement?: 'center' | 'right';
+  opacity?: number;
+}
+const { placement = 'center', opacity = 0.3 } = Astro.props;
+---
+<Image
+  src={map}
+  alt=""
+  aria-hidden="true"
+  widths={[480, 960, 1464]}
+  sizes="(max-width: 900px) 100vw, 960px"
+  class:list={['map', `map--${placement}`]}
+  style={`opacity:${opacity}`}
+/>
+
+<style>
+  .map { position: absolute; height: auto; max-width: none; pointer-events: none; }
+  .map--center { left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(960px, 106%); }
+  .map--right { right: -12%; top: 50%; transform: translateY(-50%); width: min(820px, 70%); }
+</style>
