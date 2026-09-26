@@ -4,7 +4,7 @@ import Icon from './Icon.astro';
    except "Small groups" and "New equipment", which are the prototype's custom SVGs. */
 ---
 <section class="keypoints" aria-label="Why Freedive Rote">
-  <ul class="container keypoints__list">
+  <ul class="container keypoints__list" aria-label="Why Freedive Rote" data-keypoints>
     <li class="keypoints__item">
       <span class="keypoints__icon"><span class="keypoints__number">15+</span></span>
       <span class="keypoints__label">Years of teaching</span>
@@ -88,9 +88,34 @@ import Icon from './Icon.astro';
     line-height: 1.6;
     color: var(--c-ink);
   }
+  /* Mobile (client request): one swipeable row instead of a stacked grid.
+     Items keep their desktop size; ~2.5 fit on a phone, so the next one peeks
+     in at the edge. Desktop (above 900px) is unchanged. */
   @media (max-width: 900px) {
-    .keypoints__list { flex-wrap: wrap; }
-    .keypoints__item { flex-basis: 120px; }
-    .keypoints__item + .keypoints__item { border-left-color: transparent; }
+    .keypoints__list {
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x proximity;
+      scroll-padding-inline: var(--gutter);
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .keypoints__list::-webkit-scrollbar { display: none; }
+    /* Keeps the gutter after the last item (some browsers drop end padding). */
+    .keypoints__list::after { content: ''; flex: 0 0 1px; }
+    .keypoints__item { flex: 0 0 140px; scroll-snap-align: start; }
   }
 </style>
+
+<script>
+  // The strip only scrolls on narrow screens; make it keyboard-focusable only then.
+  const strip = document.querySelector<HTMLElement>('[data-keypoints]');
+  if (strip) {
+    const sync = () => {
+      if (strip.scrollWidth > strip.clientWidth + 1) strip.tabIndex = 0;
+      else strip.removeAttribute('tabindex');
+    };
+    sync();
+    new ResizeObserver(sync).observe(strip);
+  }
+</script>
