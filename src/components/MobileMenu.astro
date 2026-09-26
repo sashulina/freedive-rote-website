@@ -1,16 +1,13 @@
 ---
-import { Image } from 'astro:assets';
-import logo from '../assets/logos/logo-freedive-rote-white.png';
 import Button from './Button.astro';
 import { COURSE_LINKS, NAV_LINKS, SITE } from '../data/site';
 /* Full-screen Ocean Night overlay for ≤900px. Built on the native popover API,
-   so it opens, closes and handles Escape without JavaScript. */
+   so it opens, closes and handles Escape without JavaScript.
+   The top row holds only the close (X) button: the prototype's 52px logo was
+   removed on purpose (client design decision, to keep focus on navigation). */
 ---
 <div id="mobile-menu" class="mobile-menu" popover aria-label="Menu" data-mobile-menu>
   <div class="mobile-menu__top">
-    <a href="/" class="mobile-menu__logo">
-      <Image src={logo} alt={SITE.logoAlt} height={52} densities={[1, 2]} />
-    </a>
     <button type="button" class="mobile-menu__close" popovertarget="mobile-menu" popovertargetaction="hide" aria-label="Close menu">
       <span></span><span></span>
     </button>
@@ -54,12 +51,9 @@ import { COURSE_LINKS, NAV_LINKS, SITE } from '../data/site';
   .mobile-menu__top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--space-4);
+    justify-content: flex-end;
     min-height: 58px;
   }
-  .mobile-menu__logo { display: flex; line-height: 0; border: 0; text-decoration: none; }
-  .mobile-menu__logo img { height: 52px; width: auto; display: block; }
 
   .mobile-menu__close {
     width: 48px;

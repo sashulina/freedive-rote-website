@@ -66,6 +66,9 @@ public/               Favicons, manifest, _redirects
   Headings set to weight 200 render at 300, as in the approved prototype.
 - `--c-ink-muted` is overridden to `#5D7078` (from `#6B7F88`) in `global.css` so small
   labels meet WCAG AA contrast. Approved by the client.
+- The open mobile menu shows only the close (X) button at the top; the prototype's
+  52px logo there was removed on purpose (client decision). The logo is unchanged
+  in the header and footer.
 - Client-side JavaScript is limited to the header scroll state, the courses dropdown,
   closing the mobile menu on link tap, the review scroller, card press on touch and the
   scroll reveal. The mobile menu itself uses the native popover API, and all content is
