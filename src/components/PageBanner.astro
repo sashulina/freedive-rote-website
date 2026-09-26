@@ -23,7 +23,7 @@ const aspect = (image.width / image.height).toFixed(3);
 const sizes = `max(100vw, calc(min(72vh, 640px) * ${aspect}))`;
 ---
 <section class="banner" aria-labelledby="page-title">
-  <Photo src={image} alt={alt} position={position} sizes={sizes} quality={80} eager class="cover" />
+  <Photo src={image} alt={alt} position={position} sizes={sizes} quality={70} eager class="cover" />
   <span class:list={['banner__scrim', `banner__scrim--${scrim}`]} aria-hidden="true"></span>
   <span class="banner__top" aria-hidden="true"></span>
   <div class="banner__content">
