@@ -345,5 +345,14 @@ const heroAlt = 'A freediver at the surface in the shallows off Nemberala beach,
 
   @media (max-width: 900px) {
     .why__grid { grid-template-columns: minmax(0, 1fr); }
+    /* Mobile: centre "Explore our location" under the stacked text. */
+    .why__action { justify-content: center; }
+  }
+
+  /* The hero buttons stop fitting side by side at 513px; from there down, stack
+     them and centre them across the hero (client request). 520px leaves a little
+     room for font rendering differences. */
+  @media (max-width: 520px) {
+    .hero__actions { align-self: stretch; flex-direction: column; align-items: center; }
   }
 </style>
