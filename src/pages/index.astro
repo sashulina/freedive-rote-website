@@ -26,7 +26,21 @@ const heroAlt = 'A freediver at the surface in the shallows off Nemberala beach,
   transparentHeader
 >
   <section class="hero" aria-labelledby="hero-title">
-    <Photo src={hero} alt={heroAlt} widths={[640, 960, 1280, 1400]} eager position="50% 96%" class="cover" />
+    {/* Source: the client's original (2000×1333), cropped to the approved
+         framing (top-left 1780×1133, the region the prototype's file used).
+         The photo covers the hero, which is min(100vh, 940px) tall, so on tall
+         (mobile) screens it renders wider than the viewport: tell the browser
+         so it picks a file sharp enough. 1.571 = the photo's aspect ratio. */}
+    <Photo
+      src={hero}
+      alt={heroAlt}
+      widths={[640, 960, 1280, 1600, 1780]}
+      sizes="max(100vw, calc(min(100vh, 940px) * 1.571))"
+      quality={80}
+      eager
+      position="50% 96%"
+      class="cover"
+    />
     <span class="hero__scrim-top" aria-hidden="true"></span>
     <span class="hero__scrim" aria-hidden="true"></span>
     <div class="hero__content">
