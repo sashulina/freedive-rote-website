@@ -16,9 +16,14 @@ interface Props {
   scrim?: 'ocean' | 'neutral' | 'surf';
 }
 const { image, alt, position, eyebrow, title, scrim = 'ocean' } = Astro.props;
+// The photo covers a min(72vh, 640px)-tall banner, so on tall (mobile) screens
+// it is drawn wider than the viewport. Tell the browser the real drawn width so
+// it picks a file sharp enough (same fix as the home hero).
+const aspect = (image.width / image.height).toFixed(3);
+const sizes = `max(100vw, calc(min(72vh, 640px) * ${aspect}))`;
 ---
 <section class="banner" aria-labelledby="page-title">
-  <Photo src={image} alt={alt} position={position} eager class="cover" />
+  <Photo src={image} alt={alt} position={position} sizes={sizes} quality={80} eager class="cover" />
   <span class:list={['banner__scrim', `banner__scrim--${scrim}`]} aria-hidden="true"></span>
   <span class="banner__top" aria-hidden="true"></span>
   <div class="banner__content">
