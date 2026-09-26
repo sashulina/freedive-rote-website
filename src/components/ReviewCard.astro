@@ -1,0 +1,50 @@
+---
+interface Props { name: string; text: string; source?: string; rating?: number }
+const { name, text, source = 'Google review', rating = 5 } = Astro.props;
+---
+<figure class="review">
+  <span class="review__stars" role="img" aria-label={`${rating} out of 5 stars`}>{'★'.repeat(rating)}</span>
+  <blockquote class="review__text"><p>{text}</p></blockquote>
+  <figcaption class="review__by">
+    <span class="review__name">{name}</span>
+    <span class="review__source">{source}</span>
+  </figcaption>
+</figure>
+
+<style>
+  .review {
+    margin: 0;
+    flex: 0 0 min(84vw, 380px);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: var(--space-8);
+    background: var(--surface-card);
+    border: var(--border-hair);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-hairline);
+  }
+  .review__stars { font-size: 15px; letter-spacing: .14em; color: var(--text-accent); }
+  .review__text { margin: 0; flex: 1; }
+  .review__text p {
+    margin: 0;
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-body);
+    color: var(--c-ink-soft);
+  }
+  .review__by {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: var(--space-4);
+    border-top: var(--border-hair);
+  }
+  .review__name { font-family: var(--font-heading-alt); font-size: var(--text-body); color: var(--c-ink); }
+  .review__source {
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--c-ink-muted);
+  }
+</style>

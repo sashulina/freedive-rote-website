@@ -1,0 +1,4 @@
+# Real 301s on Netlify / Cloudflare Pages. Astro also emits meta-refresh pages
+# for these paths (astro.config.mjs), which work on any static host.
+/contact      /#contact  301
+/courses/all  /courses   301

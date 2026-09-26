@@ -1,0 +1,68 @@
+---
+/* Responsive photo: AVIF + WebP sources with a JPEG fallback, lazy by default.
+   `position` keeps the prototype's object-position crop exactly. */
+import type { ImageMetadata } from 'astro';
+import { Picture } from 'astro:assets';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  widths?: number[];
+  sizes?: string;
+  position?: string;
+  eager?: boolean;
+  /** Encoder quality (1–100). Omit for Astro's defaults. */
+  quality?: number;
+  /** Aspect ratio (width / height) of the fixed-ratio frame the photo covers.
+      When the photo is wider than its frame, object-fit: cover draws it wider
+      than the frame, so the `sizes` widths are scaled up to match. */
+  box?: number;
+  class?: string;
+}
+const { src, alt, widths, sizes: sizesIn = '100vw', position, eager = false, quality, box, class: cls } = Astro.props;
+const w = (widths ?? [480, 800, 1200, 1600, 2000]).filter((x) => x <= src.width);
+if (!w.includes(src.width) && src.width < Math.max(...(widths ?? [2000]))) w.push(src.width);
+
+// Scale each size value in `sizes` by how much wider than its frame the photo is drawn.
+const factor = box ? Math.max(1, src.width / src.height / box) : 1;
+const scaleSizes = (s: string, f: number) => {
+  if (f <= 1.001) return s;
+  const parts: string[] = [];
+  let depth = 0, start = 0;
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === '(') depth++;
+    else if (s[i] === ')') depth--;
+    else if (s[i] === ',' && depth === 0) { parts.push(s.slice(start, i)); start = i + 1; }
+  }
+  parts.push(s.slice(start));
+  return parts
+    .map((part) => {
+      const t = part.trim();
+      let cond = '';
+      let value = t;
+      if (t.startsWith('(')) {
+        let d = 0, j = 0;
+        for (; j < t.length; j++) { if (t[j] === '(') d++; else if (t[j] === ')' && --d === 0) break; }
+        cond = t.slice(0, j + 1) + ' ';
+        value = t.slice(j + 1).trim();
+      }
+      return `${cond}calc(${value} * ${f.toFixed(3)})`;
+    })
+    .join(', ');
+};
+const sizes = scaleSizes(sizesIn, factor);
+---
+<Picture
+  src={src}
+  alt={alt}
+  formats={['avif', 'webp']}
+  fallbackFormat="jpg"
+  widths={w}
+  sizes={sizes}
+  quality={quality}
+  loading={eager ? 'eager' : 'lazy'}
+  decoding={eager ? 'sync' : 'async'}
+  fetchpriority={eager ? 'high' : undefined}
+  class={cls}
+  style={position ? `object-position:${position}` : undefined}
+/>

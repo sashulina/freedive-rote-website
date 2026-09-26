@@ -1,0 +1,46 @@
+/* Freedive Rote — typography.
+   Newsreader (light serif) for headlines & pull quotes; Jost (light geometric
+   sans, matched to the logo wordmark) for everything structural. */
+:root{
+  --font-display:"Newsreader","Iowan Old Style",Georgia,serif;
+  --font-sans:"Jost",ui-sans-serif,system-ui,sans-serif;
+  --font-body:var(--font-sans);
+
+  /* Weights — the brand lives at 200–400. 600+ is never used. */
+  --weight-extralight:200;
+  --weight-light:300;
+  --weight-regular:400;
+  --weight-medium:500;
+
+  /* Fluid scale */
+  --text-display-1:clamp(42px,6.2vw,86px);
+  --text-display-2:clamp(34px,4.4vw,58px);
+  --text-heading-1:clamp(28px,3vw,40px);
+  --text-heading-2:clamp(23px,2.1vw,28px);
+  --text-heading-3:20px;
+  --text-quote:clamp(24px,2.6vw,36px);
+  --text-body-lg:19px;
+  --text-body:17px;
+  --text-body-sm:15px;
+  --text-caption:13px;
+  --text-eyebrow:12px;
+
+  /* Leading */
+  --leading-display:1.06;
+  --leading-heading:1.2;
+  --leading-quote:1.35;
+  --leading-body:1.7;
+  --leading-loose:1.85;
+
+  /* Tracking */
+  --tracking-display:-0.02em;
+  --tracking-heading:-0.01em;
+  --tracking-body:0;
+  --tracking-eyebrow:0.2em;
+  --tracking-button:0.09em;
+  --tracking-logo:0.14em;
+
+  /* Measures */
+  --measure-text:62ch;
+  --measure-lede:46ch;
+}

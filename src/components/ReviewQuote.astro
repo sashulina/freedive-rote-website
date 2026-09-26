@@ -1,0 +1,61 @@
+---
+/* Centred Petrona review quote with a 48px sand rule above it.
+   size: "heading" = --text-heading-1, "medium" = clamp(22px,2.4vw,30px),
+   "small" = clamp(18px,1.9vw,23px). padding values come from the prototype. */
+interface Props {
+  text: string;
+  name: string;
+  source?: string;
+  size?: 'heading' | 'medium' | 'small';
+  maxWidth?: number;
+  paddingTop?: string;
+  paddingBottom?: string;
+}
+const {
+  text,
+  name,
+  source = 'Google review',
+  size = 'heading',
+  maxWidth = 26,
+  paddingTop = 'clamp(16px,2vw,28px)',
+  paddingBottom = 'clamp(56px,6vw,96px)',
+} = Astro.props;
+---
+<section class="quote" style={`padding-block:${paddingTop} ${paddingBottom}`} aria-label={`Review from ${name}`}>
+  <div class="container container--content quote__inner">
+    <span class="sand-rule" aria-hidden="true"></span>
+    <figure class="quote__figure" data-reveal>
+      <blockquote class="quote__text"><p class={`quote__p quote__p--${size}`} style={`max-width:${maxWidth}ch`}>“{text}”</p></blockquote>
+      <figcaption class="quote__by">
+        <span class="quote__name">{name}</span>
+        <span class="quote__source">{source}</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .quote__inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-8); }
+  .quote__figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: var(--space-8); }
+  .quote__text { margin: 0; }
+  .quote__p {
+    margin: 0;
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-extralight);
+    line-height: var(--leading-quote);
+    letter-spacing: var(--tracking-heading);
+    color: var(--c-ink);
+    text-wrap: pretty;
+  }
+  .quote__p--heading { font-size: var(--text-heading-1); }
+  .quote__p--medium { font-size: clamp(22px, 2.4vw, 30px); }
+  .quote__p--small { font-size: clamp(18px, 1.9vw, 23px); }
+  .quote__by { display: flex; flex-direction: column; gap: 8px; }
+  .quote__name { font-family: var(--font-heading-alt); font-size: var(--text-body-lg); color: var(--c-ink); }
+  .quote__source {
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--c-ink-muted);
+  }
+</style>

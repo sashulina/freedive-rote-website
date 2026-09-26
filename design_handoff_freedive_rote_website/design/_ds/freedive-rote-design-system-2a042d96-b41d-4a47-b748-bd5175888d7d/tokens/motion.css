@@ -1,0 +1,23 @@
+/* Freedive Rote — motion. Slow tide, no bounce. Nothing snaps or springs. */
+:root{
+  --ease-tide:cubic-bezier(.22,.68,.24,1); /* @kind other */
+  --ease-soft:cubic-bezier(.4,0,.2,1); /* @kind other */
+  --duration-quick:180ms; /* @kind other */
+  --duration-base:340ms; /* @kind other */
+  --duration-slow:700ms; /* @kind other */
+  --duration-drift:1400ms; /* @kind other */
+  --transition-hover:color var(--duration-quick) var(--ease-soft),background-color var(--duration-quick) var(--ease-soft),border-color var(--duration-quick) var(--ease-soft),opacity var(--duration-quick) var(--ease-soft); /* @kind other */
+  --transition-lift:transform var(--duration-base) var(--ease-tide),box-shadow var(--duration-base) var(--ease-tide); /* @kind other */
+  --reveal-distance:18px; /* @kind spacing */
+  --image-zoom:1.035; /* @kind other */
+}
+@media (prefers-reduced-motion:reduce){
+  :root{
+    --duration-quick:0ms; /* @kind other */
+    --duration-base:0ms; /* @kind other */
+    --duration-slow:0ms; /* @kind other */
+    --duration-drift:0ms; /* @kind other */
+    --reveal-distance:0px; /* @kind spacing */
+    --image-zoom:1; /* @kind other */
+  }
+}

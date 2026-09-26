@@ -1,0 +1,71 @@
+---
+/* Mirrors the design system's Button (_ds_bundle.js): pill, Jost 400 uppercase,
+   0.09em tracking. Presses nudge 1px down.
+   Extra variants/sizes cover the prototype's hand-built CTAs:
+   - size "cta": 52px sand/blue booking links on course and inner pages
+   - variant "reference": Trips CTA in reference ocean blue */
+import type { HTMLAttributes } from 'astro/types';
+
+type Variant = 'primary' | 'secondary' | 'sand' | 'onPhoto' | 'onPhotoSolid' | 'reference';
+type Size = 'sm' | 'md' | 'lg' | 'cta';
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'href'> {
+  variant?: Variant;
+  size?: Size;
+  href?: string;
+  /** Opens in a new tab with rel="noopener" (WhatsApp, Maps, partners). */
+  external?: boolean;
+  fullWidth?: boolean;
+  type?: 'button' | 'submit';
+}
+
+const { variant = 'primary', size = 'md', href, external = false, fullWidth = false, type = 'button', class: cls, ...rest } = Astro.props;
+const classes = ['btn', `btn--${variant}`, `btn--${size}`, fullWidth && 'btn--full', cls];
+---
+{href ? (
+  <a href={href} class:list={classes} {...(external ? { target: '_blank', rel: 'noopener' } : {})} {...rest}><slot /></a>
+) : (
+  <button type={type} class:list={classes} {...(rest as HTMLAttributes<'button'>)}><slot /></button>
+)}
+
+<style>
+  .btn {
+    --bg: transparent; --fg: var(--c-ink); --line: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: var(--tap-min);
+    margin: 0;
+    font-family: var(--font-sans);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-body);
+    letter-spacing: var(--tracking-button);
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--fg);
+    cursor: pointer;
+    transition: var(--transition-hover), transform var(--duration-base) var(--ease-tide);
+  }
+  .btn:hover { background: var(--bg-h, var(--bg)); color: var(--fg-h, var(--fg)); border-color: var(--line-h, var(--line)); box-shadow: var(--shadow-h, var(--shadow, none)); }
+  .btn:active { transform: translateY(1px); }
+  .btn--full { width: 100%; }
+
+  .btn--sm { font-size: 12px; padding: 10px 20px; min-height: 38px; }
+  .btn--md { font-size: 13px; padding: 14px 30px; }
+  .btn--lg { font-size: 14px; padding: 18px 40px; }
+  .btn--cta { font-size: 13px; min-height: 52px; padding: 0 var(--space-10); border: 0; box-shadow: var(--shadow, none); }
+
+  .btn--primary { --bg: var(--surface-deep); --fg: var(--text-on-dark); --bg-h: var(--c-blue-mid); }
+  .btn--secondary { --fg: var(--text-heading); --line: var(--border-hairline-strong); --fg-h: var(--c-ink); --line-h: var(--c-ink); }
+  .btn--sand { --bg: var(--surface-sand-strong); --bg-h: var(--c-sand-deep); }
+  .btn--sand.btn--cta { --shadow: var(--shadow-hairline); --shadow-h: var(--shadow-soft); }
+  .btn--onPhoto { --fg: var(--text-on-dark); --line: var(--border-on-dark); --bg-h: rgba(255, 255, 255, .14); --line-h: var(--c-white); }
+  .btn--onPhotoSolid { --bg: var(--c-white); --bg-h: var(--c-cream); }
+  .btn--reference { --bg: var(--c-blue-reference); --fg: var(--c-white); --bg-h: var(--c-blue-deep); --shadow: var(--shadow-hairline); --shadow-h: var(--shadow-soft); }
+  .btn--cta { transition: background var(--duration-quick) var(--ease-tide), box-shadow var(--duration-quick) var(--ease-tide), transform var(--duration-base) var(--ease-tide); }
+</style>

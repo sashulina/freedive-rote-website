@@ -1,0 +1,101 @@
+---
+import Eyebrow from './Eyebrow.astro';
+import ReviewCard from './ReviewCard.astro';
+import reviews from '../data/reviews.json';
+---
+<section class="reviews" aria-labelledby="reviews-title">
+  <div class="container reviews__inner">
+    <header class="reviews__head">
+      <div class="reviews__intro" data-reveal>
+        <Eyebrow rule={44}>Reviews</Eyebrow>
+        <h2 class="t-heading-1 reviews__title" id="reviews-title">Kind words from our amazing students</h2>
+      </div>
+      <div class="reviews__meta">
+        <div class="reviews__rating">
+          <span class="reviews__score">
+            <span class="reviews__number">5.0</span>
+            <span class="reviews__stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+          </span>
+          <span class="reviews__label">Google rating</span>
+        </div>
+        <div class="reviews__nav">
+          <button type="button" aria-label="Previous reviews" aria-controls="reviews-track" data-reviews-prev>‹</button>
+          <button type="button" aria-label="Next reviews" aria-controls="reviews-track" data-reviews-next>›</button>
+        </div>
+      </div>
+    </header>
+    <div class="reviews__track" id="reviews-track" role="region" aria-label="Student reviews" tabindex="0" data-reviews>
+      {reviews.map((r) => <ReviewCard name={r.name} text={r.text} source={r.source} rating={r.rating} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews { padding-block: clamp(56px, 6vw, 96px); }
+  .reviews__inner { display: flex; flex-direction: column; gap: clamp(32px, 4vw, 48px); }
+  .reviews__head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .reviews__intro { display: flex; flex-direction: column; gap: var(--space-5); min-width: 0; }
+  .reviews__title { max-width: 26ch; }
+  .reviews__meta { display: flex; align-items: center; gap: var(--space-8); }
+  .reviews__rating { display: flex; flex-direction: column; gap: 8px; }
+  .reviews__score { display: flex; align-items: baseline; gap: 12px; }
+  .reviews__number {
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-light);
+    font-size: 40px;
+    line-height: 1;
+    color: var(--c-ink);
+  }
+  .reviews__stars { font-size: 18px; letter-spacing: .14em; color: var(--text-accent); }
+  .reviews__label {
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--c-ink-muted);
+  }
+  .reviews__nav { display: flex; gap: 10px; }
+  .reviews__nav button {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-hairline-strong);
+    background: transparent;
+    color: var(--text-link);
+    font-family: var(--font-sans);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    transition: var(--transition-hover);
+  }
+  .reviews__nav button:hover { background: var(--surface-sand); border-color: var(--c-ink); }
+  :global(html:not(.js)) .reviews__nav { display: none; }
+
+  .reviews__track {
+    display: flex;
+    gap: var(--grid-gap);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: var(--space-2);
+    align-items: stretch;
+  }
+  .reviews__track::-webkit-scrollbar { display: none; }
+</style>
+
+<script>
+  const track = document.querySelector<HTMLElement>('[data-reviews]');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const step = (dir: number) => {
+    if (!track) return;
+    const by = Math.min(track.clientWidth * 0.9, 412);
+    track.scrollBy({ left: dir * by, behavior: reduced.matches ? 'auto' : 'smooth' });
+  };
+  document.querySelector('[data-reviews-prev]')?.addEventListener('click', () => step(-1));
+  document.querySelector('[data-reviews-next]')?.addEventListener('click', () => step(1));
+</script>

@@ -1,0 +1,235 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logos/logo-freedive-rote-white.png';
+import MobileMenu from './MobileMenu.astro';
+import { COURSE_LINKS, NAV_LINKS, SITE, cleanPath } from '../data/site';
+
+interface Props {
+  /** Home page: header starts transparent over the hero. */
+  transparent?: boolean;
+}
+const { transparent = false } = Astro.props;
+const path = cleanPath(Astro.url.pathname);
+const current = (href: string) => (href === path ? 'page' : undefined);
+---
+<header class="site-header" data-transparent={transparent ? '' : undefined} data-site-header>
+  <span class="site-header__bg" aria-hidden="true"></span>
+  <div class="site-header__inner">
+    <a href="/" class="site-header__logo" aria-current={current('/')}>
+      <Image src={logo} alt={SITE.logoAlt} height={92} densities={[1, 2]} loading="eager" fetchpriority="high" />
+    </a>
+
+    <nav class="site-nav" aria-label="Main">
+      <div class="courses" data-courses>
+        <button type="button" class="site-nav__item courses__toggle" aria-expanded="false" aria-controls="courses-menu" data-courses-toggle>
+          Freediving Courses<span class="chevron" aria-hidden="true"></span>
+        </button>
+        <div class="courses__panel" id="courses-menu" hidden data-courses-panel>
+          {COURSE_LINKS.map((l) => <a href={l.href} aria-current={current(l.href)}>{l.label}</a>)}
+        </div>
+      </div>
+      {NAV_LINKS.map((l) => <a href={l.href} class="site-nav__item site-nav__link hit" aria-current={current(l.href)}>{l.label}</a>)}
+    </nav>
+
+    <button type="button" class="hamburger" popovertarget="mobile-menu" popovertargetaction="show" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false" data-menu-open>
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<MobileMenu />
+
+<noscript>
+  <style>
+    /* Without JS the scroll state can't be tracked, so keep the header background on. */
+    .site-header__bg { opacity: 1 !important; }
+  </style>
+</noscript>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    width: 100%;
+  }
+  .site-header__bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 51, 72, .9);
+    -webkit-backdrop-filter: var(--blur-glass);
+    backdrop-filter: var(--blur-glass);
+    border-bottom: 1px solid var(--border-on-dark);
+    opacity: 1;
+    transition: opacity 380ms var(--ease-tide);
+  }
+  .site-header[data-transparent]:not(.is-scrolled) .site-header__bg { opacity: 0; }
+
+  .site-header__inner {
+    position: relative;
+    max-width: var(--max-page);
+    margin-inline: auto;
+    min-height: var(--site-header-h);
+    padding: var(--space-4) var(--gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-8);
+  }
+  .site-header__logo {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    line-height: 0;
+    border: 0;
+    text-decoration: none;
+  }
+  .site-header__logo img {
+    height: 92px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 1px 8px rgba(15, 36, 48, .5));
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2.1vw, 32px);
+  }
+  .site-nav__item {
+    padding: 10px 0;
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-body);
+    letter-spacing: .04em;
+    color: var(--text-on-dark);
+    text-shadow: 0 1px 8px rgba(15, 36, 48, .65);
+    text-decoration: none;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    background: transparent;
+    white-space: nowrap;
+  }
+  .site-nav__link { --hit-y: 0; --hit-x: -8px; }
+  .site-nav__link:hover { color: var(--text-on-dark); border-bottom-color: currentColor; }
+
+  .courses { position: relative; display: flex; align-items: center; }
+  .courses__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: default;
+  }
+  .chevron {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform var(--duration-quick) var(--ease-tide);
+  }
+  .courses__toggle[aria-expanded='true'] .chevron { transform: rotate(225deg) translate(-2px, -2px); }
+
+  .courses__panel {
+    position: absolute;
+    top: 100%;
+    left: -20px;
+    min-width: 238px;
+    padding: var(--space-3);
+    background: var(--surface-page);
+    border: var(--border-hair);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lift);
+    display: flex;
+    flex-direction: column;
+  }
+  .courses__panel[hidden] { display: none; }
+  /* No-JS fallback: open on hover / keyboard focus. */
+  :global(html:not(.js)) .courses:hover .courses__panel,
+  :global(html:not(.js)) .courses:focus-within .courses__panel { display: flex; }
+
+  /* Items keep the design system's default link hairline (base.css), as in the prototype. */
+  .courses__panel a {
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-body-sm);
+    color: var(--text-link);
+    text-decoration: none;
+  }
+  .courses__panel a:hover { background: var(--surface-sand); }
+
+  .hamburger {
+    width: 48px;
+    height: 48px;
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 6px;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+  .hamburger span { display: block; width: 28px; height: 1px; background: var(--c-white); }
+
+  @media (max-width: 900px) {
+    .site-nav { display: none; }
+    .hamburger { display: flex; }
+  }
+</style>
+
+<script>
+  // Header background fades in after 24px of scroll (home only; inner pages are always solid).
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  if (header && header.hasAttribute('data-transparent')) {
+    const update = () => header.classList.toggle('is-scrolled', window.scrollY > 24);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+
+  // "Freediving Courses" dropdown: hover opens, click/Enter/Space toggles, Escape closes.
+  const wrap = document.querySelector<HTMLElement>('[data-courses]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-courses-toggle]');
+  const panel = document.querySelector<HTMLElement>('[data-courses-panel]');
+  if (wrap && toggle && panel) {
+    let hoverOpenedAt = 0;
+    const isOpen = () => !panel.hidden;
+    const setOpen = (open: boolean) => {
+      panel.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+
+    wrap.addEventListener('mouseenter', () => {
+      if (!isOpen()) {
+        hoverOpenedAt = Date.now();
+        setOpen(true);
+      }
+    });
+    wrap.addEventListener('mouseleave', () => setOpen(false));
+
+    toggle.addEventListener('click', (e) => {
+      const keyboard = e.detail === 0;
+      // A tap on a touch tablet fires mouseenter then click; don't let the click undo the hover.
+      const justHovered = hoverOpenedAt && Date.now() - hoverOpenedAt < 500;
+      if (!keyboard && isOpen() && justHovered) return;
+      hoverOpenedAt = 0;
+      setOpen(!isOpen());
+    });
+
+    wrap.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    wrap.addEventListener('focusout', (e) => {
+      if (!wrap.contains(e.relatedTarget as Node | null)) setOpen(false);
+    });
+    document.addEventListener('click', (e) => {
+      if (isOpen() && !wrap.contains(e.target as Node)) setOpen(false);
+    });
+  }
+</script>

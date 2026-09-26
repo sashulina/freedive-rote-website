@@ -1,0 +1,86 @@
+---
+import type { ImageMetadata } from 'astro';
+import Photo from './Photo.astro';
+
+/* Full-bleed inner-page banner. Starts at the top of the viewport, behind the
+   sticky header. Scrims are the exact gradients from the prototype:
+   - ocean   (default): ocean-night bottom gradient over 72% of the height
+   - neutral (Location): neutral dark rgba(8,14,18) instead of blue
+   - surf    (Surf Survival): full-height ocean-night gradient */
+interface Props {
+  image: ImageMetadata;
+  alt: string;
+  position?: string;
+  eyebrow: string;
+  title: string;
+  scrim?: 'ocean' | 'neutral' | 'surf';
+}
+const { image, alt, position, eyebrow, title, scrim = 'ocean' } = Astro.props;
+// The photo covers a min(72vh, 640px)-tall banner, so on tall (mobile) screens
+// it is drawn wider than the viewport. Tell the browser the real drawn width so
+// it picks a file sharp enough (same fix as the home hero).
+const aspect = (image.width / image.height).toFixed(3);
+const sizes = `max(100vw, calc(min(72vh, 640px) * ${aspect}))`;
+---
+<section class="banner" aria-labelledby="page-title">
+  <Photo src={image} alt={alt} position={position} sizes={sizes} quality={70} eager class="cover" />
+  <span class:list={['banner__scrim', `banner__scrim--${scrim}`]} aria-hidden="true"></span>
+  <span class="banner__top" aria-hidden="true"></span>
+  <div class="banner__content">
+    <p class="banner__eyebrow">{eyebrow}</p>
+    <h1 class="banner__title" id="page-title">{title}</h1>
+  </div>
+</section>
+
+<style>
+  .banner {
+    position: relative;
+    margin-top: calc(var(--site-header-h) * -1);
+    min-height: min(72vh, 640px);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: var(--surface-deep);
+  }
+  .banner__scrim { position: absolute; bottom: 0; left: 0; right: 0; height: 72%; }
+  .banner__scrim--ocean { background: linear-gradient(to top, rgba(15, 36, 48, .66) 0%, rgba(15, 36, 48, .46) 40%, rgba(15, 36, 48, 0) 100%); }
+  .banner__scrim--neutral { background: linear-gradient(to top, rgba(8, 14, 18, .62) 0%, rgba(8, 14, 18, .4) 40%, rgba(8, 14, 18, 0) 100%); }
+  .banner__scrim--surf { top: 0; height: auto; background: linear-gradient(to top, rgba(15, 36, 48, .62) 0%, rgba(15, 36, 48, .18) 46%, rgba(15, 36, 48, 0) 76%); }
+  .banner__top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 240px;
+    background: linear-gradient(to bottom, rgba(15, 36, 48, .5), rgba(15, 36, 48, 0));
+  }
+  .banner__content {
+    position: relative;
+    width: 100%;
+    max-width: var(--max-page);
+    margin-inline: auto;
+    padding: calc(var(--site-header-h) + var(--space-12)) var(--gutter) clamp(48px, 6vw, 80px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .banner__eyebrow {
+    margin: 0;
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-on-dark);
+    text-shadow: 0 1px 3px rgba(15, 36, 48, .45), 0 2px 18px rgba(15, 36, 48, .65);
+  }
+  .banner__title {
+    margin: 0;
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-extralight);
+    font-size: var(--text-display-2);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--text-on-photo);
+    text-shadow: 0 1px 4px rgba(15, 36, 48, .4), 0 3px 28px rgba(15, 36, 48, .6);
+    max-width: 20ch;
+  }
+</style>

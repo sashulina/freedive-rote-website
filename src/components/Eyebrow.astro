@@ -1,0 +1,37 @@
+---
+/* Design-system Eyebrow: 12px Jost 400 uppercase, 0.2em tracking.
+   `rule` adds the leading sand hairline used on Home (Reviews). */
+interface Props {
+  tone?: 'muted' | 'accent' | 'onDark' | 'sand';
+  as?: 'p' | 'span' | 'h2' | 'h3';
+  rule?: number;
+  class?: string;
+}
+const { tone = 'muted', as: Tag = 'p', rule, class: cls } = Astro.props;
+---
+{rule ? (
+  <p class:list={['eyebrow-row', cls]}>
+    <span class="eyebrow-rule" style={`width:${rule}px`} aria-hidden="true"></span>
+    <span class:list={['eyebrow', `eyebrow--${tone}`]}><slot /></span>
+  </p>
+) : (
+  <Tag class:list={['eyebrow', `eyebrow--${tone}`, cls]}><slot /></Tag>
+)}
+
+<style>
+  .eyebrow {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-eyebrow);
+    font-weight: var(--weight-regular);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+  .eyebrow--muted { color: var(--text-muted); }
+  .eyebrow--accent { color: var(--text-accent); }
+  .eyebrow--onDark { color: var(--text-on-dark-muted); }
+  .eyebrow--sand { color: var(--c-sand-deep); }
+  .eyebrow-row { margin: 0; display: flex; align-items: center; gap: 14px; max-width: none; }
+  .eyebrow-rule { display: block; height: 1px; background: var(--c-sand-deep); }
+</style>

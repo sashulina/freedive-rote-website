@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import CoursePage from '../../components/CoursePage.astro';
+
+export async function getStaticPaths() {
+  const courses = await getCollection('courses');
+  return courses.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+---
+<CoursePage entry={entry} />

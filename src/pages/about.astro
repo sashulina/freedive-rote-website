@@ -1,0 +1,236 @@
+---
+import { getImage } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageBanner from '../components/PageBanner.astro';
+import Photo from '../components/Photo.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+import { SITE } from '../data/site';
+
+import banner from '../assets/images/about-banner-2-w.jpg';
+import portrait from '../assets/images/about-portrait.jpg';
+import training from '../assets/images/breath-hold-training-v5-w.jpg';
+import still from '../assets/images/about-still-2.jpg';
+import apneistaSrc from '../assets/logos/logo-apneista.png';
+import aboveBelowSrc from '../assets/logos/logo-above-below.png';
+
+// Partner logos are used as CSS masks (tinted ink), so only a small 2x copy is needed.
+const apneista = await getImage({ src: apneistaSrc, width: 124, format: 'webp' });
+const aboveBelow = await getImage({ src: aboveBelowSrc, width: 336, format: 'webp' });
+
+const bannerAlt = 'Instructors and a student at the buoy in the shallow lagoon, palms and white sand of Nemberala behind';
+---
+<BaseLayout
+  title="About Freedive Rote — surfers, freedivers and ocean people"
+  description="Freedive Rote is a beach-based ocean centre in Nemberala, Rote Island, built on 15+ years of coaching freediving, breath-hold and ocean awareness, with a mindful approach."
+  ogImage={banner}
+  ogImageAlt={bannerAlt}
+>
+  <PageBanner image={banner} alt={bannerAlt} position="55% 8%" eyebrow="Nemberala, Rote Island" title="About Freedive Rote" />
+
+  <section class="who" aria-labelledby="who-title">
+    <div class="container who__grid">
+      <div class="who__lead" data-reveal>
+        <Eyebrow as="h2"><span id="who-title">Who we are</span></Eyebrow>
+        <p class="who__statement">We are surfers, freedivers and ocean people, probably much like yourself.</p>
+      </div>
+      <div class="who__text" data-reveal data-reveal-delay="80">
+        <p class="t-lede">Freedive Rote is a beach-based ocean centre in Nemberala, Rote Island, built around a simple idea: helping people feel more calm, confident and connected in the water.</p>
+        <p class="t-body">Our connection to the ocean has been shaped by many years spent surfing and sailing throughout Indonesia and Papua. Freediving became a natural extension of that relationship, and for more than 15 years we have been coaching, teaching and exploring the underwater world.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="journey" aria-labelledby="journey-title">
+    <div class="journey__grid" data-reveal>
+      <div class="journey__text">
+        <Eyebrow as="h2"><span id="journey-title">Our journey</span></Eyebrow>
+        <p class="t-lede">Our journey includes co-founding Apneista Freediving &amp; Yoga in Amed, Bali, along with Above Below, an expedition company running freediving trips and liveaboards to Raja Ampat, the Banda Sea, North Sumatra, Komodo, Tonga and Baja Mexico.</p>
+        <div class="partners">
+          <a href="https://www.apneista.com/" target="_blank" rel="noopener" aria-label="Apneista Freediving & Yoga" class="partner">
+            <span class="partner__logo" style={`width:62px;height:68px;--logo:url(${apneista.src})`} aria-hidden="true"></span>
+          </a>
+          <a href="https://www.abovebelow.life/" target="_blank" rel="noopener" aria-label="Above Below" class="partner hit">
+            <span class="partner__logo" style={`width:168px;height:38px;--logo:url(${aboveBelow.src})`} aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+      <figure class="journey__photo">
+        <Photo src={portrait} alt="A freediver swimming with sea lions over a rocky seabed" position="50% 40%" widths={[480, 720, 1024]} sizes="(max-width: 900px) 100vw, 45vw" class="cover" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="surfers" aria-labelledby="surfers-title">
+    <div class="surfers__grid" data-reveal>
+      <figure class="surfers__photo">
+        <Photo src={training} alt="An instructor guiding a student through a weighted breath-hold in the pool" position="50% 34%" widths={[480, 720, 1100]} sizes="(max-width: 900px) 100vw, 46vw" class="cover" />
+      </figure>
+      <div class="surfers__text">
+        <Eyebrow>For surfers</Eyebrow>
+        <h2 class="t-heading-1 surfers__title" id="surfers-title">More than teaching freediving</h2>
+        <p class="t-body">Freedive Rote is not just about teaching freediving. As surfers ourselves, we know how much the skills and awareness developed through freediving can help build confidence in the surf.</p>
+        <p class="t-body">We offer surf survival, breath-hold training, ocean awareness and nervous system regulation to help surfers stay calmer, feel more prepared and build confidence when things get challenging, whether that is a hold-down, a bigger wave or simply learning to stay relaxed under pressure.</p>
+        <div class="surfers__action"><Button variant="sand" href="/surf-survival">Surf survival</Button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="presence" aria-labelledby="presence-title">
+    <div class="container container--content presence__inner">
+      <div data-reveal><Eyebrow as="h2"><span id="presence-title">Breath, awareness, presence</span></Eyebrow></div>
+      <div class="presence__text" data-reveal data-reveal-delay="60">
+        <p class="t-body">Meditation and mindfulness are also central to our approach. A long-standing Vipassana practice has shaped the way we teach, with an emphasis on breath, awareness, relaxation and the connection between body and mind.</p>
+        <p class="t-lede">For us, freediving is not simply about going deeper or holding your breath longer. It is about learning to become calm, present and comfortable in the ocean.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="statement" aria-label="Stillness in motion">
+    <Photo src={still} alt="A freediver in white fins gliding alongside a manta ray over a dark reef" position="50% 50%" widths={[640, 960, 1400, 2035]} sizes="max(100vw, calc(clamp(340px, 46vw, 540px) * 2.512))" class="cover" />
+    <span class="statement__scrim" aria-hidden="true"></span>
+    <div class="statement__inner" data-reveal>
+      <p class="statement__text">Stillness in motion.</p>
+      <span class="statement__rule" aria-hidden="true"></span>
+    </div>
+  </section>
+
+  <section class="closing" aria-label="Train with us">
+    <div class="container container--content closing__inner">
+      <p class="t-lede closing__text" data-reveal>Whether you are learning to freedive, looking to improve your surf survival skills, or simply wanting to feel more relaxed and at home in the water, we combine 15+ years of coaching experience, practical ocean knowledge, modern training techniques and a mindful approach to help you progress at your own pace.</p>
+      <div class="closing__actions" data-reveal data-reveal-delay="60">
+        <Button variant="primary" size="lg" href="/#offer">See the courses</Button>
+        <Button variant="secondary" size="lg" href={SITE.whatsappUrl} external>Contact us</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .who { padding-block: clamp(56px, 6vw, 92px) clamp(36px, 4vw, 56px); }
+  .who__grid {
+    display: grid;
+    grid-template-columns: minmax(0, .92fr) minmax(0, 1fr);
+    gap: clamp(36px, 5vw, 84px);
+    align-items: start;
+  }
+  .who__lead { display: flex; flex-direction: column; gap: var(--space-6); min-width: 0; }
+  .who__statement {
+    margin: 0;
+    max-width: 26ch;
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-extralight);
+    font-size: clamp(27px, 3.4vw, 44px);
+    line-height: 1.18;
+    letter-spacing: var(--tracking-heading);
+    color: var(--c-ink);
+  }
+  .who__text { display: flex; flex-direction: column; gap: var(--space-5); min-width: 0; padding-top: clamp(0px, 1vw, 14px); }
+
+  /* Full-bleed splits: text aligns with the page container on its outer edge. */
+  .journey, .surfers { margin-block: clamp(36px, 4vw, 56px); }
+  .journey { background: var(--surface-sand); }
+  .journey__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .84fr); align-items: stretch; }
+  .surfers__grid { display: grid; grid-template-columns: minmax(0, .84fr) minmax(0, 1fr); align-items: stretch; }
+  .journey__text, .surfers__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-5);
+    min-width: 0;
+  }
+  .journey__text { padding: clamp(40px, 5vw, 80px) clamp(28px, 5vw, 80px) clamp(40px, 5vw, 80px) max(var(--gutter), calc((100vw - var(--max-page)) / 2 + var(--gutter))); }
+  .surfers__text { padding: clamp(40px, 5vw, 80px) max(var(--gutter), calc((100vw - var(--max-page)) / 2 + var(--gutter))) clamp(40px, 5vw, 80px) clamp(28px, 5vw, 80px); }
+  .journey__photo, .surfers__photo {
+    margin: 0;
+    position: relative;
+    min-height: clamp(280px, 34vw, 460px);
+    overflow: hidden;
+    background: var(--c-blue-wash);
+  }
+  .surfers__title { max-width: 22ch; }
+  .surfers__action { display: flex; padding-top: var(--space-2); }
+
+  .partners {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(48px, 7vw, 88px);
+    padding-top: var(--space-6);
+    margin-top: var(--space-2);
+    border-top: 1px solid var(--border-sand);
+  }
+  .partner {
+    display: flex;
+    align-items: center;
+    border: 0;
+    text-decoration: none;
+    opacity: .82;
+    transition: opacity var(--duration-quick) var(--ease-tide);
+  }
+  .partner:hover { opacity: 1; }
+  .partner.hit { --hit-y: -4px; }
+  .partner__logo {
+    display: block;
+    background: var(--c-ink);
+    -webkit-mask: var(--logo) center / contain no-repeat;
+    mask: var(--logo) center / contain no-repeat;
+  }
+
+  .presence { padding-block: clamp(36px, 4vw, 56px); }
+  .presence__inner { display: flex; flex-direction: column; gap: var(--space-5); }
+  .presence__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding-left: clamp(0px, 2vw, 28px);
+    border-left: 1px solid var(--c-sand-deep);
+  }
+
+  .statement {
+    position: relative;
+    margin-top: clamp(36px, 4vw, 56px);
+    min-height: clamp(340px, 46vw, 540px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--surface-deep);
+  }
+  .statement__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(8, 14, 18, .56) 0%, rgba(8, 14, 18, .34) 50%, rgba(8, 14, 18, .22) 100%);
+  }
+  .statement__inner {
+    position: relative;
+    padding: clamp(40px, 6vw, 80px) var(--gutter);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-5);
+    text-align: center;
+  }
+  .statement__text {
+    margin: 0;
+    font-family: var(--font-heading-alt);
+    font-weight: var(--weight-extralight);
+    font-size: clamp(34px, 5.4vw, 68px);
+    line-height: 1.1;
+    letter-spacing: var(--tracking-display);
+    color: var(--c-white);
+    text-shadow: 0 1px 4px rgba(8, 14, 18, .4), 0 3px 28px rgba(8, 14, 18, .55);
+  }
+  .statement__rule { display: block; width: 48px; height: 1px; background: rgba(255, 255, 255, .55); }
+
+  .closing { padding-block: clamp(48px, 5.5vw, 84px); }
+  .closing__inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-8); }
+  .closing__text { max-width: 52ch; }
+  .closing__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4); }
+
+  @media (max-width: 900px) {
+    .who__grid, .journey__grid, .surfers__grid { grid-template-columns: 1fr; }
+    .presence__text { border-left: 0; }
+  }
+</style>

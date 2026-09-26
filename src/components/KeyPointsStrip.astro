@@ -1,0 +1,121 @@
+---
+import Icon from './Icon.astro';
+/* Seven key points on the aqua-wash band. Icons are Lucide (stroke 1.25, 34px)
+   except "Small groups" and "New equipment", which are the prototype's custom SVGs. */
+---
+<section class="keypoints" aria-label="Why Freedive Rote">
+  <ul class="container keypoints__list" aria-label="Why Freedive Rote" data-keypoints>
+    <li class="keypoints__item">
+      <span class="keypoints__icon"><span class="keypoints__number">15+</span></span>
+      <span class="keypoints__label">Years of teaching</span>
+    </li>
+    <li class="keypoints__item">
+      <span class="keypoints__icon"><Icon name="shield-check" size={34} /></span>
+      <span class="keypoints__label">Safety first</span>
+    </li>
+    <li class="keypoints__item">
+      <span class="keypoints__icon"><Icon name="map-pin" size={34} /></span>
+      <span class="keypoints__label">Beachfront location</span>
+    </li>
+    <li class="keypoints__item">
+      <span class="keypoints__icon">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="7.6" r="2.7"></circle><path d="M6.7 18.4v-1.4a5.3 5.3 0 0 1 10.6 0v1.4"></path><circle cx="5.4" cy="10.2" r="1.9"></circle><path d="M2 18.4v-1a3.5 3.5 0 0 1 3.5-3.5h.6"></path><circle cx="18.6" cy="10.2" r="1.9"></circle><path d="M22 18.4v-1a3.5 3.5 0 0 0-3.5-3.5h-.6"></path>
+        </svg>
+      </span>
+      <span class="keypoints__label">Small groups</span>
+    </li>
+    <li class="keypoints__item">
+      <span class="keypoints__icon">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <g transform="translate(8.7,19.6) rotate(-9)"><path d="M-2.2 0v1.9a1.7 1.7 0 0 0 1.7 1.7h1a1.7 1.7 0 0 0 1.7-1.7V0"></path><path d="M-2.2 0-2.9-12.2a1.7 1.7 0 0 1 1.3-1.9h3.2a1.7 1.7 0 0 1 1.3 1.9L2.2 0Z"></path><path d="M0-1.4v-10.8"></path></g>
+          <g transform="translate(15.3,19.6) rotate(9)"><path d="M-2.2 0v1.9a1.7 1.7 0 0 0 1.7 1.7h1a1.7 1.7 0 0 0 1.7-1.7V0"></path><path d="M-2.2 0-2.9-12.2a1.7 1.7 0 0 1 1.3-1.9h3.2a1.7 1.7 0 0 1 1.3 1.9L2.2 0Z"></path><path d="M0-1.4v-10.8"></path></g>
+        </svg>
+      </span>
+      <span class="keypoints__label">New equipment</span>
+    </li>
+    <li class="keypoints__item">
+      <span class="keypoints__icon"><Icon name="heart" size={34} /></span>
+      <span class="keypoints__label">All levels welcome</span>
+    </li>
+    <li class="keypoints__item">
+      <span class="keypoints__icon"><Icon name="award" size={34} /></span>
+      <span class="keypoints__label">Certified Molchanovs</span>
+    </li>
+  </ul>
+</section>
+
+<style>
+  .keypoints { background: var(--surface-shallow); }
+  .keypoints__list {
+    margin: 0 auto;
+    list-style: none;
+    padding-block: clamp(40px, 5vw, 64px);
+    display: flex;
+    flex-wrap: nowrap;
+    gap: clamp(24px, 3vw, 32px) 0;
+  }
+  .keypoints__item {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    padding-inline: var(--space-3);
+    text-align: center;
+  }
+  .keypoints__item + .keypoints__item { border-left: 1px solid rgba(255, 255, 255, .28); }
+  .keypoints__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    color: var(--c-blue-deep);
+  }
+  .keypoints__icon svg { display: block; }
+  .keypoints__number {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-regular);
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: -.01em;
+  }
+  .keypoints__label {
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    line-height: 1.6;
+    color: var(--c-ink);
+  }
+  /* Mobile (client request): one swipeable row instead of a stacked grid.
+     Items keep their desktop size; ~2.5 fit on a phone, so the next one peeks
+     in at the edge. Desktop (above 900px) is unchanged. */
+  @media (max-width: 900px) {
+    .keypoints__list {
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x proximity;
+      scroll-padding-inline: var(--gutter);
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .keypoints__list::-webkit-scrollbar { display: none; }
+    /* Keeps the gutter after the last item (some browsers drop end padding). */
+    .keypoints__list::after { content: ''; flex: 0 0 1px; }
+    .keypoints__item { flex: 0 0 140px; scroll-snap-align: start; }
+  }
+</style>
+
+<script>
+  // The strip only scrolls on narrow screens; make it keyboard-focusable only then.
+  const strip = document.querySelector<HTMLElement>('[data-keypoints]');
+  if (strip) {
+    const sync = () => {
+      if (strip.scrollWidth > strip.clientWidth + 1) strip.tabIndex = 0;
+      else strip.removeAttribute('tabindex');
+    };
+    sync();
+    new ResizeObserver(sync).observe(strip);
+  }
+</script>

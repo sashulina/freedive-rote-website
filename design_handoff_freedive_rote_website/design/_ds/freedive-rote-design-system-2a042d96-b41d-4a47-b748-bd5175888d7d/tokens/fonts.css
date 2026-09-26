@@ -1,0 +1,5 @@
+/* Freedive Rote — webfonts.
+   No brand font files were supplied. The logo wordmark is a light geometric sans;
+   Jost Light is the closest free match. Newsreader supplies the calm editorial
+   serif used for headlines. Both are loaded from Google Fonts. */
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;1,6..72,300&display=swap");
