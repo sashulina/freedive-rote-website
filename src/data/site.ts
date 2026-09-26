@@ -43,3 +43,11 @@ export const FOOTER_LINKS = [
   { href: '/location', label: 'Location' },
   { href: '/about', label: 'About' },
 ] as const;
+
+/** The page's public URL path, e.g. "/courses" or "/". Pages are built as
+    files (courses.html, index.html), so Astro.url.pathname can carry ".html"
+    or "/index" at build time; links and canonicals use the clean form. */
+export function cleanPath(pathname: string): string {
+  const p = pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '');
+  return p || '/';
+}

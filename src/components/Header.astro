@@ -2,14 +2,14 @@
 import { Image } from 'astro:assets';
 import logo from '../assets/logos/logo-freedive-rote-white.png';
 import MobileMenu from './MobileMenu.astro';
-import { COURSE_LINKS, NAV_LINKS, SITE } from '../data/site';
+import { COURSE_LINKS, NAV_LINKS, SITE, cleanPath } from '../data/site';
 
 interface Props {
   /** Home page: header starts transparent over the hero. */
   transparent?: boolean;
 }
 const { transparent = false } = Astro.props;
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const path = cleanPath(Astro.url.pathname);
 const current = (href: string) => (href === path ? 'page' : undefined);
 ---
 <header class="site-header" data-transparent={transparent ? '' : undefined} data-site-header>
