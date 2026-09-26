@@ -27,7 +27,7 @@ const { eyebrow, heading, image, alt, position, items, compact = false, align = 
       <span class="sand-rule" aria-hidden="true"></span>
     </div>
     <figure class="photo includes__photo" data-reveal data-reveal-delay="60">
-      <Photo src={image} alt={alt} position={position} widths={[440, 660, 880, 1100]} sizes="(max-width: 900px) calc(100vw - 40px), 440px" />
+      <Photo src={image} alt={alt} position={position} widths={[440, 660, 880, 1100, 1320, 1650]} sizes="(max-width: 900px) calc(100vw - 40px), 440px" box={1} />
     </figure>
     <DashList items={items} compact={compact} class={`includes__list includes__list--${align}`} revealDelay={100} />
   </div>

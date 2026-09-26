@@ -35,7 +35,7 @@ const split = !!d.intro.photo;
           <div class="badges">{d.intro.badges.map((b) => <Badge tone={b.tone}>{b.label}</Badge>)}</div>
         </div>
         <figure class="photo intro__photo" data-reveal data-reveal-delay="100">
-          <Photo src={d.intro.photo!.image} alt={d.intro.photo!.alt} position={d.intro.photo!.position} widths={[480, 720, 1040, 1300]} sizes="(max-width: 900px) min(calc(100vw - 40px), 520px), 520px" />
+          <Photo src={d.intro.photo!.image} alt={d.intro.photo!.alt} position={d.intro.photo!.position} widths={[480, 720, 1040, 1300, 1600]} sizes="(max-width: 900px) min(calc(100vw - 40px), 520px), 520px" box={0.8} />
         </figure>
       </div>
     </section>
