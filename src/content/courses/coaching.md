@@ -3,7 +3,7 @@ order: 5
 title: Coaching Session
 eyebrow: One to one
 seoTitle: One-to-one freediving coaching | Freedive Rote
-description: Personalised one-to-one freediving coaching on Rote Island for experienced freedivers. Work on technique, equalisation, safety, depth and relaxation in a 3–4 hour session.
+description: "One-to-one freediving coaching on Rote Island, Indonesia for experienced divers: technique, equalisation, depth and relaxation in 3–4 hours."
 banner:
   image: ../../assets/images/coaching-banner-2-w.jpg
   alt: A coach beside a student on the line in deep blue water, guiding her equalisation

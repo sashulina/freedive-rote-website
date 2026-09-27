@@ -3,7 +3,7 @@ order: 4
 title: Level 3 — Deep
 eyebrow: Deep specialist program
 seoTitle: Level 3 deep freediving program | Freedive Rote
-description: The Molchanovs Level 3 deep freediving program on Rote Island. Mouthfill equalisation, FRC diving and advanced rescue protocols, over 10 days to two weeks. Level 2 required.
+description: "Molchanovs Level 3 deep freediving program on Rote Island, Indonesia: mouthfill equalisation, FRC diving and advanced rescue. Level 2 required."
 banner:
   image: ../../assets/images/level-3-banner-2-w.jpg
   alt: A freediver descending head-first beside the line while her buddy equalises on the rope

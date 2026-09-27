@@ -3,7 +3,7 @@ order: 1
 title: Try Freediving
 eyebrow: One-day introduction
 seoTitle: Try Freediving — a one-day introduction | Freedive Rote
-description: A one-day introduction to freediving on Nemberala Beach, Rote Island. Theory, a pool session and an open water session, with all equipment provided. No experience needed.
+description: "A one-day introduction to freediving on Rote Island, Indonesia: theory, a pool session and an open water session. No experience needed."
 banner:
   image: ../../assets/images/try-banner-3-w.jpg
   alt: Freedivers silhouetted around the buoy against the sunlit surface

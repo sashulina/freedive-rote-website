@@ -3,7 +3,7 @@ order: 3
 title: Level 2 — Advanced
 eyebrow: Advanced course
 seoTitle: Level 2 advanced freediving course | Freedive Rote
-description: A 3-day Molchanovs Level 2 freediving course on Rote Island. Freefall, advanced equalisation, deeper diving techniques and the safety skills to train independently. Level 1 required.
+description: "A 3-day Molchanovs Level 2 freediving course on Rote Island, Indonesia: freefall, advanced equalisation and deeper diving. Level 1 required."
 banner:
   image: ../../assets/images/level-2-advanced.jpg
   alt: Two freedivers ascending the line towards the sun
