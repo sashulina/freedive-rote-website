@@ -42,6 +42,7 @@ const jsonLd = {
   telephone: SITE.phoneE164,
   email: SITE.email,
   address: { '@type': 'PostalAddress', ...SITE.addressParts },
+  areaServed: { '@type': 'Place', name: 'Rote Island, Indonesia' },
   hasMap: SITE.mapsUrl,
   sameAs: [SITE.instagramUrl],
 };

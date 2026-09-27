@@ -3,7 +3,7 @@ order: 2
 title: Level 1 — Beginner
 eyebrow: Beginner course
 seoTitle: Level 1 freediving course for beginners | Freedive Rote
-description: A 2.5-day Molchanovs Level 1 freediving course on Rote Island for complete beginners. Theory, equalisation, relaxation breathing, safety protocols, pool and open water sessions.
+description: "A 2.5-day Molchanovs Level 1 freediving course for beginners on Rote Island, Indonesia. Equalisation, relaxation, safety, pool and open water."
 banner:
   image: ../../assets/images/level-1-beginner.jpg
   alt: Freedivers silhouetted on the line with sunlight breaking through the surface
