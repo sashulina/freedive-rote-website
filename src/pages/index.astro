@@ -10,7 +10,9 @@ import { SITE } from '../data/site';
 
 import { getImage } from 'astro:assets';
 import hero from '../assets/images/hero-beach-v4-w.jpg';
-import heroMobile from '../assets/images/hero-beach-v4-mobile.jpg';
+import heroMobileS from '../assets/images/hero-beach-v4-mobile-s.jpg';
+import heroMobileM from '../assets/images/hero-beach-v4-mobile-m.jpg';
+import heroMobileL from '../assets/images/hero-beach-v4-mobile-l.jpg';
 import whyTrain from '../assets/images/why-train-with-us.jpg';
 import offerSurf from '../assets/images/offer-surf-3-w.jpg';
 import coursesCard from '../assets/images/courses-card.jpg';
@@ -21,23 +23,32 @@ import meetUs from '../assets/images/about-banner-2-w.jpg';
 const heroAlt = 'A freediver at the surface in the shallows off Nemberala beach, palms behind';
 
 /* Hero art direction. Desktop/tablet: the approved crop, the top-left 1780×1133
-   of the client's 2000×1333 original. Phones (≤600px): a narrower crop of the same
-   photo, 150px lower (x 300–1480, y 150–1283), so the diver's face sits above the
-   title instead of behind it. The photo covers a hero that is min(100vh, 940px) tall,
-   so it renders at hero height × its aspect ratio (1.571 desktop, 1.041 phones). */
-const heroMedia = '(max-width: 600px)';
+   of the client's 2000×1333 original. Phones (≤600px): narrower 1180×1133 crops of
+   the same photo (x 300–1480), taken a little lower so the diver's face sits just
+   above the title instead of behind it, while keeping as much sky as possible.
+   Narrower phones have a taller text block relative to the photo, so they need a
+   bigger shift: y offset 110px (≤374px wide), 80px (375–400px), 20px (401–600px).
+   The photo covers a hero that is min(100vh, 940px) tall, so it renders at
+   hero height × its aspect ratio (1.571 desktop, 1.041 phones). */
 const heroSizes = 'max(100vw, calc(min(100vh, 940px) * 1.571))';
 const heroMobileSizes = 'max(100vw, calc(min(100vh, 940px) * 1.041))';
-const heroSet = (src: typeof hero, widths: number[], format: 'avif' | 'webp' | 'jpg') =>
+const heroFormats = ['avif', 'webp', 'jpg'] as const;
+const heroType = { avif: 'image/avif', webp: 'image/webp', jpg: 'image/jpeg' };
+const heroSet = (src: typeof hero, widths: number[], format: (typeof heroFormats)[number]) =>
   getImage({ src, widths, format, quality: 80 });
-const [mAvif, mWebp, mJpg, dAvif, dWebp, dJpg] = await Promise.all([
-  heroSet(heroMobile, [480, 720, 960, 1180], 'avif'),
-  heroSet(heroMobile, [480, 720, 960, 1180], 'webp'),
-  heroSet(heroMobile, [480, 720, 960, 1180], 'jpg'),
-  heroSet(hero, [640, 960, 1280, 1600, 1780], 'avif'),
-  heroSet(hero, [640, 960, 1280, 1600, 1780], 'webp'),
-  heroSet(hero, [640, 960, 1280, 1600, 1780], 'jpg'),
-]);
+const mobileCrops = [
+  { media: '(max-width: 374px)', src: heroMobileS },
+  { media: '(max-width: 400px)', src: heroMobileM },
+  { media: '(max-width: 600px)', src: heroMobileL },
+];
+const mobileSources = (
+  await Promise.all(
+    mobileCrops.flatMap(({ media, src }) =>
+      heroFormats.map(async (f) => ({ media, type: heroType[f], srcset: (await heroSet(src, [480, 720, 960, 1180], f)).srcSet.attribute })),
+    ),
+  )
+);
+const [dAvif, dWebp, dJpg] = await Promise.all(heroFormats.map((f) => heroSet(hero, [640, 960, 1280, 1600, 1780], f)));
 ---
 <BaseLayout
   title="Freediving on Rote Island, Indonesia | Freedive Rote"
@@ -48,9 +59,7 @@ const [mAvif, mWebp, mJpg, dAvif, dWebp, dJpg] = await Promise.all([
 >
   <section class="hero" aria-labelledby="hero-title">
     <picture>
-      <source media={heroMedia} type="image/avif" srcset={mAvif.srcSet.attribute} sizes={heroMobileSizes} />
-      <source media={heroMedia} type="image/webp" srcset={mWebp.srcSet.attribute} sizes={heroMobileSizes} />
-      <source media={heroMedia} type="image/jpeg" srcset={mJpg.srcSet.attribute} sizes={heroMobileSizes} />
+      {mobileSources.map((m) => <source media={m.media} type={m.type} srcset={m.srcset} sizes={heroMobileSizes} />)}
       <source type="image/avif" srcset={dAvif.srcSet.attribute} sizes={heroSizes} />
       <source type="image/webp" srcset={dWebp.srcSet.attribute} sizes={heroSizes} />
       <img
