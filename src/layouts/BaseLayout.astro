@@ -46,6 +46,16 @@ const jsonLd = {
   hasMap: SITE.mapsUrl,
   sameAs: [SITE.instagramUrl],
 };
+
+// Homepage only: tells Google the site name to show in results instead of the domain.
+const isHome = cleanPath(Astro.url.pathname) === '/';
+const webSiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': new URL('/#website', Astro.site).href,
+  name: SITE.name,
+  url: new URL('/', Astro.site).href,
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -82,8 +92,10 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogUrl} />
 
-    <link rel="icon" href="/favicon.ico" sizes="48x48" />
-    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <!-- One favicon, a square PNG larger than 48×48, so Google has a single
+         unambiguous choice; browsers scale it down for tabs. /favicon.ico stays in
+         the site root for clients that request it directly. -->
+    <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
@@ -99,6 +111,7 @@ const jsonLd = {
       }, 3000);
     </script>
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {isHome && <script type="application/ld+json" set:html={JSON.stringify(webSiteJsonLd)} />}
   </head>
   <body>
     <div class="site">
